@@ -54,7 +54,7 @@ $students= query("SELECT * FROM tb_pelajar
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
         <a class="nav-link" href="/">Home</a>
-        <a class="nav-link" href="add.php">Add New</a>
+        <a class="nav-link" href="pelajar.php">Detail Pelajar</a>
         </div>
     </div>
 
@@ -66,9 +66,8 @@ $students= query("SELECT * FROM tb_pelajar
 <div class="container">
   <div class="row">
     <div class="col-12">
-    <h1>Dashboard</h1>
+    <h2>Data Terkini</h2>
     <hr>
-    <h3>Data Terkini</h3>
     </div>
       
     <?php foreach($students as $student):?>
