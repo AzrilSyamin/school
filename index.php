@@ -54,7 +54,7 @@ $students= query("SELECT * FROM tb_pelajar
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
         <a class="nav-link" href="/">Home</a>
-        <a class="nav-link" href="add.php">Add New</a>
+        <a class="nav-link" href="detail.php">Detail Pelajar</a>
         </div>
     </div>
 
@@ -63,36 +63,37 @@ $students= query("SELECT * FROM tb_pelajar
   </div>
 
 
-<div class="container">
-  <div class="row">
-    <div class="col-12">
-    <h1>Dashboard</h1>
-    <hr>
-    <h3>Data Terkini</h3>
-    </div>
-      
-    <?php foreach($students as $student):?>
-    <div class="col-12 col-sm-6 col-md-3 my-3">
-      <ul class="list-group shadow">
-        <li class="list-group-item"><b>Name :</b><?= $student["nama_pelajar"];?></li>
-        <li class="list-group-item"><b>Umur :</b><?= $student["umur_pelajar"];?></li>
-        <li class="list-group-item"><b>Kelas :</b><?= $student["nama_kelas"];?></li>
-        <li class="list-group-item"><b>Darjah :</b><?= $student["darjah_pelajar"];?></li>
-        <li class="list-group-item"><b>Cikgu :</b><?= $student["nama_cikgu"];?></li>
-        <li class="list-group-item"><b>Pelajaran :</b>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12">
+        <h2>List Pelajar</h2>
+        <hr>
+      </div>
+      <!-- Awal Table  -->
+      <div class="col-6">
+        <table class="table shadow">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Name</th>
+              <th scope="col">Jantina</th>
+              <th scope="col">Umur</th>
+            </tr>
+          </thead>
+          <?php $i=1; foreach($students as $student):?>
+          <tbody>
+            <tr>
+              <th scope="row"><?= $i++;?></th>
+              <td><?= $student["nama_pelajar"];?></td>
+              <td><?= $student["jantina_pelajar"];?></td>
+              <td><?= $student["umur_pelajar"];?></td>
+            </tr>
+          </tbody>
+          <?php endforeach;?>
+        </table>
+      </div>
+      <!-- Akhir Table  -->
 
-        <?php $pelajaran = query ("SELECT * FROM tb_pelajaran 
-        JOIN tb_cikgu
-        ON tb_pelajaran.cikgu_id = tb_cikgu.id WHERE cikgu_id = '$student[cikgu_id]'");
-        foreach($pelajaran as $p):?>
-        <?=$p["mata_pelajaran"]; echo"<br>";?>
-        <?php endforeach;?>
-        
-        </li>
-      </ul>
-    </div>
-    <?php endforeach;?>
-      
   </div>
 </div>
 
