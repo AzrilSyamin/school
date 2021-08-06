@@ -5,7 +5,7 @@ if (isset($_POST["submit"])) {
     if (add_teachers($_POST) > 0) {
         echo "<script>
         alert('Data Berhasil Ditambah');
-        document.location.href='/';
+        document.location.href='../teachers/teacher.php';
         </script>
         ";
     } else {

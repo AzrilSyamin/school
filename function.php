@@ -89,4 +89,19 @@ function add_teachers($data)
   mysqli_query($con, $query);
   return mysqli_affected_rows($con);
 }
+
+
+function add_subjects($data)
+{
+  global $con;
+  $mata = htmlspecialchars($data["mata"]);
+  $idcikgu = htmlspecialchars($data["idcikgu"]);
+  
+  
+  $query = "INSERT INTO tb_pelajaran VALUE
+  (NULL, '$mata','$idcikgu')";
+
+  mysqli_query($con, $query);
+  return mysqli_affected_rows($con);
+}
 ?>
