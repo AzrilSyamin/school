@@ -4,7 +4,7 @@
 if (isset($_POST["submit"])) {
     if (add_subjects($_POST) > 0) {
       echo "<script>
-      alert('Data Berhasil Ditambah');
+      
       document.location.href='../subjects/subject.php';
       </script>
       ";

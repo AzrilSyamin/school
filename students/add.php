@@ -4,7 +4,7 @@
 if (isset($_POST["submit"])) {
     if (add_students($_POST) > 0) {
       echo "<script>
-      alert('Data Berhasil Ditambah');
+      
       document.location.href='../students/student.php';
       </script>
       ";
