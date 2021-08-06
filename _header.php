@@ -22,7 +22,10 @@
 
     <!-- Custom styles for this template-->
     <link href="../_asset/css/sb-admin-2.min.css" rel="stylesheet">
-
+    
+    <!--icon bootstrap-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    
 </head>
 
 <body id="page-top">
@@ -69,9 +72,8 @@
                 <div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Students:</h6>
+                     <a class="collapse-item" href="../students/student.php">List Of Students</a>   
                         <a class="collapse-item" href="../students/add.php">Add Students</a>
-                        <a class="collapse-item" href="../students/edit.php">Edit Students</a>
-                        <a class="collapse-item" href="../students/del.php">Delete Students</a>
                     </div>
                 </div>
                 </li>
@@ -86,10 +88,24 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Teachers:</h6>
+                     <a class="collapse-item" href="../teachers/teacher.php">List Of Teachers</a>  
                         <a class="collapse-item" href="../teachers/add.php">Add Teachers</a>
-                        <a class="collapse-item" href="../teachers/edit.php">Edit Teachers</a>
-                        <a class="collapse-item" href="../teachers/del.php">Delete Teachers</a>
                     </div>
+                </div>
+                </li>
+                
+                <!-- Nav Item - Pages Collapse Menu -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTree"
+                    aria-expanded="true" aria-controls="collapseTree">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Subjects Modify</span>
+                </a>
+                <div id="collapseTree" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Subjects:</h6>
+                        <a class="collapse-item" href="../subjects/subject.php">List Of Subjects</a>  
+                     <a class="collapse-item" href="../subjects/add.php">Add Subjects</a>
                 </div>
                 </li>
         
@@ -110,9 +126,9 @@
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="">
                     <i class="fas fa-fw fa-table"></i>
-                    <span>Menu 2</span></a>
+                    <span>Log Out</span></a>
             </li>
 
             <!-- Divider -->
