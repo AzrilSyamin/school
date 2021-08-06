@@ -1,6 +1,5 @@
 <?php include_once "_header.php"; ?>
 <?php
-require_once("function.php");
 
 $students= query("SELECT * FROM tb_pelajar
                  

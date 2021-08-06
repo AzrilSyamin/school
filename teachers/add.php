@@ -1,6 +1,5 @@
 <?php include_once ("../_header.php"); ?>
 <?php
-require_once("../function.php");
 
 if (isset($_POST["submit"])) {
     if (add_teachers($_POST) > 0) {
