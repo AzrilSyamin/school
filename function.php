@@ -4,7 +4,7 @@ $con= mysqli_connect("localhost", "root", "", "db_sekolah") or die (mysqli_error
 
 function query ($query){
   global $con;
-  $result=mysqli_query($con,$query);
+  $result=mysqli_query($con,$query) or die (mysqli_error($con));
   
   $rows=[];
   while ($row=mysqli_fetch_assoc($result)){
@@ -64,11 +64,11 @@ function add_students($data)
     $cik = true;
     return false;
   }
-
+  
   $query = "INSERT INTO tb_pelajar VALUE
   (NULL, '$nama','$umur', '$jantina', '$kelasid', '$cikguid')";
 
-  mysqli_query($con, $query);
+  mysqli_query($con, $query) or die (mysqli_error($con));
   return mysqli_affected_rows($con);
 }
 
@@ -86,7 +86,7 @@ function add_teachers($data)
   $query = "INSERT INTO tb_cikgu VALUE
   (NULL, '$nama','$umur', '$jantina')";
 
-  mysqli_query($con, $query);
+  mysqli_query($con, $query) or die (mysqli_error($con));
   return mysqli_affected_rows($con);
 }
 
@@ -101,7 +101,7 @@ function add_subjects($data)
   $query = "INSERT INTO tb_pelajaran VALUE
   (NULL, '$mata','$idcikgu')";
 
-  mysqli_query($con, $query);
+  mysqli_query($con, $query) or die (mysqli_error($con));
   return mysqli_affected_rows($con);
 }
 ?>
