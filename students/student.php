@@ -2,15 +2,6 @@
 <?php
 
 $students= query("SELECT * FROM tb_pelajar
-                 
-                 JOIN tb_cikgu
-                 ON tb_pelajar.cikgu_id = tb_cikgu.id
-                 
-                 JOIN tb_kelas
-                 ON tb_pelajar.kelas_id = tb_kelas.id
-                 
-                 JOIN tb_darjah
-                 ON tb_pelajar.umur_pelajar = tb_darjah.umur_pelajar
                  ");
 ?>
 
@@ -19,6 +10,9 @@ $students= query("SELECT * FROM tb_pelajar
                         <div class="row">
                             <!-- Awal Table  -->
                             <div class="col-12">
+                      <?php if(isset($suc)):?>
+                      <p style="color:green;">Berjaya Horreyy!!</p>
+                      <?php endif;?>
                                 <table class="table shadow">
                                 <thead class="thead-dark">
                                     <tr>

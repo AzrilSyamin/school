@@ -29,9 +29,9 @@ $teachers= query("SELECT * FROM tb_cikgu
                                     <td><?= $teacher["umur_cikgu"];?></td>
                       <td>
                         
-                        <a class="badge badge-warning" href="edit.php?id=<?= $student["id"];?>"><i class="bi bi-pencil-square"></i></a>
+                        <a class="badge badge-warning" href="edit.php?id=<?= $teacher["id"];?>"><i class="bi bi-pencil-square"></i></a>
                         
-                        <a class="badge badge-danger" href="del.php?id=<?= $student["id"];?>" onclick="return confirm('Are You Sure Want To Delete?');"><i class="bi bi-trash"></i></a>
+                        <a class="badge badge-danger" href="del.php?id=<?= $teacher["id"];?>" onclick="return confirm('Are You Sure Want To Delete?');"><i class="bi bi-trash"></i></a>
                       </td>
                                     </tr>
                                 </tbody>
