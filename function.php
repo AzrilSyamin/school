@@ -54,14 +54,13 @@ function add_students($data)
   // $password = password_hash($password, PASSWORD_DEFAULT);
   //var_dump($password);
   //die;
-  if($data["jantina"]=="Choose..."){
-    $jan="test";
+  if($data["umur"]=="Choose..."){
+    return false;
+  } elseif ($data["jantina"]=="Choose..."){
     return false;
   } elseif ($data["kelas"]=="Choose..."){
-    $kel = true;
     return false;
   } elseif ($data["cikgu"]=="Choose..."){
-    $cik = true;
     return false;
   }
   
@@ -80,7 +79,6 @@ function add_teachers($data)
   $jantina = htmlspecialchars($data["jantina"]);
   
   if($data["jantina"]=="Choose..."){
-    $jan="test";
     return false;
   }
   $query = "INSERT INTO tb_cikgu VALUE
