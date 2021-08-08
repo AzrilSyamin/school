@@ -137,3 +137,24 @@ function edit_students($data)
   mysqli_query($con, $query) or die(mysqli_error($con));
   return mysqli_affected_rows($con);
 }
+
+function edit_teachers($data)
+{
+  global $con;
+  $id = $data["id"];
+  $nama = htmlspecialchars($data["nama"]);
+  $umur = htmlspecialchars($data["umur"]);
+  $jantina = htmlspecialchars($data["jantina"]);
+
+  if ($data["jantina"] == "Choose...") {
+    return false;
+  }
+  $query = "UPDATE tb_cikgu SET
+  nama_cikgu = '$nama',
+  umur_cikgu = '$umur', 
+  jantina_cikgu = '$jantina'
+  WHERE id = $id ";
+
+  mysqli_query($con, $query) or die(mysqli_error($con));
+  return mysqli_affected_rows($con);
+}
