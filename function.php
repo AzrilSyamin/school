@@ -14,6 +14,16 @@ function query($query)
   return $rows;
 }
 
+function base_url($url = null)
+{
+  $base_url = '';
+  if ($url != null) {
+    return $base_url . "/" . $url;
+  } else {
+    return $base_url;
+  }
+}
+
 function add_students($data)
 {
   global $con;
