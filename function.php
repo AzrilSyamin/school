@@ -158,3 +158,22 @@ function edit_teachers($data)
   mysqli_query($con, $query) or die(mysqli_error($con));
   return mysqli_affected_rows($con);
 }
+
+function edit_subjects($data)
+{
+  global $con;
+  $id = $data["id"];
+  $mata = htmlspecialchars($data["mata"]);
+  $idcikgu = htmlspecialchars($data["idcikgu"]);
+
+  if ($data["idcikgu"] == "Choose...") {
+    return false;
+  }
+  $query = "UPDATE tb_pelajaran SET
+  mata_pelajaran = '$mata',
+  cikgu_id = '$idcikgu'
+  WHERE id = $id ";
+
+  mysqli_query($con, $query) or die(mysqli_error($con));
+  return mysqli_affected_rows($con);
+}
