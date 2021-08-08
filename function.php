@@ -95,11 +95,12 @@ function add_subjects($data)
   $mata = htmlspecialchars($data["mata"]);
   $idcikgu = htmlspecialchars($data["idcikgu"]);
   
-  
+  if($data["idcikgu"]=="Choose..."){
+    return false;
+  }
   $query = "INSERT INTO tb_pelajaran VALUE
   (NULL, '$mata','$idcikgu')";
 
   mysqli_query($con, $query) or die (mysqli_error($con));
   return mysqli_affected_rows($con);
 }
-?>
