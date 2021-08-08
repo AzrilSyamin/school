@@ -2,7 +2,7 @@
 <?php
 
 $subjects = query("SELECT * FROM tb_cikgu
-                JOIN tb_pelajaran
+                RIGHT JOIN tb_pelajaran
                 ON tb_cikgu.id = tb_pelajaran.cikgu_id");
 ?>
 
