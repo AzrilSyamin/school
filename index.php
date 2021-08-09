@@ -1,7 +1,5 @@
 <?php
 echo "
 <script>
-window.location='students/student.php';
-</script>"
-
-?>
+window.location='dashboard'
+</script>";
