@@ -1,10 +1,13 @@
 <?php
 
-$con = mysqli_connect("localhost", "root", "", "db_sekolah") or die(mysqli_error($con));
+function con()
+{
+  return mysqli_connect("localhost", "root", "", "db_sekolah");
+}
 
 function query($query)
 {
-  global $con;
+  $con = con();
   $result = mysqli_query($con, $query) or die(mysqli_error($con));
 
   $rows = [];
@@ -26,7 +29,7 @@ function base_url($url = null)
 
 function add_students($data)
 {
-  global $con;
+  $con = con();
   $nama = htmlspecialchars($data["nama"]);
   $umur = htmlspecialchars($data["umur"]);
   $jantina = htmlspecialchars($data["jantina"]);
@@ -84,7 +87,7 @@ function add_students($data)
 
 function add_teachers($data)
 {
-  global $con;
+  $con = con();
   $nama = htmlspecialchars($data["nama"]);
   $umur = htmlspecialchars($data["umur"]);
   $jantina = htmlspecialchars($data["jantina"]);
@@ -102,7 +105,7 @@ function add_teachers($data)
 
 function add_subjects($data)
 {
-  global $con;
+  $con = con();
   $mata = htmlspecialchars($data["mata"]);
   $idcikgu = htmlspecialchars($data["idcikgu"]);
 
@@ -118,7 +121,7 @@ function add_subjects($data)
 
 function edit_students($data)
 {
-  global $con;
+  $con = con();
   $id = $data["id"];
   $nama = htmlspecialchars($data["nama"]);
   $umur = htmlspecialchars($data["umur"]);
@@ -150,7 +153,7 @@ function edit_students($data)
 
 function edit_teachers($data)
 {
-  global $con;
+  $con = con();
   $id = $data["id"];
   $nama = htmlspecialchars($data["nama"]);
   $umur = htmlspecialchars($data["umur"]);
@@ -171,7 +174,7 @@ function edit_teachers($data)
 
 function edit_subjects($data)
 {
-  global $con;
+  $con = con();
   $id = $data["id"];
   $mata = htmlspecialchars($data["mata"]);
   $idcikgu = htmlspecialchars($data["idcikgu"]);

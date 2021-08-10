@@ -8,6 +8,7 @@ $subjects = query("SELECT * FROM tb_cikgu
 
 <!-- Page Heading -->
 <h1>List Of Subjects</h1>
+<a href="add.php" class="btn btn-primary mb-3">Add Students</a>
 <div class="row">
     <!-- Awal Table  -->
     <div class="col-12">
@@ -27,9 +28,9 @@ $subjects = query("SELECT * FROM tb_cikgu
                         <td><?= $subject["mata_pelajaran"]; ?></td>
                         <td><?= $subject["nama_cikgu"]; ?></td>
                         <td>
-                            <a class="badge badge-warning" href="edit.php?id=<?= $subject["id"]; ?>"><i class="bi bi-pencil-square"></i></a>
+                            <a class="badge badge-warning" href="edit.php?id=<?= $subject["id"]; ?>"><i class="fas fa-edit"></i></a>
 
-                            <a class="badge badge-danger" href="del.php?id=<?= $subject["id"]; ?>" onclick="return confirm('Are You Sure Want To Delete?');"><i class="bi bi-trash"></i></a>
+                            <a class="badge badge-danger" href="del.php?id=<?= $subject["id"]; ?>" onclick="return confirm('Are You Sure Want To Delete?');"><i class="far fa-trash-alt"></i></a>
                         </td>
                     </tr>
                 </tbody>

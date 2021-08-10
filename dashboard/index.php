@@ -1,7 +1,7 @@
 <?php require "../_header.php";
 
 $students = query("SELECT * FROM tb_pelajar
-                  JOIN tb_cikgu
+                  LEFT JOIN tb_cikgu
                   ON tb_pelajar.cikgu_id = tb_cikgu.id
 
                   JOIN tb_kelas
@@ -15,10 +15,8 @@ $students = query("SELECT * FROM tb_pelajar
 ?>
 
 <!-- DataTales Pelajar -->
+<h1>Detail Pelajar</h1>
 <div class="card shadow mb-4">
-  <div class="card-header py-3">
-    <h4 class="m-0 font-weight-bold text-primary">Detail Pelajar</h4>
-  </div>
   <div class="card-body">
     <div class="table-responsive">
       <table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
