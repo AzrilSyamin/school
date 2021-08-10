@@ -11,7 +11,7 @@ $subjects = query("SELECT * FROM tb_cikgu
 <a href="add.php" class="btn btn-primary mb-3">Add Students</a>
 <div class="row">
     <!-- Awal Table  -->
-    <div class="col-12">
+    <div class="col-12 table-responsive">
         <table class="table shadow">
             <thead class="thead-dark">
                 <tr>

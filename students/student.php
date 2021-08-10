@@ -10,7 +10,7 @@ $students = query("SELECT * FROM tb_pelajar
 <a href="add.php" class="btn btn-primary mb-3">Add Students</a>
 <div class="row">
     <!-- Awal Table  -->
-    <div class="col-12">
+    <div class="col-12 table-responsive">
         <?php if (isset($suc)) : ?>
             <p style="color:green;">Berjaya Horreyy!!</p>
         <?php endif; ?>
