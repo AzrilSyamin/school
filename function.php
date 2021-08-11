@@ -200,15 +200,19 @@ function register($data)
   $password = htmlspecialchars($data["password"]);
   $password2 = htmlspecialchars($data["password2"]);
   $role_id = 0;
-
-  // CREATE TABLE IF NOT EXISTS tb_user(
-  //   `id` INT AUTO_INCREMENT,
-  //   `full_name` VARCHAR(200),
-  //   `email` VARCHAR(200),
-  //   `password` VARCHAR(200),
-  //   `role_id` INT,
-  //   PRIMARY KEY (`id`)
-  // );
+  
+  $create ="
+   CREATE TABLE IF NOT EXISTS tb_user(
+     `id` INT AUTO_INCREMENT,
+     `full_name` VARCHAR(200),
+     `email` VARCHAR(200),
+     `password` VARCHAR(200),
+     `role_id` INT,
+     PRIMARY KEY (`id`)
+  )";
+  
+  mysqli_query($con,$create);
+  
 
   $result = mysqli_query($con, "SELECT * FROM tb_user WHERE email = '$email'");
 
