@@ -21,12 +21,12 @@
     <!-- /.login-logo -->
     <div class="card card-outline card-primary">
       <div class="card-header text-center">
-        <a href="../_asset/index2.html" class="h1"><b>Data </b>Sekolah</a>
+        <a href="/" class="h1"><b>Data </b>Sekolah</a>
       </div>
       <div class="card-body">
         <p class="login-box-msg">Sign in to start your session</p>
 
-        <form action="../_asset/index3.html" method="post">
+        <form action="" method="post">
           <div class="input-group mb-3">
             <input type="email" class="form-control" placeholder="Email" name="email">
             <div class="input-group-append">
@@ -74,7 +74,7 @@
           <a href="forget.php">I forgot my password</a>
         </p>
         <p class="mb-0">
-          <a href="reg.php" class="text-center">Register a new membership</a>
+          <a href="reg.php" class="text-center">Register a new member</a>
         </p>
       </div>
       <!-- /.card-body -->
