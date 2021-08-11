@@ -191,3 +191,47 @@ function edit_subjects($data)
   mysqli_query($con, $query) or die(mysqli_error($con));
   return mysqli_affected_rows($con);
 }
+
+function register($data)
+{
+  $con = con();
+  $full_name = htmlspecialchars($data["full_name"]);
+  $email = htmlspecialchars($data["email"]);
+  $password = htmlspecialchars($data["password"]);
+  $password2 = htmlspecialchars($data["password2"]);
+  $role_id = 0;
+
+  // CREATE TABLE IF NOT EXISTS tb_user(
+  //   `id` INT AUTO_INCREMENT,
+  //   `full_name` VARCHAR(200),
+  //   `email` VARCHAR(200),
+  //   `password` VARCHAR(200),
+  //   `role_id` INT,
+  //   PRIMARY KEY (`id`)
+  // );
+
+  $result = mysqli_query($con, "SELECT * FROM tb_user WHERE email = '$email'");
+
+  if (mysqli_fetch_assoc($result)) {
+    echo "<script>
+    alert('Email Sudah Terdaftar!')
+    </script>";
+    return false;
+  }
+
+
+  if ($password !== $password2) {
+    echo "<script>
+    alert('Password Tidak Sama!')
+    </script>";
+    return false;
+  }
+
+  $password = password_hash($password, PASSWORD_DEFAULT);
+
+  $query = "INSERT INTO tb_user VALUE 
+  (null, '$full_name', '$email', '$password', '$role_id')";
+
+  mysqli_query($con, $query) or die(mysqli_error($con));
+  return mysqli_affected_rows($con);
+}

@@ -1,3 +1,18 @@
+<?php
+require "../function.php";
+
+if (isset($_POST["submit"])) {
+  if (register($_POST) > 0) {
+    echo "<script>
+    alert('Register Berjaya!')
+    </script>";
+  } else {
+    echo "<script>
+    alert('Register Gagal!')
+    </script>";
+  }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
