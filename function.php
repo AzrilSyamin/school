@@ -69,6 +69,19 @@ function add_students($data)
   // $password = password_hash($password, PASSWORD_DEFAULT);
   //var_dump($password);
   //die;
+  
+  $create ="
+   CREATE TABLE IF NOT EXISTS tb_user(
+     `id` INT AUTO_INCREMENT,
+     `nama_pelajar` VARCHAR(200),
+     `umur_pelajar` VARCHAR(200),
+     `jantina_pelajar` VARCHAR(200),
+     `kelas_id` INT,
+     `cikgu_id` INT,
+     PRIMARY KEY (`id`)
+  )";
+  mysqli_query($con,$create);
+  
   if ($data["umur"] == "Choose...") {
     return false;
   } elseif ($data["jantina"] == "Choose...") {
@@ -93,6 +106,16 @@ function add_teachers($data)
   $umur = htmlspecialchars($data["umur"]);
   $jantina = htmlspecialchars($data["jantina"]);
 
+  $create ="
+   CREATE TABLE IF NOT EXISTS tb_user(
+     `id` INT AUTO_INCREMENT,
+     `nama_cikgu` VARCHAR(200),
+     `umur_cikgu` VARCHAR(200),
+     `jantina_cikgu` VARCHAR(200),
+     PRIMARY KEY (`id`)
+  )";
+  mysqli_query($con,$create);
+
   if ($data["jantina"] == "Choose...") {
     return false;
   }
@@ -109,6 +132,15 @@ function add_subjects($data)
   $con = con();
   $mata = htmlspecialchars($data["mata"]);
   $idcikgu = htmlspecialchars($data["idcikgu"]);
+  
+  $create ="
+   CREATE TABLE IF NOT EXISTS tb_user(
+     `id` INT AUTO_INCREMENT,
+     `mata_pelajaran` VARCHAR(200),
+     `cikgu_id` INT,
+     PRIMARY KEY (`id`)
+  )";
+  mysqli_query($con,$create);
 
   if ($data["idcikgu"] == "Choose...") {
     return false;
