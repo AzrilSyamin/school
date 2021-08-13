@@ -7,7 +7,7 @@ $teachers = query("SELECT * FROM tb_cikgu
 
 <!-- Page Heading -->
 <h1>List Of Teachers</h1>
-<a href="add.php" class="btn btn-primary mb-3">Add Students</a>
+<a href="add.php" class="btn btn-primary mb-3">Add Teachers</a>
 <div class="row">
     <!-- Awal Table  -->
     <div class="col-12 table-responsive">

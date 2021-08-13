@@ -8,7 +8,7 @@ $subjects = query("SELECT * FROM tb_cikgu
 
 <!-- Page Heading -->
 <h1>List Of Subjects</h1>
-<a href="add.php" class="btn btn-primary mb-3">Add Students</a>
+<a href="add.php" class="btn btn-primary mb-3">Add Subjects</a>
 <div class="row">
     <!-- Awal Table  -->
     <div class="col-12 table-responsive">
