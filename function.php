@@ -71,7 +71,7 @@ function add_students($data)
   //die;
   
   $create ="
-   CREATE TABLE IF NOT EXISTS tb_user(
+   CREATE TABLE IF NOT EXISTS tb_pelajar(
      `id` INT AUTO_INCREMENT,
      `nama_pelajar` VARCHAR(200),
      `umur_pelajar` VARCHAR(200),
@@ -107,7 +107,7 @@ function add_teachers($data)
   $jantina = htmlspecialchars($data["jantina"]);
 
   $create ="
-   CREATE TABLE IF NOT EXISTS tb_user(
+   CREATE TABLE IF NOT EXISTS tb_cikgu(
      `id` INT AUTO_INCREMENT,
      `nama_cikgu` VARCHAR(200),
      `umur_cikgu` VARCHAR(200),
@@ -134,7 +134,7 @@ function add_subjects($data)
   $idcikgu = htmlspecialchars($data["idcikgu"]);
   
   $create ="
-   CREATE TABLE IF NOT EXISTS tb_user(
+   CREATE TABLE IF NOT EXISTS tb_pelajaran(
      `id` INT AUTO_INCREMENT,
      `mata_pelajaran` VARCHAR(200),
      `cikgu_id` INT,
@@ -233,7 +233,8 @@ function register($data)
   $password2 = htmlspecialchars($data["password2"]);
   $role_id = 0;
   
-  $create ="
+  //create table tb_user
+  $createTbUser ="
    CREATE TABLE IF NOT EXISTS tb_user(
      `id` INT AUTO_INCREMENT,
      `full_name` VARCHAR(200),
@@ -242,8 +243,50 @@ function register($data)
      `role_id` INT,
      PRIMARY KEY (`id`)
   )";
+  mysqli_query($con,$createTbUser);
   
-  mysqli_query($con,$create);
+  //create table tb_darjah dan insert data
+  $createTbDarjah ="
+   CREATE TABLE IF NOT EXISTS tb_darjah(
+     `id` INT AUTO_INCREMENT,
+     `umur_pelajar` INT,
+     `darjah_pelajar` VARCHAR(200),
+     PRIMARY KEY (`id`)
+  )";
+  mysqli_query($con,$createTbDarjah);
+  
+  $insertTbDarjah ="
+  INSERT INTO `tb_darjah` (`Id`, `umur_pelajar`, `darjah_pelajar`) VALUES
+  (NULL, '7', 'Darjah 1'), 
+  (NULL, '8', 'Darjah 2'),
+  (NULL, '9', 'Darjah 3'), 
+  (NULL, '10', 'Darjah 4'),
+  (NULL, '11', 'Darjah 5'), 
+  (NULL, '12', 'Darjah 6'),
+  (NULL, '13', 'Tingkatan 1'), 
+  (NULL, '14', 'Tingkatan 2'),
+  (NULL, '15', 'Tingkatan 3'), 
+  (NULL, '16', 'Tingkatan 4'),
+  (NULL, '17', 'Tingkatan 5'), 
+  (NULL, '18', 'Tingkatan 6')";
+  mysqli_query($con,$insertTbDarjah);
+  
+  //create table tb_kelas dan INSERT
+  $createTbKelas ="
+   CREATE TABLE IF NOT EXISTS tb_kelas(
+     `id` INT,
+     `nama_kelas` VARCHAR(200),
+     PRIMARY KEY (`id`)
+  )";
+  mysqli_query($con,$createTbKelas);
+  
+  $insertTbKelas ="
+  INSERT INTO `tb_kelas` (`Id`,`nama_kelas`) VALUES
+  (1, 'Kelas A'), 
+  (2, 'Kelas B'),
+  (3, 'Kelas C'), 
+  (4, 'Kelas D')";
+  mysqli_query($con,$insertTbKelas);
   
 
   $result = mysqli_query($con, "SELECT * FROM tb_user WHERE email = '$email'");
