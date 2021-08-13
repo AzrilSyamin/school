@@ -4,7 +4,8 @@ require "../function.php";
 if (isset($_POST["submit"])) {
   if (register($_POST) > 0) {
     echo "<script>
-    alert('Register Berjaya!')
+    alert('Register Berjaya!');
+    window.location='/';
     </script>";
   } else {
     echo "<script>
