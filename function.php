@@ -36,52 +36,7 @@ function add_students($data)
   $jantina = htmlspecialchars($data["jantina"]);
   $kelasid = htmlspecialchars($data["kelas"]);
   $cikguid = htmlspecialchars($data["cikgu"]);
-  // $compassword = htmlspecialchars($data["compassword"]);
-  // $email = htmlspecialchars($data["email"]);
-  // $address = htmlspecialchars($data["address"]);
-  // $code = htmlspecialchars($data["code"]);
-  // $profile_img = htmlspecialchars($data["profile_img"]);
 
-  // //cek username sudah ada atau belum
-  // $hasil = mysqli_query($conn, "SELECT username FROM users WHERE username = '$username'");
-
-  // if (mysqli_fetch_assoc($hasil)) {
-  //   echo "
-  //     <script>
-  //     alert('Username Yang Anda Pilih Sudah Wujud!');
-  //     </script>
-  //     ";
-
-  //   return false;
-  // }
-
-  // //cek password sama atau tidak
-  // if ($password !== $compassword) {
-  //   echo "
-  //     <script>
-  //     alert('Password Anda Tidak Sama!');
-  //     </script>
-  //     ";
-
-  //   return false;
-  // }
-  // //enkripsi password/atau acak password
-  // $password = password_hash($password, PASSWORD_DEFAULT);
-  //var_dump($password);
-  //die;
-  
-  $create ="
-   CREATE TABLE IF NOT EXISTS tb_pelajar(
-     `id` INT AUTO_INCREMENT,
-     `nama_pelajar` VARCHAR(200),
-     `umur_pelajar` VARCHAR(200),
-     `jantina_pelajar` VARCHAR(200),
-     `kelas_id` INT,
-     `cikgu_id` INT,
-     PRIMARY KEY (`id`)
-  )";
-  mysqli_query($con,$create);
-  
   if ($data["umur"] == "Choose...") {
     return false;
   } elseif ($data["jantina"] == "Choose...") {
@@ -106,16 +61,6 @@ function add_teachers($data)
   $umur = htmlspecialchars($data["umur"]);
   $jantina = htmlspecialchars($data["jantina"]);
 
-  $create ="
-   CREATE TABLE IF NOT EXISTS tb_cikgu(
-     `id` INT AUTO_INCREMENT,
-     `nama_cikgu` VARCHAR(200),
-     `umur_cikgu` VARCHAR(200),
-     `jantina_cikgu` VARCHAR(200),
-     PRIMARY KEY (`id`)
-  )";
-  mysqli_query($con,$create);
-
   if ($data["jantina"] == "Choose...") {
     return false;
   }
@@ -132,15 +77,6 @@ function add_subjects($data)
   $con = con();
   $mata = htmlspecialchars($data["mata"]);
   $idcikgu = htmlspecialchars($data["idcikgu"]);
-  
-  $create ="
-   CREATE TABLE IF NOT EXISTS tb_pelajaran(
-     `id` INT AUTO_INCREMENT,
-     `mata_pelajaran` VARCHAR(200),
-     `cikgu_id` INT,
-     PRIMARY KEY (`id`)
-  )";
-  mysqli_query($con,$create);
 
   if ($data["idcikgu"] == "Choose...") {
     return false;
@@ -232,9 +168,9 @@ function register($data)
   $password = htmlspecialchars($data["password"]);
   $password2 = htmlspecialchars($data["password2"]);
   $role_id = 0;
-  
+
   //create table tb_user
-  $createTbUser ="
+  $createTbUser = "
    CREATE TABLE IF NOT EXISTS tb_user(
      `id` INT AUTO_INCREMENT,
      `full_name` VARCHAR(200),
@@ -243,51 +179,84 @@ function register($data)
      `role_id` INT,
      PRIMARY KEY (`id`)
   )";
-  mysqli_query($con,$createTbUser);
-  
+  mysqli_query($con, $createTbUser);
+
   //create table tb_darjah dan insert data
-  $createTbDarjah ="
+  $createTbDarjah = "
    CREATE TABLE IF NOT EXISTS tb_darjah(
      `id` INT AUTO_INCREMENT,
      `umur_pelajar` INT,
      `darjah_pelajar` VARCHAR(200),
      PRIMARY KEY (`id`)
   )";
-  mysqli_query($con,$createTbDarjah);
-  
-  $insertTbDarjah ="
+  mysqli_query($con, $createTbDarjah);
+  $insertTbDarjah = "
   INSERT INTO `tb_darjah` (`Id`, `umur_pelajar`, `darjah_pelajar`) VALUES
-  (NULL, '7', 'Darjah 1'), 
-  (NULL, '8', 'Darjah 2'),
-  (NULL, '9', 'Darjah 3'), 
-  (NULL, '10', 'Darjah 4'),
-  (NULL, '11', 'Darjah 5'), 
-  (NULL, '12', 'Darjah 6'),
-  (NULL, '13', 'Tingkatan 1'), 
-  (NULL, '14', 'Tingkatan 2'),
-  (NULL, '15', 'Tingkatan 3'), 
-  (NULL, '16', 'Tingkatan 4'),
-  (NULL, '17', 'Tingkatan 5'), 
-  (NULL, '18', 'Tingkatan 6')";
-  mysqli_query($con,$insertTbDarjah);
-  
+  (1, '7', 'Darjah 1'), 
+  (2, '8', 'Darjah 2'),
+  (3, '9', 'Darjah 3'), 
+  (4, '10', 'Darjah 4'),
+  (5, '11', 'Darjah 5'), 
+  (6, '12', 'Darjah 6'),
+  (7, '13', 'Tingkatan 1'), 
+  (8, '14', 'Tingkatan 2'),
+  (9, '15', 'Tingkatan 3'), 
+  (10, '16', 'Tingkatan 4'),
+  (11, '17', 'Tingkatan 5'), 
+  (12, '18', 'Tingkatan 6')";
+  mysqli_query($con, $insertTbDarjah);
+  //akhir create table tb_darjah dan insert data
+
   //create table tb_kelas dan INSERT
-  $createTbKelas ="
+  $createTbKelas = "
    CREATE TABLE IF NOT EXISTS tb_kelas(
      `id` INT,
      `nama_kelas` VARCHAR(200),
      PRIMARY KEY (`id`)
   )";
-  mysqli_query($con,$createTbKelas);
-  
-  $insertTbKelas ="
+  mysqli_query($con, $createTbKelas);
+  $insertTbKelas = "
   INSERT INTO `tb_kelas` (`Id`,`nama_kelas`) VALUES
   (1, 'Kelas A'), 
   (2, 'Kelas B'),
   (3, 'Kelas C'), 
   (4, 'Kelas D')";
-  mysqli_query($con,$insertTbKelas);
-  
+  mysqli_query($con, $insertTbKelas);
+  //akhir create table tb_kelas dan INSERT  
+
+  // create table cikgu 
+  $create = "
+  CREATE TABLE IF NOT EXISTS tb_cikgu(
+    `id` INT AUTO_INCREMENT,
+    `nama_cikgu` VARCHAR(200),
+    `umur_cikgu` VARCHAR(200),
+    `jantina_cikgu` VARCHAR(200),
+    PRIMARY KEY (`id`))";
+  mysqli_query($con, $create);
+  // akhir create table cikgu 
+
+  // create table pelajaran   
+  $create = "
+ CREATE TABLE IF NOT EXISTS tb_pelajaran(
+   `id` INT AUTO_INCREMENT,
+   `mata_pelajaran` VARCHAR(200),
+   `cikgu_id` INT,
+   PRIMARY KEY (`id`))";
+  mysqli_query($con, $create);
+  // akhir create table pelajaran
+
+  // create table pelajar
+  $create = "
+  CREATE TABLE IF NOT EXISTS tb_pelajar(
+    `id` INT AUTO_INCREMENT,
+    `nama_pelajar` VARCHAR(200),
+    `umur_pelajar` VARCHAR(200),
+    `jantina_pelajar` VARCHAR(200),
+    `kelas_id` INT,
+    `cikgu_id` INT,
+    PRIMARY KEY (`id`))";
+  mysqli_query($con, $create);
+  // akhir create table pelajar 
 
   $result = mysqli_query($con, "SELECT * FROM tb_user WHERE email = '$email'");
 
