@@ -1,5 +1,11 @@
 <?php require_once("function.php");
 
+if (!isset($_SESSION["login"])) {
+    echo "<script>
+  window.location='../auth/login.php'
+  </script>";
+}
+
 ?>
 <!DOCTYPE html>
 <!--

@@ -296,6 +296,7 @@ function login($data)
 
     $row = mysqli_fetch_assoc($result);
     if (password_verify($password, $row["password"])) {
+      $_SESSION["login"] = true;
       echo "<script>
       window.location='/'
       </script>";
