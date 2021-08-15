@@ -1,3 +1,13 @@
+<?php
+require "../function.php";
+
+if (isset($_POST["submit"])) {
+  if (!login($_POST)) {
+    echo "Username/Password Salah!";
+  }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 

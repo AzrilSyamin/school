@@ -283,3 +283,22 @@ function register($data)
   mysqli_query($con, $query) or die(mysqli_error($con));
   return mysqli_affected_rows($con);
 }
+
+function login($data)
+{
+  $con = con();
+  $email = htmlspecialchars($data["email"]);
+  $password = htmlspecialchars($data["password"]);
+
+  $result = mysqli_query($con,  "SELECT * FROM tb_user WHERE email = '$email'");
+
+  if (mysqli_num_rows($result) === 1) {
+
+    $row = mysqli_fetch_assoc($result);
+    if (password_verify($password, $row["password"])) {
+      echo "<script>
+      window.location='/'
+      </script>";
+    }
+  }
+}
