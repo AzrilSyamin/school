@@ -276,9 +276,11 @@ function register($data)
 
 
   if ($password !== $password2) {
-    echo "<script>
-    alert('Password Tidak Sama!')
-    </script>";
+    echo  "<div class=\"register-box\">
+    <div class=\"alert alert-danger\" role=\"alert\">
+        <p>Password Tidak Sama!</p>
+      </div>
+      </div>";
     return false;
   }
 
