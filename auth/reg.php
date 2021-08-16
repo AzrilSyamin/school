@@ -8,15 +8,18 @@ if (isset($_POST["submit"])) {
     window.location='/';
     </script>";
   } else {
-    echo "<script>
-    alert('Register Gagal!')
-    </script>";
+    $error = true;
   }
 }
 ?>
 
 <body class="hold-transition register-page">
   <div class="register-box">
+    <?php if (isset($error)) : ?>
+      <div class="alert alert-danger" role="alert">
+        <p>Register Gagal!</p>
+      </div>
+    <?php endif; ?>
     <div class="card card-outline card-primary">
       <div class="card-header text-center">
         <a href="/" class="h1"><b>Data </b>Sekolah</a>

@@ -3,7 +3,7 @@ require "_headerauth.php";
 
 if (isset($_POST["submit"])) {
   if (!login($_POST)) {
-    echo "Username/Password Salah!";
+    $error = true;
   }
 }
 ?>
@@ -11,6 +11,11 @@ if (isset($_POST["submit"])) {
 
 <body class="hold-transition login-page">
   <div class="login-box">
+    <?php if (isset($error)) : ?>
+      <div class="alert alert-danger" role="alert">
+        <p>Username / Password Salah!</p>
+      </div>
+    <?php endif; ?>
     <!-- /.login-logo -->
     <div class="card card-outline card-primary">
       <div class="card-header text-center">

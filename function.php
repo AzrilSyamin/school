@@ -261,9 +261,16 @@ function register($data)
   $result = mysqli_query($con, "SELECT * FROM tb_user WHERE email = '$email'");
 
   if (mysqli_fetch_assoc($result)) {
-    echo "<script>
-    alert('Email Sudah Terdaftar!')
-    </script>";
+    // echo "<script>
+    // alert('Email Sudah Terdaftar!')
+    // </script>";
+
+    echo  "<div class=\"register-box\">
+    <div class=\"alert alert-danger\" role=\"alert\">
+        <p>Email Sudah Terdaftar!</p>
+      </div>
+      </div>";
+
     return false;
   }
 
