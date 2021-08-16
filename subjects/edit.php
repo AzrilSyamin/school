@@ -19,9 +19,9 @@ if (isset($_POST["submit"])) {
 ?>
 
 <!-- Page Heading -->
-<h1>Edit Subjects</h1>
+<h3>Edit Subjects</h3>
 <a href="subject.php" class="btn btn-primary">Back</a>
-<div class="row justify-content-center">
+<div class="row">
   <!-- Awal Form  -->
   <div class="col-12 col-md-6 p-4 shadow">
     <?php if (isset($error)) : ?>

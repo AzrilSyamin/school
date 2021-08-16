@@ -6,7 +6,7 @@ $students = query("SELECT * FROM tb_pelajar
 ?>
 
 <!-- Page Heading -->
-<h1>List Of Students</h1>
+<h3>List Of Students</h3>
 <a href="add.php" class="btn btn-primary mb-3">Add Students</a>
 <div class="row">
     <!-- Awal Table  -->

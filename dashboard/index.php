@@ -15,7 +15,7 @@ $students = query("SELECT * FROM tb_pelajar
 ?>
 
 <!-- DataTales Pelajar -->
-<h1>Detail Pelajar</h1>
+<h3>Detail Pelajar</h3>
 <div class="card shadow mb-4">
   <div class="card-body">
     <div class="table-responsive">

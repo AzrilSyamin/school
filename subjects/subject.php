@@ -7,7 +7,7 @@ $subjects = query("SELECT * FROM tb_cikgu
 ?>
 
 <!-- Page Heading -->
-<h1>List Of Subjects</h1>
+<h3>List Of Subjects</h3>
 <a href="add.php" class="btn btn-primary mb-3">Add Subjects</a>
 <div class="row">
     <!-- Awal Table  -->

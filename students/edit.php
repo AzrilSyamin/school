@@ -20,9 +20,9 @@ if (isset($_POST["submit"])) {
 ?>
 
 <!-- Page Heading -->
-<h1>Edit Students</h1>
+<h3>Edit Students</h3>
 <a href="student.php" class="btn btn-primary">Back</a>
-<div class="row justify-content-center">
+<div class="row">
   <!-- Awal Form  -->
   <div class="col-12 col-md-6 p-4 shadow">
     <?php if (isset($error)) : ?>
