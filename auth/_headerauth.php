@@ -1,7 +1,7 @@
 <?php
 require "../function.php";
 
-if (isset($_SESSION["login"])) {
+if (isset($_SESSION["email"])) {
   echo "<script>
   window.location='/'
   </script>";

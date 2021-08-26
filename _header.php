@@ -1,10 +1,15 @@
 <?php require_once("function.php");
 
-if (!isset($_SESSION["login"])) {
+if (!isset($_SESSION["email"])) {
     echo "<script>
   window.location='../auth/login.php'
   </script>";
 }
+
+$query = mysqli_query(con(),"SELECT * FROM tb_user WHERE id = '$_SESSION[email]'");
+$users = mysqli_fetch_assoc($query);
+
+
 
 ?>
 <!DOCTYPE html>
@@ -179,10 +184,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="../_asset/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+                        <img src="../img/<?= $users["picture"];?>" alt="User Image">
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block">Demo Users</a>
+                        <a href="../user/profile.php" class="d-block"><?= $users["first_name"];?> <?= $users["last_name"];?></a>
                     </div>
                 </div>
 
