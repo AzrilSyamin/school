@@ -163,19 +163,23 @@ function edit_subjects($data)
 function register($data)
 {
   $con = con();
-  $full_name = htmlspecialchars($data["full_name"]);
+  $first_name = htmlspecialchars($data["first_name"]);
+  $last_name = htmlspecialchars($data["last_name"]);
   $email = htmlspecialchars($data["email"]);
   $password = htmlspecialchars($data["password"]);
   $password2 = htmlspecialchars($data["password2"]);
-  $role_id = 0;
+  $picture = "default.jpg";
+  $role_id = 1;
 
   //create table tb_user
   $createTbUser = "
    CREATE TABLE IF NOT EXISTS tb_user(
      `id` INT AUTO_INCREMENT,
-     `full_name` VARCHAR(200),
+     `first_name` VARCHAR(200),
+     `last_name` VARCHAR(200),
      `email` VARCHAR(200),
      `password` VARCHAR(200),
+     `picture` VARCHAR(200),
      `role_id` INT,
      PRIMARY KEY (`id`)
   )";
@@ -287,7 +291,7 @@ function register($data)
   $password = password_hash($password, PASSWORD_DEFAULT);
 
   $query = "INSERT INTO tb_user VALUE 
-  (null, '$full_name', '$email', '$password', '$role_id')";
+  (null, '$first_name','$last_name', '$email', '$password','$picture', '$role_id')";
 
   mysqli_query($con, $query) or die(mysqli_error($con));
   return mysqli_affected_rows($con);
@@ -305,10 +309,25 @@ function login($data)
 
     $row = mysqli_fetch_assoc($result);
     if (password_verify($password, $row["password"])) {
-      $_SESSION["login"] = true;
-      echo "<script>
-      window.location='/'
-      </script>";
+      $cek = mysqli_num_rows($result);
+      if ($cek > 0){
+        if($row["role_id"] == 1){
+          $_SESSION["email"] = $row["id"];
+          echo "<script>
+          window.location='/'
+          </script>";
+        } else if ($row["role_id"] == 0){
+          $_SESSION["email"] = $row["id"];
+          echo "<script>
+          window.location='/'
+          </script>";
+        }
+      }
     }
+  } else {
+    echo "<script>
+          alert('Email Belum Berdaftar!');
+          window.location='/';
+          </script>";  
   }
 }
