@@ -29,13 +29,23 @@ if (isset($_POST["submit"])) {
 
         <form action="" method="post">
           <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Full name" name="full_name" required>
+            <input type="text" class="form-control" placeholder="First Name" name="first_name" required>
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-user"></span>
               </div>
             </div>
           </div>
+          
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Last Name" name="last_name" required>
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-user"></span>
+              </div>
+            </div>
+          </div>
+          
           <div class="input-group mb-3">
             <input type="email" class="form-control" placeholder="Email" name="email" required>
             <div class="input-group-append">
