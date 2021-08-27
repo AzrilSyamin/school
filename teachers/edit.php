@@ -48,9 +48,8 @@ if (isset($_POST["submit"])) {
       <div class="form-group">
         <label for="jantina">Jantina :</label>
         <select name="jantina" id="jantina" class="form-control">
-          <option selected>Choose...</option>
-          <option>Lelaki</option>
-          <option>Perempuan</option>
+          <option <?php if($teachers["jantina_cikgu"] == 'Lelaki'){ echo"selected";}?>>Lelaki</option>
+          <option <?php if($teachers["jantina_cikgu"] == 'Perempuan'){ echo"selected";}?>>Perempuan</option>
         </select>
       </div>
 
