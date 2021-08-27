@@ -169,21 +169,34 @@ function edit_user($data)
   $email = htmlspecialchars($data["email"]);
   $password = htmlspecialchars($data["password1"]);
   $password2 = htmlspecialchars($data["password2"]);
-  $picture = "default.jpg";
+  //pic_name
+  $name_picture = htmlspecialchars($_FILES["picture"]["name"]);
   $role_id = 1;
+  //sumber
+  $sumber = $_FILES["picture"]["tmp_name"];
+  // //folder
+  $folder = "../img/";
 
-  if ($password && $password2 !== null){
+  if ($name_picture == null) {
+    $sql_pic = mysqli_query($con, "SELECT * FROM tb_user WHERE id = '$_SESSION[email]'");
+
+    $data_pic = mysqli_fetch_assoc($sql_pic);
+    $name_picture = $data_pic["picture"];
+  } else {
+    move_uploaded_file($sumber, $folder . $name_picture);
+  }
+
+  if ($password && $password2 !== null) {
     if ($password !== $password2) {
       echo "Password Tidak Sama";
       return false;
     }
-  
+
     $password = password_hash($password, PASSWORD_DEFAULT);
   } else {
     $sql_pass = mysqli_query($con, "SELECT * FROM tb_user WHERE id = '$_SESSION[email]'");
-  
+
     $data_pass = mysqli_fetch_assoc($sql_pass);
-    
     $password = $data_pass["password"];
   }
 
@@ -193,7 +206,7 @@ function edit_user($data)
   last_name = '$last_name', 
   email = '$email', 
   password = '$password',
-  picture = '$picture', 
+  picture = '$name_picture', 
   role_id = $role_id
   WHERE id = $id ";
 

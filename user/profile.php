@@ -22,7 +22,7 @@ if (isset($_POST["submit"])) {
 <h3>My Profile</h3>
 <div class="row">
   <div class="col-12 col-md-6 p-4 shadow">
-    <form action="" method="POST">
+    <form action="" method="POST" enctype="multipart/form-data">
       <div class="form-group">
         <label>User ID :</label>
         <input type="text" class="form-control" name="id" value="<?= $data["id"]; ?>" readonly>
