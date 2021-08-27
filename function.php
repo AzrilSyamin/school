@@ -160,6 +160,42 @@ function edit_subjects($data)
   return mysqli_affected_rows($con);
 }
 
+function edit_user($data)
+{
+  $con = con();
+  $id = $data["id"];
+  $first_name = htmlspecialchars($data["first_name"]);
+  $last_name = htmlspecialchars($data["last_name"]);
+  $email = htmlspecialchars($data["email"]);
+  $password = htmlspecialchars($data["password1"]);
+  $password2 = htmlspecialchars($data["password2"]);
+  $picture = "default.jpg";
+  $role_id = 1;
+
+  // if ($password && $password2 == null){
+
+  // }
+
+  if ($password !== $password2) {
+    echo "Password Tidak Sama";
+    return false;
+  }
+
+  $password = password_hash($password, PASSWORD_DEFAULT);
+
+  $query = "UPDATE tb_user SET
+  first_name = '$first_name',
+  last_name = '$last_name', 
+  email = '$email', 
+  password = '$password',
+  picture = '$picture', 
+  role_id = $role_id
+  WHERE id = $id ";
+
+  mysqli_query($con, $query) or die(mysqli_error($con));
+  return mysqli_affected_rows($con);
+}
+
 function register($data)
 {
   $con = con();
@@ -310,13 +346,13 @@ function login($data)
     $row = mysqli_fetch_assoc($result);
     if (password_verify($password, $row["password"])) {
       $cek = mysqli_num_rows($result);
-      if ($cek > 0){
-        if($row["role_id"] == 1){
+      if ($cek > 0) {
+        if ($row["role_id"] == 1) {
           $_SESSION["email"] = $row["id"];
           echo "<script>
           window.location='/'
           </script>";
-        } else if ($row["role_id"] == 0){
+        } else if ($row["role_id"] == 0) {
           $_SESSION["email"] = $row["id"];
           echo "<script>
           window.location='/'
@@ -328,6 +364,6 @@ function login($data)
     echo "<script>
           alert('Email Belum Berdaftar!');
           window.location='/';
-          </script>";  
+          </script>";
   }
 }
