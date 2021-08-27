@@ -172,16 +172,21 @@ function edit_user($data)
   $picture = "default.jpg";
   $role_id = 1;
 
-  // if ($password && $password2 == null){
-
-  // }
-
-  if ($password !== $password2) {
-    echo "Password Tidak Sama";
-    return false;
+  if ($password && $password2 !== null){
+    if ($password !== $password2) {
+      echo "Password Tidak Sama";
+      return false;
+    }
+  
+    $password = password_hash($password, PASSWORD_DEFAULT);
+  } else {
+    $sql_pass = mysqli_query($con, "SELECT * FROM tb_user WHERE id = '$_SESSION[email]'");
+  
+    $data_pass = mysqli_fetch_assoc($sql_pass);
+    
+    $password = $data_pass["password"];
   }
 
-  $password = password_hash($password, PASSWORD_DEFAULT);
 
   $query = "UPDATE tb_user SET
   first_name = '$first_name',

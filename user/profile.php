@@ -45,12 +45,12 @@ if (isset($_POST["submit"])) {
 
       <div class="form-group">
         <label for="password1">Password :</label>
-        <input type="password" class="form-control" name="password1" id="password1" value="<?= $data["password"]; ?>>
+        <input type="password" class="form-control" name="password1" id="password1">
       </div>
 
       <div class=" form-group">
         <label for="password2">Comfirm Password :</label>
-        <input type="password" class="form-control" name="password2" id="password2" value="<?= $data["password"]; ?>>
+        <input type="password" class="form-control" name="password2" id="password2">
       </div>
 
       <div class=" form-group">
