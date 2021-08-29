@@ -57,7 +57,7 @@ if (isset($_POST["submit"])) {
         </select>
       </div>
 
-      <button type="submit" class="btn btn-success" style="float:right;" name="submit"><i class="fas fa-save"></i> Edit Teacher</button>
+      <button type="submit" class="btn btn-success" style="float:right;" name="submit"><i class="fas fa-save"></i> Save Changes</button>
     </form>
   </div>
   <!-- Akhir Form  -->
