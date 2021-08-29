@@ -19,9 +19,9 @@ if (isset($_POST["submit"])) {
 
 
 ?>
-<h3>My Profile</h3>
 <div class="row">
   <div class="col-12 col-md-6 p-4 shadow">
+    <h4>My Profile</h4>
     <form action="" method="POST" enctype="multipart/form-data">
       <div class="form-group">
         <label>User ID :</label>
@@ -54,11 +54,11 @@ if (isset($_POST["submit"])) {
       </div>
 
       <div class=" form-group">
-        <label for="picture">Picture Update :</label>
+        <label for="picture">Profile Picture :</label>
         <input type="file" class="form-control-file" name="picture" id="picture">
       </div>
 
-      <button type="submit" class="btn btn-primary" style="float:right;" name="submit">Save Changes</button>
+      <button type="submit" class="btn btn-primary" style="float:right;" name="submit"><i class="fas fa-save"></i> Save Changes</button>
     </form>
   </div>
 </div>

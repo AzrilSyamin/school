@@ -14,11 +14,11 @@ if (isset($_POST["submit"])) {
 ?>
 
 <!-- Page Heading -->
-<h3>Add New Subjects</h3>
-<a href="subject.php" class="btn btn-primary mb-3"><i class="fas fa-backward"></i> Back</a>
 <div class="row">
     <!-- Awal Form  -->
     <div class="col-12 col-md-6 p-4 shadow">
+        <h4>Add New Subjects</h4>
+        <a href="subject.php" class="btn btn-primary mb-3"><i class="fas fa-backward"></i> Back</a>
         <?php if (isset($error)) : ?>
             <div class="alert alert-danger alert-dismissible fade show pb-0" role="alert">
                 <p>Failed to add Subjects</p>
@@ -46,7 +46,7 @@ if (isset($_POST["submit"])) {
                 </select>
             </div>
 
-            <button type="submit" class="btn btn-primary" name="submit"><i class="fas fa-fw fa-plus-circle"></i> Add New Subject</button>
+            <button type="submit" class="btn btn-primary" style="float: right;" name="submit"><i class="fas fa-fw fa-plus-circle"></i> Add New Subject</button>
         </form>
     </div>
     <!-- Akhir Form  -->
