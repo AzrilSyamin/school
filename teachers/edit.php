@@ -17,11 +17,11 @@ if (isset($_POST["submit"])) {
 
 ?>
 <!-- Page Heading -->
-<h3>Edit Teachers</h3>
-<a href="teacher.php" class="btn btn-primary"><i class="fas fa-backward"></i> Back</a>
 <div class="row">
   <!-- Awal Form  -->
   <div class="col-12 col-md-6 p-4 shadow">
+    <h4>Edit Teachers</h4>
+    <a href="teacher.php" class="btn btn-primary"><i class="fas fa-backward"></i> Back</a>
     <?php if (isset($error)) : ?>
       <div class="alert alert-danger alert-dismissible fade show pb-0" role="alert">
         <p>Failed to edit Teacher</p>
@@ -57,7 +57,7 @@ if (isset($_POST["submit"])) {
         </select>
       </div>
 
-      <button type="submit" class="btn btn-primary" name="submit"><i class="fas fa-save"></i> Edit Teacher</button>
+      <button type="submit" class="btn btn-success" style="float:right;" name="submit"><i class="fas fa-save"></i> Edit Teacher</button>
     </form>
   </div>
   <!-- Akhir Form  -->

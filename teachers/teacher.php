@@ -16,7 +16,7 @@ $teachers = query("SELECT * FROM tb_teacher
                         <h4>List Of Teachers</h4>
                     </div>
                     <div class="col-12 col-md-6">
-                        <a href="add.php" class="btn btn-primary" style="float:right;"><i class="fas fa-fw fa-plus-circle"></i> Add New Teachers</a>
+                        <a href="add.php" class="btn btn-success" style="float:right;"><i class="fas fa-fw fa-plus-circle"></i> Add New Teachers</a>
                     </div>
                 </div>
             </div>
