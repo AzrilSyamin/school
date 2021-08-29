@@ -1,13 +1,13 @@
 <?php include_once "../_header.php"; ?>
 <?php
 
-$teachers = query("SELECT * FROM tb_cikgu
+$teachers = query("SELECT * FROM tb_teacher
                  ");
 ?>
 
 <!-- Page Heading -->
 <h3>List Of Teachers</h3>
-<a href="add.php" class="btn btn-primary mb-3">Add Teachers</a>
+<a href="add.php" class="btn btn-primary mb-3"><i class="fas fa-fw fa-plus-circle"></i> Add New Teachers</a>
 <div class="row">
     <!-- Awal Table  -->
     <div class="col-12 table-responsive">
@@ -16,8 +16,8 @@ $teachers = query("SELECT * FROM tb_cikgu
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Name</th>
-                    <th scope="col">Jantina</th>
-                    <th scope="col">Umur</th>
+                    <th scope="col">Gender</th>
+                    <th scope="col">Age</th>
                     <th scope="col">Action</th>
                 </tr>
             </thead>
@@ -26,9 +26,9 @@ $teachers = query("SELECT * FROM tb_cikgu
                 <tbody>
                     <tr>
                         <th scope="row"><?= $i++; ?></th>
-                        <td><?= $teacher["nama_cikgu"]; ?></td>
-                        <td><?= $teacher["jantina_cikgu"]; ?></td>
-                        <td><?= $teacher["umur_cikgu"]; ?></td>
+                        <td><?= $teacher["teacher_name"]; ?></td>
+                        <td><?= $teacher["teacher_gender"]; ?></td>
+                        <td><?= $teacher["teacher_age"]; ?></td>
                         <td>
 
                             <a class="badge badge-warning" href="edit.php?id=<?= $teacher["id"]; ?>"><i class="fas fa-edit"></i></a>

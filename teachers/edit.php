@@ -2,12 +2,11 @@
 <?php
 
 $id = $_GET["id"];
-$teachers = query("SELECT * FROM tb_cikgu WHERE id = $id")[0];
+$teachers = query("SELECT * FROM tb_teacher WHERE id = $id")[0];
 
 if (isset($_POST["submit"])) {
   if (edit_teachers($_POST) > 0) {
     echo "<script>
-        
         document.location.href='../teachers/teacher.php';
         </script>
         ";
@@ -19,15 +18,16 @@ if (isset($_POST["submit"])) {
 ?>
 <!-- Page Heading -->
 <h3>Edit Teachers</h3>
-<a href="teacher.php" class="btn btn-primary">Back</a>
+<a href="teacher.php" class="btn btn-primary"><i class="fas fa-backward"></i> Back</a>
 <div class="row">
   <!-- Awal Form  -->
   <div class="col-12 col-md-6 p-4 shadow">
     <?php if (isset($error)) : ?>
-      <div class="alert alert-danger" role="alert">
-        <p>Teacher is <b>not edit!</b>
-          <br> Please again try later...
-        </p>
+      <div class="alert alert-danger alert-dismissible fade show pb-0" role="alert">
+        <p>Failed to edit Teacher</p>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
     <?php endif; ?>
     <form action="" method="POST">
@@ -36,24 +36,28 @@ if (isset($_POST["submit"])) {
       </div>
 
       <div class="form-group">
-        <label for="nama">Nama :</label>
-        <input type="text" class="form-control" name="nama" id="nama" value="<?= $teachers["nama_cikgu"]; ?>" required autofocus>
+        <label for="name">Nama :</label>
+        <input type="text" class="form-control" name="name" id="name" value="<?= $teachers["teacher_name"]; ?>" required autofocus>
       </div>
 
       <div class="form-group">
-        <label for="umur">Umur :</label>
-        <input type="number" class="form-control" name="umur" id="umur" value="<?= $teachers["umur_cikgu"]; ?>" required>
+        <label for="age">Age :</label>
+        <input type="number" class="form-control" name="age" id="age" value="<?= $teachers["teacher_age"]; ?>" required>
       </div>
 
       <div class="form-group">
-        <label for="jantina">Jantina :</label>
-        <select name="jantina" id="jantina" class="form-control">
-          <option <?php if($teachers["jantina_cikgu"] == 'Lelaki'){ echo"selected";}?>>Lelaki</option>
-          <option <?php if($teachers["jantina_cikgu"] == 'Perempuan'){ echo"selected";}?>>Perempuan</option>
+        <label for="gender">Gender :</label>
+        <select name="gender" id="gender" class="form-control">
+          <option <?php if ($teachers["teacher_gender"] == 'Lelaki') {
+                    echo "selected";
+                  } ?>>Lelaki</option>
+          <option <?php if ($teachers["teacher_gender"] == 'Perempuan') {
+                    echo "selected";
+                  } ?>>Perempuan</option>
         </select>
       </div>
 
-      <button type="submit" class="btn btn-primary" name="submit">Edit Teacher</button>
+      <button type="submit" class="btn btn-primary" name="submit"><i class="fas fa-save"></i> Edit Teacher</button>
     </form>
   </div>
   <!-- Akhir Form  -->

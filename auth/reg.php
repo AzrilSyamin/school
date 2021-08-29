@@ -4,7 +4,7 @@ require "_headerauth.php";
 if (isset($_POST["submit"])) {
   if (register($_POST) > 0) {
     echo "<script>
-    alert('Register Berjaya!');
+    alert('Register Success !');
     window.location='/';
     </script>";
   } else {
@@ -16,13 +16,16 @@ if (isset($_POST["submit"])) {
 <body class="hold-transition register-page">
   <div class="register-box">
     <?php if (isset($error)) : ?>
-      <div class="alert alert-danger" role="alert">
-        <p>Register Gagal!</p>
+      <div class="alert alert-danger alert-dismissible fade show pb-0" role="alert">
+        <p>Registration Failed !</p>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
     <?php endif; ?>
     <div class="card card-outline card-primary">
       <div class="card-header text-center">
-        <a href="/" class="h1"><b>Data </b>Sekolah</a>
+        <a href="/" class="h1"><b>School</b> Data</a>
       </div>
       <div class="card-body">
         <p class="login-box-msg">Register a new member</p>
@@ -36,7 +39,7 @@ if (isset($_POST["submit"])) {
               </div>
             </div>
           </div>
-          
+
           <div class="input-group mb-3">
             <input type="text" class="form-control" placeholder="Last Name" name="last_name" required>
             <div class="input-group-append">
@@ -45,7 +48,7 @@ if (isset($_POST["submit"])) {
               </div>
             </div>
           </div>
-          
+
           <div class="input-group mb-3">
             <input type="email" class="form-control" placeholder="Email" name="email" required>
             <div class="input-group-append">

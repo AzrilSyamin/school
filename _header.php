@@ -6,7 +6,7 @@ if (!isset($_SESSION["email"])) {
   </script>";
 }
 
-$query = mysqli_query(con(),"SELECT * FROM tb_user WHERE id = '$_SESSION[email]'");
+$query = mysqli_query(con(), "SELECT * FROM tb_user WHERE id = '$_SESSION[email]'");
 $users = mysqli_fetch_assoc($query);
 
 
@@ -22,7 +22,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Data Sekolah</title>
+    <title>School Data</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -176,7 +176,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <!-- Brand Logo -->
             <a href="/" class="brand-link">
                 <img src="../_asset/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">Data Sekolah</span>
+                <span class="brand-text font-weight-light">School Data</span>
             </a>
 
             <!-- Sidebar -->
@@ -184,10 +184,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="../img/<?= $users["picture"];?>" alt="User Image">
+                        <img src="../img/<?= $users["picture"]; ?>" alt="User Image">
                     </div>
                     <div class="info">
-                        <a href="../user/profile.php" class="d-block"><?= $users["first_name"];?> <?= $users["last_name"];?></a>
+                        <a href="../user/profile.php" class="d-block"><?= $users["first_name"]; ?> <?= $users["last_name"]; ?></a>
                     </div>
                 </div>
 

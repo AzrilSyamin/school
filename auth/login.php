@@ -12,14 +12,17 @@ if (isset($_POST["submit"])) {
 <body class="hold-transition login-page">
   <div class="login-box">
     <?php if (isset($error)) : ?>
-      <div class="alert alert-danger" role="alert">
-        <p>Username / Password Salah!</p>
+      <div class="alert alert-danger alert-dismissible fade show pb-0" role="alert">
+        <p>Incorrect Username / Password !</p>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
     <?php endif; ?>
     <!-- /.login-logo -->
     <div class="card card-outline card-primary">
       <div class="card-header text-center">
-        <a href="/" class="h1"><b>Data </b>Sekolah</a>
+        <a href="/" class="h1"><b>School</b> Data</a>
       </div>
       <div class="card-body">
         <p class="login-box-msg">Sign in to start your session</p>

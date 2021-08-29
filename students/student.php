@@ -1,13 +1,13 @@
 <?php include_once "../_header.php"; ?>
 <?php
 
-$students = query("SELECT * FROM tb_pelajar
+$students = query("SELECT * FROM tb_student
                  ");
 ?>
 
 <!-- Page Heading -->
 <h3>List Of Students</h3>
-<a href="add.php" class="btn btn-primary mb-3">Add Students</a>
+<a href="add.php" class="btn btn-primary mb-3"><i class="fas fa-fw fa-plus-circle"></i> Add New Students</a>
 <div class="row">
     <!-- Awal Table  -->
     <div class="col-12 table-responsive">
@@ -19,8 +19,8 @@ $students = query("SELECT * FROM tb_pelajar
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Name</th>
-                    <th scope="col">Jantina</th>
-                    <th scope="col">Umur</th>
+                    <th scope="col">Gender</th>
+                    <th scope="col">Age</th>
                     <th scope="col">Action</th>
                 </tr>
             </thead>
@@ -29,9 +29,9 @@ $students = query("SELECT * FROM tb_pelajar
                 <tbody>
                     <tr>
                         <th scope="row"><?= $i++; ?></th>
-                        <td><?= $student["nama_pelajar"]; ?></td>
-                        <td><?= $student["jantina_pelajar"]; ?></td>
-                        <td><?= $student["umur_pelajar"]; ?></td>
+                        <td><?= $student["student_name"]; ?></td>
+                        <td><?= $student["student_gender"]; ?></td>
+                        <td><?= $student["student_age"]; ?></td>
                         <td>
 
                             <a class="badge badge-warning" href="edit.php?id=<?= $student["id"]; ?>"><i class="fas fa-edit"></i></i></a>

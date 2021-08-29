@@ -4,7 +4,6 @@
 if (isset($_POST["submit"])) {
     if (add_teachers($_POST) > 0) {
         echo "<script>
-        
         document.location.href='../teachers/teacher.php';
         </script>
         ";
@@ -16,38 +15,39 @@ if (isset($_POST["submit"])) {
 ?>
 <!-- Page Heading -->
 <h3>Add New Teachers</h3>
-<a href="teacher.php" class="btn btn-primary mb-3">Back</a>
+<a href="teacher.php" class="btn btn-primary mb-3"><i class="fas fa-backward"></i> Back</a>
 <div class="row">
     <!-- Awal Form  -->
     <div class="col-12 col-md-6 p-4 shadow">
         <?php if (isset($error)) : ?>
-            <div class="alert alert-danger" role="alert">
-                <p>Teacher is <b>not added!</b>
-                    <br> Please again try later...
-                </p>
+            <div class="alert alert-danger alert-dismissible fade show pb-0" role="alert">
+                <p>Failed to add Teacher</p>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
         <?php endif; ?>
         <form action="" method="POST">
             <div class="form-group">
-                <label for="nama">Nama :</label>
-                <input type="text" class="form-control" name="nama" id="nama" required autofocus>
+                <label for="name">Nama :</label>
+                <input type="text" class="form-control" name="name" id="name" required autofocus>
             </div>
 
             <div class="form-group">
-                <label for="umur">Umur :</label>
-                <input type="number" class="form-control" name="umur" id="umur" required>
+                <label for="age">Age :</label>
+                <input type="number" class="form-control" name="age" id="age" required>
             </div>
 
             <div class="form-group">
-                <label for="jantina">Jantina :</label>
-                <select name="jantina" id="jantina" class="form-control">
+                <label for="gender">Gender :</label>
+                <select name="gender" id="gender" class="form-control">
                     <option selected>Choose...</option>
                     <option>Lelaki</option>
                     <option>Perempuan</option>
                 </select>
             </div>
 
-            <button type="submit" class="btn btn-primary" name="submit">Add New Teacher</button>
+            <button type="submit" class="btn btn-primary" name="submit"><i class="fas fa-fw fa-plus-circle"></i> Add New Teachers</button>
         </form>
     </div>
     <!-- Akhir Form  -->

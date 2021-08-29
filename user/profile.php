@@ -29,13 +29,13 @@ if (isset($_POST["submit"])) {
       </div>
 
       <div class="form-group">
-        <label for="nama">First Name :</label>
-        <input type="text" class="form-control" name="first_name" id="nama" required autofocus value="<?= $data["first_name"]; ?>">
+        <label for="name">First Name :</label>
+        <input type="text" class="form-control" name="first_name" id="name" required autofocus value="<?= $data["first_name"]; ?>">
       </div>
 
       <div class="form-group">
-        <label for="nama">Last Name :</label>
-        <input type="text" class="form-control" name="last_name" id="nama" value="<?= $data["last_name"]; ?>">
+        <label for="name">Last Name :</label>
+        <input type="text" class="form-control" name="last_name" id="name" value="<?= $data["last_name"]; ?>">
       </div>
 
       <div class="form-group">

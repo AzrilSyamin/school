@@ -1,60 +1,60 @@
 <?php require "../_header.php";
 
-$students = query("SELECT * FROM tb_pelajar
-                  LEFT JOIN tb_cikgu
-                  ON tb_pelajar.cikgu_id = tb_cikgu.id
+$students = query("SELECT * FROM tb_student
+                  LEFT JOIN tb_teacher
+                  ON tb_student.teacher_id = tb_teacher.id
 
-                  JOIN tb_kelas
-                  ON tb_pelajar.kelas_id = tb_kelas.id
+                  JOIN tb_class
+                  ON tb_student.class_id = tb_class.id
 
-                  JOIN tb_darjah
-                  ON tb_pelajar.umur_pelajar = tb_darjah.umur_pelajar
+                  JOIN tb_stages
+                  ON tb_student.student_age = tb_stages.student_age
                  ");
 // var_dump($students);
 // die;
 ?>
 
-<!-- DataTales Pelajar -->
-<h3>Detail Pelajar</h3>
+<!-- DataTales Students -->
+<h3>Students Detail</h3>
 <div class="card shadow mb-4">
   <div class="card-body">
     <div class="table-responsive">
-      <table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
+      <table class="table table-bordered table-striped text-center" id="dataTable" width="100%" cellspacing="0">
         <thead class="thead-dark">
           <tr>
             <th>Name</th>
-            <th>Umur</th>
-            <th>Kelas</th>
-            <th>Darjah</th>
-            <th>Cikgu</th>
-            <th>Pelajaran</th>
+            <th>Age</th>
+            <th>Class</th>
+            <th>Stages</th>
+            <th>Teacher</th>
+            <th>Subjects</th>
           </tr>
         </thead>
         <tfoot class="thead-dark">
           <tr>
             <th>Name</th>
-            <th>Umur</th>
-            <th>Kelas</th>
-            <th>Darjah</th>
-            <th>Cikgu</th>
-            <th>Pelajaran</th>
+            <th>Age</th>
+            <th>Class</th>
+            <th>Stages</th>
+            <th>Teacher</th>
+            <th>Subjects</th>
           </tr>
         </tfoot>
         <tbody>
           <?php foreach ($students as $student) : ?>
             <tr>
-              <td><?= $student["nama_pelajar"]; ?></td>
-              <td><?= $student["umur_pelajar"]; ?></td>
-              <td><?= $student["nama_kelas"]; ?></td>
-              <td><?= $student["darjah_pelajar"]; ?></td>
-              <td><?= $student["nama_cikgu"]; ?></td>
+              <td><?= $student["student_name"]; ?></td>
+              <td><?= $student["student_age"]; ?></td>
+              <td><?= $student["class_name"]; ?></td>
+              <td><?= $student["stages_age"]; ?></td>
+              <td><?= $student["teacher_name"]; ?></td>
               <td>
-                <?php $pelajaran = query("SELECT * FROM tb_pelajaran 
-                                        JOIN tb_cikgu
-                                        ON tb_pelajaran.cikgu_id = tb_cikgu.id WHERE cikgu_id = '$student[cikgu_id]'");
+                <?php $pelajaran = query("SELECT * FROM tb_subjects 
+                                        JOIN tb_teacher
+                                        ON tb_subjects.teacher_id = tb_teacher.id WHERE teacher_id = '$student[teacher_id]'");
                 foreach ($pelajaran as $p) : ?>
                   <ul>
-                    <li><?= $p["mata_pelajaran"]; ?></li>
+                    <li><?= $p["subjects_name"]; ?></li>
                   </ul>
                 <?php endforeach; ?>
               </td>
@@ -65,6 +65,6 @@ $students = query("SELECT * FROM tb_pelajar
     </div>
   </div>
 </div>
-<!-- End DataTales Pelajar -->
+<!-- End DataTales Students -->
 
 <?php require "../_footer.php" ?>

@@ -2,13 +2,12 @@
 <?php
 
 $id = $_GET["id"];
-$subjects = query("SELECT * FROM tb_pelajaran WHERE id = $id")[0];
+$subjects = query("SELECT * FROM tb_subjects WHERE id = $id")[0];
 
 
 if (isset($_POST["submit"])) {
   if (edit_subjects($_POST) > 0) {
     echo "<script>
-      
       document.location.href='../subjects/subject.php';
       </script>
       ";
@@ -20,15 +19,16 @@ if (isset($_POST["submit"])) {
 
 <!-- Page Heading -->
 <h3>Edit Subjects</h3>
-<a href="subject.php" class="btn btn-primary">Back</a>
+<a href="subject.php" class="btn btn-primary"><i class="fas fa-backward"></i> Back</a>
 <div class="row">
   <!-- Awal Form  -->
   <div class="col-12 col-md-6 p-4 shadow">
     <?php if (isset($error)) : ?>
-      <div class="alert alert-danger" role="alert">
-        <p>Subjects is <b>not edit!</b>
-          <br> Please again try later...
-        </p>
+      <div class="alert alert-danger alert-dismissible fade show pb-0" role="alert">
+        <p>Failed to edit Subjects</p>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
     <?php endif; ?>
     <form action="" method="POST">
@@ -37,24 +37,24 @@ if (isset($_POST["submit"])) {
       </div>
 
       <div class="form-group">
-        <label for="mata">Nama Mata Pelajaran :</label>
-        <input type="text" class="form-control" name="mata" id="mata " value="<?= $subjects["mata_pelajaran"]; ?>" autofocus required>
+        <label for="subjects">Subjects Name :</label>
+        <input type="text" class="form-control" name="subjects" id="subjects " value="<?= $subjects["subjects_name"]; ?>" autofocus required>
       </div>
 
       <div class="form-group">
-        <label for="idcikgu">Name Cikgu :</label>
+        <label for="teacher">Teacher Name :</label>
 
-        <select name="idcikgu" id="idcikgu" class="form-control">
+        <select name="teacher" id="teacher" class="form-control">
           <option selected>Choose...</option>
           <?php
-          $teachers = query("SELECT * FROM tb_cikgu");
+          $teachers = query("SELECT * FROM tb_teacher");
           foreach ($teachers as $teacher) : ?>
-            <option value="<?= $teacher["id"]; ?>"><?= $teacher["nama_cikgu"]; ?></option>
+            <option value="<?= $teacher["id"]; ?>"><?= $teacher["teacher_name"]; ?></option>
           <?php endforeach; ?>
         </select>
       </div>
 
-      <button type="submit" class="btn btn-primary" name="submit">Edit Subject</button>
+      <button type="submit" class="btn btn-primary" name="submit"><i class="fas fa-save"></i> Edit Subject</button>
     </form>
   </div>
   <!-- Akhir Form  -->

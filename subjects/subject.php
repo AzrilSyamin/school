@@ -1,14 +1,14 @@
 <?php include_once "../_header.php"; ?>
 <?php
 
-$subjects = query("SELECT * FROM tb_cikgu
-                RIGHT JOIN tb_pelajaran
-                ON tb_cikgu.id = tb_pelajaran.cikgu_id");
+$subjects = query("SELECT * FROM tb_teacher
+                RIGHT JOIN tb_subjects
+                ON tb_teacher.id = tb_subjects.teacher_id");
 ?>
 
 <!-- Page Heading -->
 <h3>List Of Subjects</h3>
-<a href="add.php" class="btn btn-primary mb-3">Add Subjects</a>
+<a href="add.php" class="btn btn-primary mb-3"><i class="fas fa-fw fa-plus-circle"></i> Add New Subjects</a>
 <div class="row">
     <!-- Awal Table  -->
     <div class="col-12 table-responsive">
@@ -16,8 +16,8 @@ $subjects = query("SELECT * FROM tb_cikgu
             <thead class="thead-dark">
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Name Mata Pelajaran</th>
-                    <th scope="col">Nama Cikgu</th>
+                    <th scope="col">Subjects Name</th>
+                    <th scope="col">Teacher Name</th>
                     <th scope="col">Action</th>
             </thead>
             <?php $i = 1;
@@ -25,8 +25,8 @@ $subjects = query("SELECT * FROM tb_cikgu
                 <tbody>
                     <tr>
                         <th scope="row"><?= $i++; ?></th>
-                        <td><?= $subject["mata_pelajaran"]; ?></td>
-                        <td><?= $subject["nama_cikgu"]; ?></td>
+                        <td><?= $subject["subjects_name"]; ?></td>
+                        <td><?= $subject["teacher_name"]; ?></td>
                         <td>
                             <a class="badge badge-warning" href="edit.php?id=<?= $subject["id"]; ?>"><i class="fas fa-edit"></i></a>
 

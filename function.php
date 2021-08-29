@@ -6,6 +6,8 @@ function con()
   return mysqli_connect("localhost", "root", "", "db_sekolah");
 }
 
+
+//function query
 function query($query)
 {
   $con = con();
@@ -17,7 +19,10 @@ function query($query)
   }
   return $rows;
 }
+//end function login
 
+
+//function base_url
 function base_url($url = null)
 {
   $base_url = '';
@@ -27,139 +32,159 @@ function base_url($url = null)
     return $base_url;
   }
 }
+//end function base_url
 
+
+//function add_students
 function add_students($data)
 {
   $con = con();
-  $nama = htmlspecialchars($data["nama"]);
-  $umur = htmlspecialchars($data["umur"]);
-  $jantina = htmlspecialchars($data["jantina"]);
-  $kelasid = htmlspecialchars($data["kelas"]);
-  $cikguid = htmlspecialchars($data["cikgu"]);
+  $name = htmlspecialchars($data["name"]);
+  $age = htmlspecialchars($data["age"]);
+  $gender = htmlspecialchars($data["gender"]);
+  $class_id = htmlspecialchars($data["class"]);
+  $teacher_id = htmlspecialchars($data["teacher"]);
 
-  if ($data["umur"] == "Choose...") {
+  if ($data["age"] == "Choose...") {
     return false;
-  } elseif ($data["jantina"] == "Choose...") {
+  } elseif ($data["gender"] == "Choose...") {
     return false;
-  } elseif ($data["kelas"] == "Choose...") {
+  } elseif ($data["class"] == "Choose...") {
     return false;
-  } elseif ($data["cikgu"] == "Choose...") {
+  } elseif ($data["teacher"] == "Choose...") {
     return false;
   }
 
-  $query = "INSERT INTO tb_pelajar VALUE
-  (NULL, '$nama','$umur', '$jantina', '$kelasid', '$cikguid')";
+  $query = "INSERT INTO tb_student VALUE
+  (NULL, '$name','$age', '$gender', '$class_id', '$teacher_id')";
 
   mysqli_query($con, $query) or die(mysqli_error($con));
   return mysqli_affected_rows($con);
 }
+//end function add_students
 
+
+//function add_teachers
 function add_teachers($data)
 {
   $con = con();
-  $nama = htmlspecialchars($data["nama"]);
-  $umur = htmlspecialchars($data["umur"]);
-  $jantina = htmlspecialchars($data["jantina"]);
+  $name = htmlspecialchars($data["name"]);
+  $age = htmlspecialchars($data["age"]);
+  $gender = htmlspecialchars($data["gender"]);
 
-  if ($data["jantina"] == "Choose...") {
+  if ($data["gender"] == "Choose...") {
     return false;
   }
-  $query = "INSERT INTO tb_cikgu VALUE
-  (NULL, '$nama','$umur', '$jantina')";
+  $query = "INSERT INTO tb_teacher VALUE
+  (NULL, '$name','$age', '$gender')";
 
   mysqli_query($con, $query) or die(mysqli_error($con));
   return mysqli_affected_rows($con);
 }
+//end function add_teachers
 
 
+//function add_subjects
 function add_subjects($data)
 {
   $con = con();
-  $mata = htmlspecialchars($data["mata"]);
-  $idcikgu = htmlspecialchars($data["idcikgu"]);
+  $subjects = htmlspecialchars($data["subjects"]);
+  $teacher = htmlspecialchars($data["teacher"]);
 
-  if ($data["idcikgu"] == "Choose...") {
+  if ($data["teacher"] == "Choose...") {
     return false;
   }
-  $query = "INSERT INTO tb_pelajaran VALUE
-  (NULL, '$mata','$idcikgu')";
+  $query = "INSERT INTO tb_subjects VALUE
+  (NULL, '$subjects','$teacher')";
 
   mysqli_query($con, $query) or die(mysqli_error($con));
   return mysqli_affected_rows($con);
 }
+//end function add_subjects
 
+
+//function edit_students
 function edit_students($data)
 {
   $con = con();
   $id = $data["id"];
-  $nama = htmlspecialchars($data["nama"]);
-  $umur = htmlspecialchars($data["umur"]);
-  $jantina = htmlspecialchars($data["jantina"]);
-  $kelasid = htmlspecialchars($data["kelas"]);
-  $cikguid = htmlspecialchars($data["cikgu"]);
+  $name = htmlspecialchars($data["name"]);
+  $age = htmlspecialchars($data["age"]);
+  $gender = htmlspecialchars($data["gender"]);
+  $class_id = htmlspecialchars($data["class"]);
+  $teacher_id = htmlspecialchars($data["teacher"]);
 
-  if ($data["umur"] == "Choose...") {
+  if ($data["age"] == "Choose...") {
     return false;
-  } elseif ($data["jantina"] == "Choose...") {
+  } elseif ($data["gender"] == "Choose...") {
     return false;
-  } elseif ($data["kelas"] == "Choose...") {
+  } elseif ($data["class"] == "Choose...") {
     return false;
-  } elseif ($data["cikgu"] == "Choose...") {
+  } elseif ($data["teacher"] == "Choose...") {
     return false;
   }
 
-  $query = "UPDATE tb_pelajar SET
-  nama_pelajar = '$nama',
-  umur_pelajar = '$umur', 
-  jantina_pelajar = '$jantina', 
-  kelas_id = '$kelasid', 
-  cikgu_id = '$cikguid'
+  $query = "UPDATE tb_student SET
+  student_name = '$name',
+  student_age = '$age', 
+  student_gender = '$gender', 
+  class_id = '$class_id', 
+  teacher_id = '$teacher_id'
   WHERE id = $id ";
 
   mysqli_query($con, $query) or die(mysqli_error($con));
   return mysqli_affected_rows($con);
 }
+//end function edit_students
 
+
+//function edit_teachers
 function edit_teachers($data)
 {
   $con = con();
   $id = $data["id"];
-  $nama = htmlspecialchars($data["nama"]);
-  $umur = htmlspecialchars($data["umur"]);
-  $jantina = htmlspecialchars($data["jantina"]);
+  $name = htmlspecialchars($data["name"]);
+  $age = htmlspecialchars($data["age"]);
+  $gender = htmlspecialchars($data["gender"]);
 
-  if ($data["jantina"] == "Choose...") {
+  if ($data["gender"] == "Choose...") {
     return false;
   }
-  $query = "UPDATE tb_cikgu SET
-  nama_cikgu = '$nama',
-  umur_cikgu = '$umur', 
-  jantina_cikgu = '$jantina'
+  $query = "UPDATE tb_teacher SET
+  teacher_name = '$name',
+  teacher_age = '$age', 
+  teacher_gender = '$gender'
   WHERE id = $id ";
 
   mysqli_query($con, $query) or die(mysqli_error($con));
   return mysqli_affected_rows($con);
 }
+//end function edit_teachers
 
+
+//function edit_subjects
 function edit_subjects($data)
 {
   $con = con();
   $id = $data["id"];
-  $mata = htmlspecialchars($data["mata"]);
-  $idcikgu = htmlspecialchars($data["idcikgu"]);
+  $subjects = htmlspecialchars($data["subjects"]);
+  $teacher = htmlspecialchars($data["teacher"]);
 
-  if ($data["idcikgu"] == "Choose...") {
+  if ($data["teacher"] == "Choose...") {
     return false;
   }
-  $query = "UPDATE tb_pelajaran SET
-  mata_pelajaran = '$mata',
-  cikgu_id = '$idcikgu'
+  $query = "UPDATE tb_subjects SET
+  subjects_name = '$subjects',
+  teacher_id = '$teacher'
   WHERE id = $id ";
 
   mysqli_query($con, $query) or die(mysqli_error($con));
   return mysqli_affected_rows($con);
 }
+//end function edit_subjects
 
+
+//function edit_user
 function edit_user($data)
 {
   $con = con();
@@ -213,7 +238,10 @@ function edit_user($data)
   mysqli_query($con, $query) or die(mysqli_error($con));
   return mysqli_affected_rows($con);
 }
+//end function edit_user
 
+
+//function register
 function register($data)
 {
   $con = con();
@@ -239,17 +267,17 @@ function register($data)
   )";
   mysqli_query($con, $createTbUser);
 
-  //create table tb_darjah dan insert data
+  //create table tb_stages and insert data
   $createTbDarjah = "
-   CREATE TABLE IF NOT EXISTS tb_darjah(
+   CREATE TABLE IF NOT EXISTS tb_stages(
      `id` INT AUTO_INCREMENT,
-     `umur_pelajar` INT,
-     `darjah_pelajar` VARCHAR(200),
+     `student_age` INT,
+     `stages_age` VARCHAR(200),
      PRIMARY KEY (`id`)
   )";
   mysqli_query($con, $createTbDarjah);
   $insertTbDarjah = "
-  INSERT INTO `tb_darjah` (`Id`, `umur_pelajar`, `darjah_pelajar`) VALUES
+  INSERT INTO `tb_stages` (`Id`, `student_age`, `stages_age`) VALUES
   (1, '7', 'Darjah 1'), 
   (2, '8', 'Darjah 2'),
   (3, '9', 'Darjah 3'), 
@@ -263,94 +291,98 @@ function register($data)
   (11, '17', 'Tingkatan 5'), 
   (12, '18', 'Tingkatan 6')";
   mysqli_query($con, $insertTbDarjah);
-  //akhir create table tb_darjah dan insert data
+  //end create table tb_stages and insert data
 
-  //create table tb_kelas dan INSERT
+  //create table tb_class and INSERT
   $createTbKelas = "
-   CREATE TABLE IF NOT EXISTS tb_kelas(
+   CREATE TABLE IF NOT EXISTS tb_class(
      `id` INT,
-     `nama_kelas` VARCHAR(200),
+     `class_name` VARCHAR(200),
      PRIMARY KEY (`id`)
   )";
   mysqli_query($con, $createTbKelas);
   $insertTbKelas = "
-  INSERT INTO `tb_kelas` (`Id`,`nama_kelas`) VALUES
-  (1, 'Kelas A'), 
-  (2, 'Kelas B'),
-  (3, 'Kelas C'), 
-  (4, 'Kelas D')";
+  INSERT INTO `tb_class` (`Id`,`class_name`) VALUES
+  (1, 'Class A'), 
+  (2, 'Class B'),
+  (3, 'Class C'), 
+  (4, 'Class D')";
   mysqli_query($con, $insertTbKelas);
-  //akhir create table tb_kelas dan INSERT  
+  //end create table tb_class and INSERT  
 
-  // create table cikgu 
+  // create tb_teacher 
   $create = "
-  CREATE TABLE IF NOT EXISTS tb_cikgu(
+  CREATE TABLE IF NOT EXISTS tb_teacher(
     `id` INT AUTO_INCREMENT,
-    `nama_cikgu` VARCHAR(200),
-    `umur_cikgu` VARCHAR(200),
-    `jantina_cikgu` VARCHAR(200),
+    `teacher_name` VARCHAR(200),
+    `teacher_age` VARCHAR(200),
+    `teacher_gender` VARCHAR(200),
     PRIMARY KEY (`id`))";
   mysqli_query($con, $create);
-  // akhir create table cikgu 
+  // end create tb_teacher 
 
-  // create table pelajaran   
+  // create tb_subjects   
   $create = "
- CREATE TABLE IF NOT EXISTS tb_pelajaran(
+ CREATE TABLE IF NOT EXISTS tb_subjects(
    `id` INT AUTO_INCREMENT,
-   `mata_pelajaran` VARCHAR(200),
-   `cikgu_id` INT,
+   `subjects_name` VARCHAR(200),
+   `teacher_id` INT,
    PRIMARY KEY (`id`))";
   mysqli_query($con, $create);
   // akhir create table pelajaran
 
-  // create table pelajar
+  // create tb_student
   $create = "
-  CREATE TABLE IF NOT EXISTS tb_pelajar(
+  CREATE TABLE IF NOT EXISTS tb_student(
     `id` INT AUTO_INCREMENT,
-    `nama_pelajar` VARCHAR(200),
-    `umur_pelajar` VARCHAR(200),
-    `jantina_pelajar` VARCHAR(200),
-    `kelas_id` INT,
-    `cikgu_id` INT,
+    `student_name` VARCHAR(200),
+    `student_age` VARCHAR(200),
+    `student_gender` VARCHAR(200),
+    `class_id` INT,
+    `teacher_id` INT,
     PRIMARY KEY (`id`))";
   mysqli_query($con, $create);
-  // akhir create table pelajar 
+  // end create tb_student 
 
   $result = mysqli_query($con, "SELECT * FROM tb_user WHERE email = '$email'");
 
   if (mysqli_fetch_assoc($result)) {
-    // echo "<script>
-    // alert('Email Sudah Terdaftar!')
-    // </script>";
 
     echo  "<div class=\"register-box\">
-    <div class=\"alert alert-danger\" role=\"alert\">
-        <p>Email Sudah Terdaftar!</p>
+    <div class=\"alert alert-danger alert-dismissible fade show pb-0\" role=\"alert\">
+        <p>Email Is Already Registered !</p>
+        <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
+          <span aria-hidden=\"true\">&times;</span>
+        </button>
       </div>
       </div>";
-
     return false;
   }
 
 
   if ($password !== $password2) {
     echo  "<div class=\"register-box\">
-    <div class=\"alert alert-danger\" role=\"alert\">
-        <p>Password Tidak Sama!</p>
+    <div class=\"alert alert-danger alert-dismissible fade show pb-0\" role=\"alert\">
+        <p>Passwords Do Not Match !</p>
+        <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
+          <span aria-hidden=\"true\">&times;</span>
+        </button>
       </div>
       </div>";
     return false;
   }
 
   $password = password_hash($password, PASSWORD_DEFAULT);
-
   $query = "INSERT INTO tb_user VALUE 
   (null, '$first_name','$last_name', '$email', '$password','$picture', '$role_id')";
 
   mysqli_query($con, $query) or die(mysqli_error($con));
   return mysqli_affected_rows($con);
 }
+//end function register
 
+
+//function login
 function login($data)
 {
   $con = con();
@@ -368,20 +400,21 @@ function login($data)
         if ($row["role_id"] == 1) {
           $_SESSION["email"] = $row["id"];
           echo "<script>
-          window.location='/'
+          window.location.href='/'
           </script>";
         } else if ($row["role_id"] == 0) {
           $_SESSION["email"] = $row["id"];
           echo "<script>
-          window.location='/'
+          window.location.href='/'
           </script>";
         }
       }
     }
   } else {
     echo "<script>
-          alert('Email Belum Berdaftar!');
-          window.location='/';
+          alert('Are You Sure This Email?, Unregistered Email !');
+          window.location.href='/';
           </script>";
   }
 }
+//end function login
