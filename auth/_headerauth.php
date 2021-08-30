@@ -1,7 +1,12 @@
-<?php
-require "../function.php";
+<?php require "../function.php";
 
-if (isset($_SESSION["email"])) {
+if (isset($_SESSION["admin"])) {
+  $login = $_SESSION["admin"];
+} elseif (isset($_SESSION["moderator"])) {
+  $login = $_SESSION["moderator"];
+}
+
+if (isset($login)) {
   echo "<script>
   window.location='/'
   </script>";

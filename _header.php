@@ -1,12 +1,18 @@
 <?php require_once("function.php");
 
-if (!isset($_SESSION["email"])) {
+if (isset($_SESSION["admin"])) {
+    $login = $_SESSION["admin"];
+} elseif (isset($_SESSION["moderator"])) {
+    $login = $_SESSION["moderator"];
+}
+
+if (!isset($login)) {
     echo "<script>
   window.location='../auth/login.php'
   </script>";
 }
 
-$query = mysqli_query(con(), "SELECT * FROM tb_user WHERE id = '$_SESSION[email]'");
+$query = mysqli_query(con(), "SELECT * FROM tb_user WHERE id = '$login'");
 $users = mysqli_fetch_assoc($query);
 
 

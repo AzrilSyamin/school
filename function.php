@@ -196,14 +196,20 @@ function edit_user($data)
   $password2 = htmlspecialchars($data["password2"]);
   //pic_name
   $name_picture = htmlspecialchars($_FILES["picture"]["name"]);
-  $role_id = 1;
+  $role_id = 2;
   //sumber
   $sumber = $_FILES["picture"]["tmp_name"];
   // //folder
   $folder = "../img/";
 
+  if (isset($_SESSION["admin"])) {
+    $login = $_SESSION["admin"];
+  } elseif (isset($_SESSION["moderator"])) {
+    $login = $_SESSION["moderator"];
+  }
+
   if ($name_picture == null) {
-    $sql_pic = mysqli_query($con, "SELECT * FROM tb_user WHERE id = '$_SESSION[email]'");
+    $sql_pic = mysqli_query($con, "SELECT * FROM tb_user WHERE id = '$login'");
 
     $data_pic = mysqli_fetch_assoc($sql_pic);
     $name_picture = $data_pic["picture"];
@@ -219,7 +225,7 @@ function edit_user($data)
 
     $password = password_hash($password, PASSWORD_DEFAULT);
   } else {
-    $sql_pass = mysqli_query($con, "SELECT * FROM tb_user WHERE id = '$_SESSION[email]'");
+    $sql_pass = mysqli_query($con, "SELECT * FROM tb_user WHERE id = '$login'");
 
     $data_pass = mysqli_fetch_assoc($sql_pass);
     $password = $data_pass["password"];
@@ -251,10 +257,10 @@ function register($data)
   $password = htmlspecialchars($data["password"]);
   $password2 = htmlspecialchars($data["password2"]);
   $picture = "default.jpg";
-  $role_id = 1;
+  $role_id = 2;
 
   //create table tb_user
-  $createTbUser = "
+  $create = "
    CREATE TABLE IF NOT EXISTS tb_user(
      `id` INT AUTO_INCREMENT,
      `first_name` VARCHAR(200),
@@ -265,7 +271,26 @@ function register($data)
      `role_id` INT,
      PRIMARY KEY (`id`)
   )";
-  mysqli_query($con, $createTbUser);
+  mysqli_query($con, $create);
+  //end create table tb_user
+
+
+  //create table tb_role
+  $create = "
+   CREATE TABLE IF NOT EXISTS tb_role(
+     `role_id` INT AUTO_INCREMENT,
+     `role_name` VARCHAR(200),
+     PRIMARY KEY (`role_id`)
+  )";
+  mysqli_query($con, $create);
+  $insertTbRole = "
+  INSERT INTO `tb_role` (`role_Id`, `role_name`) VALUES
+  (1, 'admin'),
+  (2, 'moderator'),
+  (3, 'member')";
+  mysqli_query($con, $insertTbRole);
+  //end create table tb_role
+
 
   //create table tb_stages and insert data
   $createTbDarjah = "
@@ -293,6 +318,7 @@ function register($data)
   mysqli_query($con, $insertTbDarjah);
   //end create table tb_stages and insert data
 
+
   //create table tb_class and INSERT
   $createTbKelas = "
    CREATE TABLE IF NOT EXISTS tb_class(
@@ -310,6 +336,7 @@ function register($data)
   mysqli_query($con, $insertTbKelas);
   //end create table tb_class and INSERT  
 
+
   // create tb_teacher 
   $create = "
   CREATE TABLE IF NOT EXISTS tb_teacher(
@@ -321,6 +348,7 @@ function register($data)
   mysqli_query($con, $create);
   // end create tb_teacher 
 
+
   // create tb_subjects   
   $create = "
  CREATE TABLE IF NOT EXISTS tb_subjects(
@@ -330,6 +358,7 @@ function register($data)
    PRIMARY KEY (`id`))";
   mysqli_query($con, $create);
   // akhir create table pelajaran
+
 
   // create tb_student
   $create = "
@@ -395,15 +424,22 @@ function login($data)
 
     $row = mysqli_fetch_assoc($result);
     if (password_verify($password, $row["password"])) {
+
+      $role = mysqli_query($con, "SELECT * FROM tb_role WHERE role_id = $row[role_id]");
+      $role_id = mysqli_fetch_assoc($role);
+      // print_r($role_id);
+      // die;
+
       $cek = mysqli_num_rows($result);
       if ($cek > 0) {
-        if ($row["role_id"] == 1) {
-          $_SESSION["email"] = $row["id"];
+        //if ($row["role_id"] == 1)
+        if ($role_id["role_name"] == "admin") {
+          $_SESSION["admin"] = $row["id"];
           echo "<script>
           window.location.href='/'
           </script>";
-        } else if ($row["role_id"] == 0) {
-          $_SESSION["email"] = $row["id"];
+        } else if ($role_id["role_name"] == "moderator") {
+          $_SESSION["moderator"] = $row["id"];
           echo "<script>
           window.location.href='/'
           </script>";

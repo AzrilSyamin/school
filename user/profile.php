@@ -1,6 +1,15 @@
 <?php include_once("../_header.php");
 
-$query = mysqli_query(con(), "SELECT * FROM tb_user WHERE id = '$_SESSION[email]'");
+if (isset($_SESSION["admin"])) {
+  $login = $_SESSION["admin"];
+} elseif (isset($_SESSION["moderator"])) {
+  $login = $_SESSION["moderator"];
+}
+
+$query = mysqli_query(con(), "SELECT * FROM tb_user 
+                              JOIN tb_role 
+                              ON tb_user.role_id = tb_role.role_id 
+                              WHERE tb_user.id = '$login'");
 $data = mysqli_fetch_assoc($query);
 
 if (isset($_POST["submit"])) {
@@ -21,7 +30,7 @@ if (isset($_POST["submit"])) {
 ?>
 <div class="row">
   <div class="col-12 col-md-6 p-4 shadow">
-    <h4>My Profile</h4>
+    <h4>My Profile <?= "[" . $data["role_name"] . "]"; ?> </h4>
     <form action="" method="POST" enctype="multipart/form-data">
       <div class="form-group">
         <label>User ID :</label>
