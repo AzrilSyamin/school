@@ -1,5 +1,11 @@
-<?php include_once("../_header.php"); ?>
-<?php
+<?php include_once("../_header.php");
+
+if (!isset($_SESSION["admin"])) {
+  echo "<script>
+  window.location.href='/';
+  </script>";
+  return false;
+}
 
 $id = $_GET["id"];
 $teachers = query("SELECT * FROM tb_teacher WHERE id = $id")[0];
