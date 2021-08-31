@@ -20,7 +20,7 @@ if (isset($_POST["submit"])) {
           </script>";
   } else {
     echo "<script>
-          alert('Edit Fail');
+          alert('Edit Failed');
           window.location='../user/profile.php';
           </script>";
   }
@@ -32,6 +32,11 @@ if (isset($_POST["submit"])) {
   <div class="col-12 col-md-6 p-4 shadow">
     <h4>My Profile <?= "[" . $data["role_name"] . "]"; ?> </h4>
     <form action="" method="POST" enctype="multipart/form-data">
+
+      <div class="form-group">
+        <img src="../img/<?= $data["picture"]; ?>" alt="user-profile">
+      </div>
+
       <div class="form-group">
         <label>User ID :</label>
         <input type="text" class="form-control" name="id" value="<?= $data["id"]; ?>" readonly>
@@ -53,6 +58,24 @@ if (isset($_POST["submit"])) {
       </div>
 
       <div class="form-group">
+        <label for="age">Age :</label>
+        <input type="number" class="form-control" name="age" id="age" value="<?= $data["age"]; ?>" required>
+      </div>
+
+      <div class="form-group">
+        <label for="gender">Gender :</label>
+        <select name="gender" id="gender" class="form-control">
+          <option value="">Choose...</option>
+          <option <?php if ($data['gender'] == 'Lelaki') {
+                    echo "selected";
+                  } ?>>Lelaki</option>
+          <option <?php if ($data['gender'] == 'Perempuan') {
+                    echo "selected";
+                  } ?>>Perempuan</option>
+        </select>
+      </div>
+
+      <div class="form-group">
         <label for="password1">Password :</label>
         <input type="password" class="form-control" name="password1" id="password1">
       </div>
@@ -67,7 +90,8 @@ if (isset($_POST["submit"])) {
         <input type="file" class="form-control-file" name="picture" id="picture">
       </div>
 
-      <button type="submit" class="btn btn-primary" style="float:right;" name="submit"><i class="fas fa-save"></i> Save Changes</button>
+      <button type="submit" class="btn btn-success ml-1" style="float:right;" name="submit"><i class="fas fa-save"></i> Save Changes</button>
+      <button type="reset" class="btn btn-warning" style="float:right;" name="submit"><i class="fas fa-redo-alt"></i> Reset</button>
     </form>
   </div>
 </div>

@@ -192,15 +192,19 @@ function edit_user($data)
   $first_name = htmlspecialchars($data["first_name"]);
   $last_name = htmlspecialchars($data["last_name"]);
   $email = htmlspecialchars($data["email"]);
+  $age = htmlspecialchars($data["age"]);
+  $gender = htmlspecialchars($data["gender"]);
   $password = htmlspecialchars($data["password1"]);
   $password2 = htmlspecialchars($data["password2"]);
   //pic_name
   $name_picture = htmlspecialchars($_FILES["picture"]["name"]);
   $role_id = 2;
+  $is_active = 1;
   //sumber
   $sumber = $_FILES["picture"]["tmp_name"];
   // //folder
   $folder = "../img/";
+
 
   if (isset($_SESSION["admin"])) {
     $login = $_SESSION["admin"];
@@ -208,15 +212,17 @@ function edit_user($data)
     $login = $_SESSION["moderator"];
   }
 
-  if ($name_picture == null) {
-    $sql_pic = mysqli_query($con, "SELECT * FROM tb_user WHERE id = '$login'");
+  $sql = mysqli_query($con, "SELECT * FROM tb_user WHERE id = '$login'");
 
-    $data_pic = mysqli_fetch_assoc($sql_pic);
+  //picture
+  if ($name_picture == null) {
+    $data_pic = mysqli_fetch_assoc($sql);
     $name_picture = $data_pic["picture"];
   } else {
     move_uploaded_file($sumber, $folder . $name_picture);
   }
 
+  //password
   if ($password && $password2 !== null) {
     if ($password !== $password2) {
       echo "Password Tidak Sama";
@@ -225,10 +231,8 @@ function edit_user($data)
 
     $password = password_hash($password, PASSWORD_DEFAULT);
   } else {
-    $sql_pass = mysqli_query($con, "SELECT * FROM tb_user WHERE id = '$login'");
-
-    $data_pass = mysqli_fetch_assoc($sql_pass);
-    $password = $data_pass["password"];
+    $data_pass = mysqli_fetch_assoc($sql);
+    $password = @$data_pass["password"];
   }
 
 
@@ -236,9 +240,12 @@ function edit_user($data)
   first_name = '$first_name',
   last_name = '$last_name', 
   email = '$email', 
+  age = $age,
+  gender = '$gender',
   password = '$password',
   picture = '$name_picture', 
-  role_id = $role_id
+  role_id = $role_id,
+  is_active = '$is_active'
   WHERE id = $id ";
 
   mysqli_query($con, $query) or die(mysqli_error($con));
@@ -258,6 +265,7 @@ function register($data)
   $password2 = htmlspecialchars($data["password2"]);
   $picture = "default.jpg";
   $role_id = 2;
+  $is_active = 1;
 
   //create table tb_user
   $create = "
@@ -265,10 +273,13 @@ function register($data)
      `id` INT AUTO_INCREMENT,
      `first_name` VARCHAR(200),
      `last_name` VARCHAR(200),
+     `age` INT,
+     `gender` VARCHAR(200),
      `email` VARCHAR(200),
      `password` VARCHAR(200),
      `picture` VARCHAR(200),
      `role_id` INT,
+     `is_active` INT,
      PRIMARY KEY (`id`)
   )";
   mysqli_query($con, $create);
@@ -403,7 +414,7 @@ function register($data)
 
   $password = password_hash($password, PASSWORD_DEFAULT);
   $query = "INSERT INTO tb_user VALUE 
-  (null, '$first_name','$last_name', '$email', '$password','$picture', '$role_id')";
+  (null, '$first_name','$last_name', null, null, '$email', '$password','$picture', '$role_id', '$is_active')";
 
   mysqli_query($con, $query) or die(mysqli_error($con));
   return mysqli_affected_rows($con);
