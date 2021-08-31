@@ -46,9 +46,9 @@ ON tb_user.role_id = tb_role.role_id
                         <?php $i = 1;
                         foreach ($users as $user) :
                             if ($user["is_active"] == 1) {
-                                $status = "<p style= color:green;><b>Active</b></p>";
+                                $status = "<p class=\"badge badge-success\"><b>Active</b></p>";
                             } elseif ($user["is_active"] == 0) {
-                                $status = "<p style= color:red;><b>Non Active</b></p>";
+                                $status = "<p class=\"badge badge-danger\"><b>Non Active</b></p>";
                             } ?>
                             <tr>
                                 <th scope="row"><?= $i++; ?></th>
