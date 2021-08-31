@@ -170,8 +170,8 @@ function edit_user($data)
   $password2 = htmlspecialchars($data["password2"]);
   //pic_name
   $name_picture = htmlspecialchars($_FILES["picture"]["name"]);
-  $role_id = 2;
-  $is_active = 1;
+  $role_id = htmlspecialchars($data["role_id"]);
+  $is_active = htmlspecialchars($data["is_active"]);
   //sumber
   $sumber = $_FILES["picture"]["tmp_name"];
   // //folder

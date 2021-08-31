@@ -44,7 +44,12 @@ if (isset($_POST["submit"])) {
 
       <div class="form-group">
         <!-- Is Active  -->
-        <input type="hidden" class="form-control" name="is_status" value="<?= $data["is_active"]; ?>">
+        <input type="hidden" class="form-control" name="is_active" value="<?= $data["is_active"]; ?>">
+      </div>
+
+      <div class="form-group">
+        <!-- Role Id  -->
+        <input type="hidden" class="form-control" name="role_id" value="<?= $data["role_id"]; ?>">
       </div>
 
       <div class="form-group">
