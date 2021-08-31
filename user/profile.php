@@ -43,6 +43,11 @@ if (isset($_POST["submit"])) {
       </div>
 
       <div class="form-group">
+        <!-- Is Active  -->
+        <input type="hidden" class="form-control" name="is_status" value="<?= $data["is_active"]; ?>">
+      </div>
+
+      <div class="form-group">
         <label for="name">First Name :</label>
         <input type="text" class="form-control" name="first_name" id="name" required autofocus value="<?= $data["first_name"]; ?>">
       </div>

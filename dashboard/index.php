@@ -1,8 +1,8 @@
 <?php require "../_header.php";
 
 $students = query("SELECT * FROM tb_student
-                  LEFT JOIN tb_teacher
-                  ON tb_student.teacher_id = tb_teacher.id
+                  LEFT JOIN tb_user
+                  ON tb_student.teacher_id = tb_user.id
 
                   JOIN tb_class
                   ON tb_student.class_id = tb_class.id
@@ -10,9 +10,10 @@ $students = query("SELECT * FROM tb_student
                   JOIN tb_stages
                   ON tb_student.student_age = tb_stages.student_age
                  ");
-// var_dump($students);
-// die;
+
 ?>
+
+
 
 <!-- DataTales Students -->
 <div class="card">
@@ -50,11 +51,11 @@ $students = query("SELECT * FROM tb_student
             <td><?= $student["student_age"]; ?></td>
             <td><?= $student["class_name"]; ?></td>
             <td><?= $student["stages_age"]; ?></td>
-            <td><?= $student["teacher_name"]; ?></td>
+            <td><?= $student["first_name"]; ?></td>
             <td>
               <?php $pelajaran = query("SELECT * FROM tb_subjects 
-                                        JOIN tb_teacher
-                                        ON tb_subjects.teacher_id = tb_teacher.id WHERE teacher_id = '$student[teacher_id]'");
+                                        JOIN tb_user
+                                        ON tb_subjects.teacher_id = tb_user.id WHERE teacher_id = '$student[teacher_id]'");
               foreach ($pelajaran as $p) : ?>
                 <ul>
                   <li><?= $p["subjects_name"]; ?></li>

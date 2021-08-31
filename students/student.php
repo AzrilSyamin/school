@@ -23,9 +23,6 @@ $students = query("SELECT * FROM tb_student
             <!-- End Header Table  -->
             <!-- Awal Table  -->
             <div class="table-responsive shadow">
-                <?php if (isset($suc)) : ?>
-                    <p style="color:green;">Berjaya Horreyy!!</p>
-                <?php endif; ?>
                 <table class="table table-striped">
                     <thead class="thead-dark">
                         <tr>
@@ -47,8 +44,9 @@ $students = query("SELECT * FROM tb_student
                                 <td>
 
                                     <a class="badge badge-warning" href="edit.php?id=<?= $student["id"]; ?>"><i class="fas fa-edit"></i></i></a>
-
-                                    <a class="badge badge-danger" href="del.php?id=<?= $student["id"]; ?>" onclick="return confirm('Are You Sure Want To Delete?');"><i class="far fa-trash-alt"></i></a>
+                                    <?php if (isset($_SESSION["admin"])) { ?>
+                                        <a class="badge badge-danger" href="del.php?id=<?= $student["id"]; ?>" onclick="return confirm('Are You Sure Want To Delete?');"><i class="far fa-trash-alt"></i></a>
+                                    <?php } ?>
                                 </td>
                             </tr>
                         <?php endforeach; ?>

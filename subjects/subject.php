@@ -1,9 +1,9 @@
 <?php include_once "../_header.php"; ?>
 <?php
 
-$subjects = query("SELECT * FROM tb_teacher
+$subjects = query("SELECT * FROM tb_user
                 RIGHT JOIN tb_subjects
-                ON tb_teacher.id = tb_subjects.teacher_id");
+                ON tb_user.id = tb_subjects.teacher_id");
 ?>
 
 <!-- Page Heading -->
@@ -38,11 +38,12 @@ $subjects = query("SELECT * FROM tb_teacher
                             <tr>
                                 <th scope="row"><?= $i++; ?></th>
                                 <td><?= $subject["subjects_name"]; ?></td>
-                                <td><?= $subject["teacher_name"]; ?></td>
+                                <td><?= "Cikgu" . " " . $subject["first_name"] . " " . $subject["last_name"]; ?></td>
                                 <td>
                                     <a class="badge badge-warning" href="edit.php?id=<?= $subject["id"]; ?>"><i class="fas fa-edit"></i></a>
-
-                                    <a class="badge badge-danger" href="del.php?id=<?= $subject["id"]; ?>" onclick="return confirm('Are You Sure Want To Delete?');"><i class="far fa-trash-alt"></i></a>
+                                    <?php if (isset($_SESSION["admin"])) { ?>
+                                        <a class="badge badge-danger" href="del.php?id=<?= $subject["id"]; ?>" onclick="return confirm('Are You Sure Want To Delete?');"><i class="far fa-trash-alt"></i></a>
+                                    <?php } ?>
                                 </td>
                             </tr>
                         <?php endforeach; ?>

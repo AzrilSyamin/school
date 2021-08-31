@@ -8,7 +8,7 @@ if (!isset($_SESSION["admin"])) {
 }
 
 $id = $_GET["id"];
-$teachers = query("SELECT * FROM tb_teacher WHERE id = $id")[0];
+$user = query("SELECT * FROM tb_user WHERE id = $id")[0];
 
 if (isset($_POST["submit"])) {
   if (edit_teachers($_POST) > 0) {
@@ -36,34 +36,98 @@ if (isset($_POST["submit"])) {
         </button>
       </div>
     <?php endif; ?>
-    <form action="" method="POST">
+    <form action="" method="POST" enctype="multipart/form-data">
       <div class="form-group">
-        <input type="hidden" class="form-control" name="id" id="id" value="<?= $teachers["id"]; ?>" required>
+        <label for="first_name">User ID *</label>
+        <input type="text" class="form-control" name="id" id="id" value="<?= $user["id"]; ?>" required readonly>
       </div>
 
       <div class="form-group">
-        <label for="name">Nama :</label>
-        <input type="text" class="form-control" name="name" id="name" value="<?= $teachers["teacher_name"]; ?>" required autofocus>
+        <label for="first_name">First Name *</label>
+        <input type="text" class="form-control" name="first_name" id="first_name" value="<?= $user["first_name"]; ?>" autofocus required>
       </div>
 
       <div class="form-group">
-        <label for="age">Age :</label>
-        <input type="number" class="form-control" name="age" id="age" value="<?= $teachers["teacher_age"]; ?>" required>
+        <label for="last_name">Last Name</label>
+        <input type="text" class="form-control" name="last_name" id="last_name" value="<?= $user["last_name"]; ?>">
       </div>
 
       <div class="form-group">
-        <label for="gender">Gender :</label>
+        <label for="age">Age *</label>
+        <input type="number" class="form-control" name="age" id="age" value="<?= $user["age"]; ?>" required>
+      </div>
+
+      <div class="form-group">
+        <label for="gender">Gender</label>
         <select name="gender" id="gender" class="form-control">
-          <option <?php if ($teachers["teacher_gender"] == 'Lelaki') {
+          <option value="">Choose...</option>
+          <option <?php if ($user["gender"] == 'Lelaki') {
                     echo "selected";
                   } ?>>Lelaki</option>
-          <option <?php if ($teachers["teacher_gender"] == 'Perempuan') {
+          <option <?php if ($user["gender"] == 'Perempuan') {
                     echo "selected";
                   } ?>>Perempuan</option>
+          <option <?php if ($user["gender"] == 'Lain-Lain') {
+                    echo "selected";
+                  } ?>>Lain-Lain</option>
         </select>
       </div>
 
-      <button type="submit" class="btn btn-success" style="float:right;" name="submit"><i class="fas fa-save"></i> Save Changes</button>
+      <div class="form-group">
+        <label for="email">Email *</label>
+        <input type="email" class="form-control" name="email" id="email" value="<?= $user["email"]; ?>" required>
+      </div>
+
+      <div class="form-group">
+        <label for="password1">Password *</label>
+        <input type="password" class="form-control" name="password1" id="password1">
+      </div>
+
+      <div class=" form-group">
+        <label for="password2">Comfirm Password *</label>
+        <input type="password" class="form-control" name="password2" id="password2">
+      </div>
+
+      <div class="form-group">
+        <label for="is_active">Status *</label>
+        <select name="is_active" id="is_active" class="form-control">
+          <option value="">Choose...</option>
+          <option value="1" <?php if ($user["is_active"] == 1) {
+                              echo "selected";
+                            } ?>>Active</option>
+          <option value="0" <?php if ($user["is_active"] == 0) {
+                              echo "selected";
+                            } ?>>Non Active</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="role">Role *</label>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="role_id" id="role" value="1" <?php if ($user["role_id"] == 1) {
+                                                                                            echo "checked";
+                                                                                          } ?>>
+          <label class="form-check-label" for="inlineRadio1">Admin</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="role_id" id="role" value="2" <?php if ($user["role_id"] == 2) {
+                                                                                            echo "checked";
+                                                                                          } ?>>
+          <label class="form-check-label" for="inlineRadio2">Moderator</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <img src="../img/<?= $user["picture"]; ?>" alt="user-profile">
+      </div>
+
+      <div class=" form-group">
+        <label for="picture">Profile Picture</label>
+        <input type="file" class="form-control-file" name="picture" id="picture">
+      </div>
+
+      <button type="submit" class="btn btn-success ml-2" style="float: right;" name="submit"><i class="fas fa-save"></i> Save Changes</button>
+      <button type="reset" class="btn btn-warning ml-2" style="float: right;"><i class="fas fa-redo-alt"></i> Reset</button>
     </form>
   </div>
   <!-- Akhir Form  -->

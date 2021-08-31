@@ -1,7 +1,8 @@
-<?php include_once "../_header.php"; ?>
-<?php
+<?php include_once "../_header.php";
 
-$teachers = query("SELECT * FROM tb_teacher
+$users = query("SELECT * FROM tb_user 
+JOIN tb_role
+ON tb_user.role_id = tb_role.role_id 
                  ");
 ?>
 
@@ -29,9 +30,13 @@ $teachers = query("SELECT * FROM tb_teacher
                     <thead class="thead-dark">
                         <tr>
                             <th scope="col">#</th>
+                            <th scope="col">Profile</th>
                             <th scope="col">Name</th>
-                            <th scope="col">Gender</th>
                             <th scope="col">Age</th>
+                            <th scope="col">Gender</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Role</th>
                             <?php if (isset($_SESSION["admin"])) { ?>
                                 <th scope="col">Action</th>
                             <?php } ?>
@@ -39,17 +44,28 @@ $teachers = query("SELECT * FROM tb_teacher
                     </thead>
                     <tbody>
                         <?php $i = 1;
-                        foreach ($teachers as $teacher) : ?>
+                        foreach ($users as $user) :
+                            if ($user["is_active"] == 1) {
+                                $status = "<p style= color:green;><b>Active</b></p>";
+                            } elseif ($user["is_active"] == 0) {
+                                $status = "<p style= color:red;><b>Non Active</b></p>";
+                            } ?>
                             <tr>
                                 <th scope="row"><?= $i++; ?></th>
-                                <td><?= $teacher["teacher_name"]; ?></td>
-                                <td><?= $teacher["teacher_gender"]; ?></td>
-                                <td><?= $teacher["teacher_age"]; ?></td>
+                                <td><img src="../img/<?= $user["picture"]; ?>" alt="user-profile" width="35px"></td>
+                                <td><?= $user["first_name"] . " " . $user["last_name"] ?></td>
+                                <td><?= $user["age"]; ?></td>
+                                <td><?= $user["gender"]; ?></td>
+                                <td><?= $user["email"]; ?></td>
+                                <td><?= $status; ?></td>
+                                <td><?= $user["role_name"]; ?></td>
                                 <?php if (isset($_SESSION["admin"])) { ?>
-                                    <td>
-                                        <a class="badge badge-warning" href="edit.php?id=<?= $teacher["id"]; ?>"><i class="fas fa-edit"></i></a>
+                                    <td class="<?php if ($user["id"] == $login) {
+                                                    echo "d-none";
+                                                } ?>">
+                                        <a class="badge badge-warning" href="edit.php?id=<?= $user["id"]; ?>"><i class="fas fa-edit"></i></a>
 
-                                        <a class="badge badge-danger" href="del.php?id=<?= $teacher["id"]; ?>" onclick="return confirm('Are You Sure Want To Delete?');"><i class="far fa-trash-alt"></i></a>
+                                        <a class="badge badge-danger" href="del.php?id=<?= $user["id"]; ?>" onclick="return confirm('Are You Sure Want To Delete?');"><i class="far fa-trash-alt"></i></a>
                                     </td>
                                 <?php } ?>
                             </tr>

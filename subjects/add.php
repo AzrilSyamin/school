@@ -39,9 +39,9 @@ if (isset($_POST["submit"])) {
                 <select name="teacher" id="teacher" class="form-control">
                     <option selected>Choose...</option>
                     <?php
-                    $teachers = query("SELECT * FROM tb_teacher");
+                    $teachers = query("SELECT * FROM tb_user");
                     foreach ($teachers as $teacher) : ?>
-                        <option value="<?= $teacher["id"]; ?>"><?= $teacher["teacher_name"]; ?></option>
+                        <option value="<?= $teacher["id"]; ?>"><?= "Cikgu" . " " . $teacher["first_name"] . " " . $teacher["last_name"]; ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>

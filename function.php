@@ -35,48 +35,53 @@ function base_url($url = null)
 //end function base_url
 
 
-//function add_students
-function add_students($data)
-{
-  $con = con();
-  $name = htmlspecialchars($data["name"]);
-  $age = htmlspecialchars($data["age"]);
-  $gender = htmlspecialchars($data["gender"]);
-  $class_id = htmlspecialchars($data["class"]);
-  $teacher_id = htmlspecialchars($data["teacher"]);
-
-  if ($data["age"] == "Choose...") {
-    return false;
-  } elseif ($data["gender"] == "Choose...") {
-    return false;
-  } elseif ($data["class"] == "Choose...") {
-    return false;
-  } elseif ($data["teacher"] == "Choose...") {
-    return false;
-  }
-
-  $query = "INSERT INTO tb_student VALUE
-  (NULL, '$name','$age', '$gender', '$class_id', '$teacher_id')";
-
-  mysqli_query($con, $query) or die(mysqli_error($con));
-  return mysqli_affected_rows($con);
-}
-//end function add_students
-
-
 //function add_teachers
 function add_teachers($data)
 {
   $con = con();
-  $name = htmlspecialchars($data["name"]);
+  $first_name = htmlspecialchars($data["first_name"]);
+  $last_name = htmlspecialchars($data["last_name"]);
   $age = htmlspecialchars($data["age"]);
   $gender = htmlspecialchars($data["gender"]);
+  $email = htmlspecialchars($data["email"]);
+  $password = htmlspecialchars($data["password1"]);
+  $password2 = htmlspecialchars($data["password2"]);
+  $picture = 'default.jpg';
+  $role_id = 2;
+  $is_active = htmlspecialchars($data["status"]);
 
-  if ($data["gender"] == "Choose...") {
+  $result = mysqli_query($con, "SELECT * FROM tb_user WHERE email = '$email'");
+
+  if (mysqli_fetch_assoc($result)) {
+
+    echo  "<div class=\"register-box\">
+    <div class=\"alert alert-danger alert-dismissible fade show pb-0\" role=\"alert\">
+        <p>Email Is Already Registered !</p>
+        <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
+          <span aria-hidden=\"true\">&times;</span>
+        </button>
+      </div>
+      </div>";
     return false;
   }
-  $query = "INSERT INTO tb_teacher VALUE
-  (NULL, '$name','$age', '$gender')";
+
+
+  if ($password !== $password2) {
+    echo  "<div class=\"register-box\">
+    <div class=\"alert alert-danger alert-dismissible fade show pb-0\" role=\"alert\">
+        <p>Passwords Do Not Match !</p>
+        <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
+          <span aria-hidden=\"true\">&times;</span>
+        </button>
+      </div>
+      </div>";
+    return false;
+  }
+
+  $password = password_hash($password, PASSWORD_DEFAULT);
+
+  $query = "INSERT INTO tb_user VALUE
+  (NULL, '$first_name','$last_name', '$age', '$gender', '$email',  '$password', '$picture', '$role_id', '$is_active')";
 
   mysqli_query($con, $query) or die(mysqli_error($con));
   return mysqli_affected_rows($con);
@@ -84,104 +89,71 @@ function add_teachers($data)
 //end function add_teachers
 
 
-//function add_subjects
-function add_subjects($data)
-{
-  $con = con();
-  $subjects = htmlspecialchars($data["subjects"]);
-  $teacher = htmlspecialchars($data["teacher"]);
-
-  if ($data["teacher"] == "Choose...") {
-    return false;
-  }
-  $query = "INSERT INTO tb_subjects VALUE
-  (NULL, '$subjects','$teacher')";
-
-  mysqli_query($con, $query) or die(mysqli_error($con));
-  return mysqli_affected_rows($con);
-}
-//end function add_subjects
-
-
-//function edit_students
-function edit_students($data)
-{
-  $con = con();
-  $id = $data["id"];
-  $name = htmlspecialchars($data["name"]);
-  $age = htmlspecialchars($data["age"]);
-  $gender = htmlspecialchars($data["gender"]);
-  $class_id = htmlspecialchars($data["class"]);
-  $teacher_id = htmlspecialchars($data["teacher"]);
-
-  if ($data["age"] == "Choose...") {
-    return false;
-  } elseif ($data["gender"] == "Choose...") {
-    return false;
-  } elseif ($data["class"] == "Choose...") {
-    return false;
-  } elseif ($data["teacher"] == "Choose...") {
-    return false;
-  }
-
-  $query = "UPDATE tb_student SET
-  student_name = '$name',
-  student_age = '$age', 
-  student_gender = '$gender', 
-  class_id = '$class_id', 
-  teacher_id = '$teacher_id'
-  WHERE id = $id ";
-
-  mysqli_query($con, $query) or die(mysqli_error($con));
-  return mysqli_affected_rows($con);
-}
-//end function edit_students
-
-
 //function edit_teachers
 function edit_teachers($data)
 {
   $con = con();
   $id = $data["id"];
-  $name = htmlspecialchars($data["name"]);
+  $first_name = htmlspecialchars($data["first_name"]);
+  $last_name = htmlspecialchars($data["last_name"]);
+  $email = htmlspecialchars($data["email"]);
   $age = htmlspecialchars($data["age"]);
   $gender = htmlspecialchars($data["gender"]);
+  $password = htmlspecialchars($data["password1"]);
+  $password2 = htmlspecialchars($data["password2"]);
+  //pic_name
+  $name_picture = htmlspecialchars(@$_FILES["picture"]["name"]);
+  $role_id = htmlspecialchars($data["role_id"]);
+  $is_active = htmlspecialchars($data["is_active"]);
+  //sumber
+  $sumber = @$_FILES["picture"]["tmp_name"];
+  // //folder
+  $folder = "../img/";
+  $sql = mysqli_query($con, "SELECT * FROM tb_user WHERE id = $id");
 
-  if ($data["gender"] == "Choose...") {
-    return false;
+
+  //picture
+  if ($name_picture == null) {
+    $data_pic = mysqli_fetch_assoc($sql);
+    $name_picture = $data_pic["picture"];
+  } else {
+    move_uploaded_file($sumber, $folder . $name_picture);
   }
-  $query = "UPDATE tb_teacher SET
-  teacher_name = '$name',
-  teacher_age = '$age', 
-  teacher_gender = '$gender'
+
+  //password
+  if ($password && $password2 !== null) {
+    if ($password !== $password2) {
+      echo "<script>
+      alert('Passwords Do Not Match !');
+      document.location.href='edit.php';
+      </script>";
+      return false;
+    }
+
+    $password = password_hash($password, PASSWORD_DEFAULT);
+  } else {
+    $sql_pass = mysqli_query($con, "SELECT * FROM tb_user WHERE id = $id");
+    $data_pass = mysqli_fetch_assoc($sql_pass);
+    $password = @$data_pass["password"];
+  }
+
+
+  $query = "UPDATE tb_user SET
+  first_name = '$first_name',
+  last_name = '$last_name',
+  age = '$age',
+  gender = '$gender',
+  email = '$email',
+  password = '$password', 
+  picture = '$name_picture',
+  role_id = '$role_id', 
+  is_active = '$is_active' 
   WHERE id = $id ";
 
   mysqli_query($con, $query) or die(mysqli_error($con));
   return mysqli_affected_rows($con);
 }
 //end function edit_teachers
-
-
-//function edit_subjects
-function edit_subjects($data)
-{
-  $con = con();
-  $id = $data["id"];
-  $subjects = htmlspecialchars($data["subjects"]);
-  $teacher = htmlspecialchars($data["teacher"]);
-
-  if ($data["teacher"] == "Choose...") {
-    return false;
-  }
-  $query = "UPDATE tb_subjects SET
-  subjects_name = '$subjects',
-  teacher_id = '$teacher'
-  WHERE id = $id ";
-
-  mysqli_query($con, $query) or die(mysqli_error($con));
-  return mysqli_affected_rows($con);
-}
-//end function edit_subjects
 
 
 //function edit_user
@@ -225,13 +197,17 @@ function edit_user($data)
   //password
   if ($password && $password2 !== null) {
     if ($password !== $password2) {
-      echo "Password Tidak Sama";
+      echo "<script>
+      alert('Passwords Do Not Match !');
+      document.location.href='profile.php';
+      </script>";
       return false;
     }
 
     $password = password_hash($password, PASSWORD_DEFAULT);
   } else {
-    $data_pass = mysqli_fetch_assoc($sql);
+    $sql_pass = mysqli_query($con, "SELECT * FROM tb_user WHERE id = '$login'");
+    $data_pass = mysqli_fetch_assoc($sql_pass);
     $password = @$data_pass["password"];
   }
 
@@ -239,12 +215,12 @@ function edit_user($data)
   $query = "UPDATE tb_user SET
   first_name = '$first_name',
   last_name = '$last_name', 
-  email = '$email', 
-  age = $age,
+  age = '$age',
   gender = '$gender',
+  email = '$email', 
   password = '$password',
   picture = '$name_picture', 
-  role_id = $role_id,
+  role_id = '$role_id',
   is_active = '$is_active'
   WHERE id = $id ";
 
@@ -252,6 +228,111 @@ function edit_user($data)
   return mysqli_affected_rows($con);
 }
 //end function edit_user
+
+
+//function add_subjects
+function add_subjects($data)
+{
+  $con = con();
+  $subjects = htmlspecialchars($data["subjects"]);
+  $teacher = htmlspecialchars($data["teacher"]);
+
+  if ($data["teacher"] == "Choose...") {
+    return false;
+  }
+  $query = "INSERT INTO tb_subjects VALUE
+  (NULL, '$subjects','$teacher')";
+
+  mysqli_query($con, $query) or die(mysqli_error($con));
+  return mysqli_affected_rows($con);
+}
+//end function add_subjects
+
+
+//function edit_subjects
+function edit_subjects($data)
+{
+  $con = con();
+  $id = $data["id"];
+  $subjects = htmlspecialchars($data["subjects"]);
+  $teacher = htmlspecialchars($data["teacher"]);
+
+  if ($data["teacher"] == "Choose...") {
+    return false;
+  }
+  $query = "UPDATE tb_subjects SET
+  subjects_name = '$subjects',
+  teacher_id = '$teacher'
+  WHERE id = $id ";
+
+  mysqli_query($con, $query) or die(mysqli_error($con));
+  return mysqli_affected_rows($con);
+}
+//end function edit_subjects
+
+
+//function add_students
+function add_students($data)
+{
+  $con = con();
+  $name = htmlspecialchars($data["name"]);
+  $age = htmlspecialchars($data["age"]);
+  $gender = htmlspecialchars($data["gender"]);
+  $class_id = htmlspecialchars($data["class"]);
+  $teacher_id = htmlspecialchars($data["teacher"]);
+
+  if ($data["age"] == "Choose...") {
+    return false;
+  } elseif ($data["gender"] == "Choose...") {
+    return false;
+  } elseif ($data["class"] == "Choose...") {
+    return false;
+  } elseif ($data["teacher"] == "Choose...") {
+    return false;
+  }
+
+  $query = "INSERT INTO tb_student VALUE
+  (NULL, '$name','$age', '$gender', '$class_id', '$teacher_id')";
+
+  mysqli_query($con, $query) or die(mysqli_error($con));
+  return mysqli_affected_rows($con);
+}
+//end function add_students
+
+
+//function edit_students
+function edit_students($data)
+{
+  $con = con();
+  $id = $data["id"];
+  $name = htmlspecialchars($data["name"]);
+  $age = htmlspecialchars($data["age"]);
+  $gender = htmlspecialchars($data["gender"]);
+  $class_id = htmlspecialchars($data["class"]);
+  $teacher_id = htmlspecialchars($data["teacher"]);
+
+  if ($data["age"] == "Choose...") {
+    return false;
+  } elseif ($data["gender"] == "Choose...") {
+    return false;
+  } elseif ($data["class"] == "Choose...") {
+    return false;
+  } elseif ($data["teacher"] == "Choose...") {
+    return false;
+  }
+
+  $query = "UPDATE tb_student SET
+  student_name = '$name',
+  student_age = '$age', 
+  student_gender = '$gender', 
+  class_id = '$class_id', 
+  teacher_id = '$teacher_id'
+  WHERE id = $id ";
+
+  mysqli_query($con, $query) or die(mysqli_error($con));
+  return mysqli_affected_rows($con);
+}
+//end function edit_students
 
 
 //function register
@@ -265,7 +346,7 @@ function register($data)
   $password2 = htmlspecialchars($data["password2"]);
   $picture = "default.jpg";
   $role_id = 2;
-  $is_active = 1;
+  $is_active = 0;
 
   //create table tb_user
   $create = "
@@ -345,19 +426,7 @@ function register($data)
   (3, 'Class C'), 
   (4, 'Class D')";
   mysqli_query($con, $insertTbKelas);
-  //end create table tb_class and INSERT  
-
-
-  // create tb_teacher 
-  $create = "
-  CREATE TABLE IF NOT EXISTS tb_teacher(
-    `id` INT AUTO_INCREMENT,
-    `teacher_name` VARCHAR(200),
-    `teacher_age` VARCHAR(200),
-    `teacher_gender` VARCHAR(200),
-    PRIMARY KEY (`id`))";
-  mysqli_query($con, $create);
-  // end create tb_teacher 
+  //end create table tb_class and INSERT
 
 
   // create tb_subjects   
@@ -436,10 +505,21 @@ function login($data)
     $row = mysqli_fetch_assoc($result);
     if (password_verify($password, $row["password"])) {
 
+      if ($row["is_active"] == 0) {
+        echo  "<div class=\"register-box\">
+        <div class=\"alert alert-danger alert-dismissible fade show pb-0\" role=\"alert\">
+          <h4>NOTE !</h4>
+          <p>Please Contact Admin To Active your Account !</p>
+          <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
+            <span aria-hidden=\"true\">&times;</span>
+          </button>
+        </div>
+        </div>";
+        return false;
+      }
+
       $role = mysqli_query($con, "SELECT * FROM tb_role WHERE role_id = $row[role_id]");
       $role_id = mysqli_fetch_assoc($role);
-      // print_r($role_id);
-      // die;
 
       $cek = mysqli_num_rows($result);
       if ($cek > 0) {
