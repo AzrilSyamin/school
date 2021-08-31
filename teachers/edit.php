@@ -37,6 +37,11 @@ if (isset($_POST["submit"])) {
       </div>
     <?php endif; ?>
     <form action="" method="POST" enctype="multipart/form-data">
+
+      <div class="form-group mt-2">
+        <img src="../img/<?= $user["picture"]; ?>" alt="user-profile">
+      </div>
+
       <div class="form-group">
         <label for="first_name">User ID *</label>
         <input type="text" class="form-control" name="id" id="id" value="<?= $user["id"]; ?>" required readonly>
@@ -79,17 +84,17 @@ if (isset($_POST["submit"])) {
       </div>
 
       <div class="form-group">
-        <label for="password1">Password *</label>
+        <label for="password1">Password</label>
         <input type="password" class="form-control" name="password1" id="password1">
       </div>
 
       <div class=" form-group">
-        <label for="password2">Comfirm Password *</label>
+        <label for="password2">Comfirm Password</label>
         <input type="password" class="form-control" name="password2" id="password2">
       </div>
 
       <div class="form-group">
-        <label for="is_active">Status *</label>
+        <label for="is_active">Status *</label><br>
         <div class="form-check form-check-inline">
           <input class="form-check-input" type="radio" name="is_active" id="is_active" value="1" <?php if ($user["is_active"] == 1) {
                                                                                                     echo "checked";
@@ -105,7 +110,7 @@ if (isset($_POST["submit"])) {
       </div>
 
       <div class="form-group">
-        <label for="role_id">Role *</label>
+        <label for="role_id">Role *</label><br>
         <div class="form-check form-check-inline">
           <input class="form-check-input" type="radio" name="role_id" id="role_id" value="1" <?php if ($user["role_id"] == 1) {
                                                                                                 echo "checked";
@@ -120,17 +125,13 @@ if (isset($_POST["submit"])) {
         </div>
       </div>
 
-      <div class="form-group">
-        <img src="../img/<?= $user["picture"]; ?>" alt="user-profile">
-      </div>
-
       <div class=" form-group">
         <label for="picture">Profile Picture</label>
         <input type="file" class="form-control-file" name="picture" id="picture">
       </div>
 
-      <button type="submit" class="btn btn-success ml-2" style="float: right;" name="submit"><i class="fas fa-save"></i> Save Changes</button>
-      <button type="reset" class="btn btn-warning ml-2" style="float: right;"><i class="fas fa-redo-alt"></i> Reset</button>
+      <button type="submit" class="btn btn-success m-2" style="float: right;" name="submit"><i class="fas fa-save"></i> Save Changes</button>
+      <button type="reset" class="btn btn-warning m-2" style="float: right;"><i class="fas fa-redo-alt"></i> Reset</button>
     </form>
   </div>
   <!-- Akhir Form  -->

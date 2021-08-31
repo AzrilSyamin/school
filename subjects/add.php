@@ -46,8 +46,8 @@ if (isset($_POST["submit"])) {
                 </select>
             </div>
 
-            <button type="submit" class="btn btn-success ml-2" style="float: right;" name="submit"><i class="fas fa-fw fa-plus-circle"></i> Add New Subject</button>
-            <button type="reset" class="btn btn-warning ml-2" style="float: right;"><i class="fas fa-redo-alt"></i> Reset</button>
+            <button type="submit" class="btn btn-success m-2" style="float: right;" name="submit"><i class="fas fa-fw fa-plus-circle"></i> Add New Subject</button>
+            <button type="reset" class="btn btn-warning m-2" style="float: right;"><i class="fas fa-redo-alt"></i> Reset</button>
         </form>
     </div>
     <!-- Akhir Form  -->

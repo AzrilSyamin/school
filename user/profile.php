@@ -43,37 +43,22 @@ if (isset($_POST["submit"])) {
       </div>
 
       <div class="form-group">
-        <!-- Is Active  -->
-        <input type="hidden" class="form-control" name="is_active" value="<?= $data["is_active"]; ?>">
-      </div>
-
-      <div class="form-group">
-        <!-- Role Id  -->
-        <input type="hidden" class="form-control" name="role_id" value="<?= $data["role_id"]; ?>">
-      </div>
-
-      <div class="form-group">
-        <label for="name">First Name :</label>
+        <label for="name">First Name *</label>
         <input type="text" class="form-control" name="first_name" id="name" required autofocus value="<?= $data["first_name"]; ?>">
       </div>
 
       <div class="form-group">
-        <label for="name">Last Name :</label>
+        <label for="name">Last Name</label>
         <input type="text" class="form-control" name="last_name" id="name" value="<?= $data["last_name"]; ?>">
       </div>
 
       <div class="form-group">
-        <label for="email">Email :</label>
-        <input type="email" class="form-control" name="email" id="email" value="<?= $data["email"]; ?>" readonly>
-      </div>
-
-      <div class="form-group">
-        <label for="age">Age :</label>
+        <label for="age">Age *</label>
         <input type="number" class="form-control" name="age" id="age" value="<?= $data["age"]; ?>" required>
       </div>
 
       <div class="form-group">
-        <label for="gender">Gender :</label>
+        <label for="gender">Gender</label>
         <select name="gender" id="gender" class="form-control">
           <option value="">Choose...</option>
           <option <?php if ($data['gender'] == 'Lelaki') {
@@ -86,22 +71,37 @@ if (isset($_POST["submit"])) {
       </div>
 
       <div class="form-group">
-        <label for="password1">Password :</label>
+        <label for="email">Email</label>
+        <input type="email" class="form-control" name="email" id="email" value="<?= $data["email"]; ?>" readonly>
+      </div>
+
+      <div class="form-group">
+        <label for="password1">Password</label>
         <input type="password" class="form-control" name="password1" id="password1">
       </div>
 
       <div class=" form-group">
-        <label for="password2">Comfirm Password :</label>
+        <label for="password2">Comfirm Password</label>
         <input type="password" class="form-control" name="password2" id="password2">
       </div>
 
       <div class=" form-group">
-        <label for="picture">Profile Picture :</label>
+        <label for="picture">Profile Picture</label>
         <input type="file" class="form-control-file" name="picture" id="picture">
       </div>
 
-      <button type="submit" class="btn btn-success ml-1" style="float:right;" name="submit"><i class="fas fa-save"></i> Save Changes</button>
-      <button type="reset" class="btn btn-warning" style="float:right;" name="submit"><i class="fas fa-redo-alt"></i> Reset</button>
+      <div class="form-group">
+        <!-- Role Id  -->
+        <input type="hidden" class="form-control" name="role_id" value="<?= $data["role_id"]; ?>">
+      </div>
+
+      <div class="form-group">
+        <!-- Is Active  -->
+        <input type="hidden" class="form-control" name="is_active" value="<?= $data["is_active"]; ?>">
+      </div>
+
+      <button type="submit" class="btn btn-success m-2" style="float:right;" name="submit"><i class="fas fa-save"></i> Save Changes</button>
+      <button type="reset" class="btn btn-warning m-2" style="float:right;" name="submit"><i class="fas fa-redo-alt"></i> Reset</button>
     </form>
   </div>
 </div>

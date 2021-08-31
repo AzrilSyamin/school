@@ -85,7 +85,8 @@ if (isset($_POST["submit"])) {
         </select>
       </div>
 
-      <button type="submit" class="btn btn-success" style="float:right;" name="submit"><i class="fas fa-save"></i> Save Changes</button>
+      <button type="submit" class="btn btn-success m-2" style="float:right;" name="submit"><i class="fas fa-save"></i> Save Changes</button>
+      <button type="reset" class="btn btn-warning m-2" style="float: right;"><i class="fas fa-redo-alt"></i> Reset</button>
     </form>
   </div>
   <!-- Akhir Form  -->
