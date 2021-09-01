@@ -54,27 +54,35 @@ function add_teachers($data)
 
   if (mysqli_fetch_assoc($result)) {
 
-    echo  "<div class=\"register-box\">
-    <div class=\"alert alert-danger alert-dismissible fade show pb-0\" role=\"alert\">
-        <p>Email Is Already Registered !</p>
-        <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
-          <span aria-hidden=\"true\">&times;</span>
-        </button>
+    echo  "
+    <div class=\"row\">
+      <div class=\"col-12 col-md-6\">
+        <div class=\"alert alert-danger alert-dismissible fade show pb-0\" role=\"alert\">
+          <p>Email Is Already Registered !</p>
+          <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
+            <span aria-hidden=\"true\">&times;</span>
+          </button>
+        </div>
       </div>
-      </div>";
+    </div>
+      ";
     return false;
   }
 
 
   if ($password !== $password2) {
-    echo  "<div class=\"register-box\">
-    <div class=\"alert alert-danger alert-dismissible fade show pb-0\" role=\"alert\">
-        <p>Passwords Do Not Match !</p>
-        <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
-          <span aria-hidden=\"true\">&times;</span>
-        </button>
+    echo  "
+      <div class=\"row\">
+        <div class=\"col-12 col-md-6\">
+          <div class=\"alert alert-danger alert-dismissible fade show pb-0\" role=\"alert\">
+            <p>Passwords Do Not Match !</p>
+            <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
+              <span aria-hidden=\"true\">&times;</span>
+            </button>
+          </div>
+        </div>
       </div>
-      </div>";
+      ";
     return false;
   }
 
@@ -123,10 +131,18 @@ function edit_teachers($data)
   //password
   if ($password && $password2 !== null) {
     if ($password !== $password2) {
-      echo "<script>
-      alert('Passwords Do Not Match !');
-      document.location.href='edit.php';
-      </script>";
+      echo "
+      <div class=\"row\">
+        <div class=\"col-12 col-md-6\">
+          <div class=\"alert alert-danger alert-dismissible fade show pb-0\" role=\"alert\">
+            <p>Passwords Do Not Match !</p>
+            <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
+              <span aria-hidden=\"true\">&times;</span>
+            </button>
+          </div>
+        </div>
+      </div>
+      ";
       return false;
     }
 
@@ -169,11 +185,11 @@ function edit_user($data)
   $password = htmlspecialchars($data["password1"]);
   $password2 = htmlspecialchars($data["password2"]);
   //pic_name
-  $name_picture = htmlspecialchars($_FILES["picture"]["name"]);
+  $name_picture = htmlspecialchars(@$_FILES["picture"]["name"]);
   $role_id = htmlspecialchars($data["role_id"]);
   $is_active = htmlspecialchars($data["is_active"]);
   //sumber
-  $sumber = $_FILES["picture"]["tmp_name"];
+  $sumber = @$_FILES["picture"]["tmp_name"];
   // //folder
   $folder = "../img/";
 
@@ -197,10 +213,18 @@ function edit_user($data)
   //password
   if ($password && $password2 !== null) {
     if ($password !== $password2) {
-      echo "<script>
-      alert('Passwords Do Not Match !');
-      document.location.href='profile.php';
-      </script>";
+      echo "
+      <div class=\"row\">
+        <div class=\"col-12 col-md-6\">
+          <div class=\"alert alert-danger alert-dismissible fade show pb-0\" role=\"alert\">
+            <p>Passwords Do Not Match !</p>
+            <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
+              <span aria-hidden=\"true\">&times;</span>
+            </button>
+          </div>
+        </div>
+      </div>
+      ";
       return false;
     }
 

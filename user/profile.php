@@ -19,10 +19,18 @@ if (isset($_POST["submit"])) {
           window.location='../user/profile.php';
           </script>";
   } else {
-    echo "<script>
-          alert('Edit Failed');
-          window.location='../user/profile.php';
-          </script>";
+    echo "
+    <div class=\"row\">
+      <div class=\"col-12 col-md-6\">
+          <div class=\"alert alert-danger alert-dismissible fade show pb-0\" role=\"alert\">
+            <p>Edit Failed</p>
+            <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
+              <span aria-hidden=\"true\">&times;</span>
+            </button>
+          </div>
+      </div>
+    </div>
+        ";
   }
 }
 
@@ -30,7 +38,7 @@ if (isset($_POST["submit"])) {
 ?>
 <div class="row">
   <div class="col-12 col-md-6 p-4 shadow">
-    <h4>My Profile <?= "[" . $data["role_name"] . "]"; ?> </h4>
+    <h4>My Profile <br><span class="badge badge-info"><?= $data["role_name"]; ?></span></h4>
     <form action="" method="POST" enctype="multipart/form-data">
 
       <div class="form-group">
