@@ -536,12 +536,29 @@ function login($data)
           </script>";
         }
       }
+    } else {
+      echo "
+      <div class=\"login-box\">
+        <div class=\"alert alert-danger alert-dismissible fade show pb-0\" role=\"alert\">
+          <p>Incorrect Username / Password !</p>
+          <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
+            <span aria-hidden=\"true\">&times;</span>
+          </button>
+        </div>
+      </div>
+      ";
     }
   } else {
-    echo "<script>
-          alert('Are You Sure This Email?, Unregistered Email !');
-          window.location.href='/';
-          </script>";
+    echo "
+      <div class=\"login-box\">
+        <div class=\"alert alert-danger alert-dismissible fade show pb-0\" role=\"alert\">
+          <p>Are You Sure This Email? <br> Email Not Registered !</p>
+          <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
+            <span aria-hidden=\"true\">&times;</span>
+          </button>
+        </div>
+      </div>
+          ";
   }
 }
 //end function login

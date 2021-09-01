@@ -2,23 +2,13 @@
 require "_headerauth.php";
 
 if (isset($_POST["submit"])) {
-  if (!login($_POST)) {
-    $error = true;
-  }
+  !login($_POST);
 }
 ?>
 
 
 <body class="hold-transition login-page">
   <div class="login-box">
-    <?php if (isset($error)) : ?>
-      <div class="alert alert-danger alert-dismissible fade show pb-0" role="alert">
-        <p>Incorrect Username / Password !</p>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-    <?php endif; ?>
     <!-- /.login-logo -->
     <div class="card card-outline card-primary">
       <div class="card-header text-center">
