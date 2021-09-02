@@ -11,10 +11,67 @@ $students = query("SELECT * FROM tb_student
                   ON tb_student.student_age = tb_stages.student_age
                  ");
 
+$teacher = query("SELECT * FROM tb_user");
+$subjects = query("SELECT * FROM tb_subjects");
+$student = query("SELECT * FROM tb_student");
 ?>
 
 
-
+<!-- Start Card  -->
+<div class="row mb-4">
+  <div class="col-12 col-md-4">
+    <div class="card  text-white shadow bg-dark mb-3">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-8">
+            <h5 class="card-text">TOTAL TEACHERS</h5>
+          </div>
+          <div class="col-4">
+            <h2><b><?= count($teacher); ?></b></h2>
+          </div>
+          <div class="col-12">
+            <p><a href="../teachers/teacher.php" class="text-white"> View Details</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-md-4">
+    <div class="card  text-white shadow bg-danger mb-3">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-8">
+            <h5 class="card-text">TOTAL SUBJECTS</h5>
+          </div>
+          <div class="col-4">
+            <h2><b><?= count($subjects); ?></b></h2>
+          </div>
+          <div class="col-12">
+            <p><a href="../subjects/subject.php" class="text-white"> View Details</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-md-4">
+    <div class="card  text-white shadow bg-success mb-3">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-8">
+            <h5 class="card-text">TOTAL STUDENTS</h5>
+          </div>
+          <div class="col-4">
+            <h2><b><?= count($student); ?></b></h2>
+          </div>
+          <div class="col-12">
+            <p><a href="../students/student.php" class="text-white"> View Details</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Start Card  -->
 <!-- DataTales Students -->
 <div class="card">
   <div class="card-header">
