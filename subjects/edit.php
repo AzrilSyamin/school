@@ -48,9 +48,11 @@ if (isset($_POST["submit"])) {
           <option selected>Choose...</option>
           <?php
           $teachers = query("SELECT * FROM tb_user");
-          foreach ($teachers as $teacher) : ?>
-            <option value="<?= $teacher["id"]; ?>"><?= "Cikgu" . " " . $teacher["first_name"] . " " . $teacher["last_name"]; ?></option>
-          <?php endforeach; ?>
+          foreach ($teachers as $teacher) {
+            $selected = $teacher["id"] == $subjects["teacher_id"] ? "selected" : null;
+
+            echo  '<option value="' . $teacher["id"] . '" ' . $selected . '>' . "Teacher" . ' ' . $teacher["first_name"] . ' ' . $teacher["last_name"] . '</option>';
+          } ?>
         </select>
       </div>
 
