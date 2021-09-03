@@ -390,6 +390,15 @@ function register($data)
   mysqli_query($con, $create);
   //end create table tb_user
 
+  //create table tb_gender
+  $create = "
+   CREATE TABLE IF NOT EXISTS tb_gender(
+     `id` INT AUTO_INCREMENT,
+     `gender` VARCHAR(200)
+     PRIMARY KEY (`id`)
+  )";
+  mysqli_query($con, $create);
+  //end create table tb_gender
 
   //create table tb_role
   $create = "

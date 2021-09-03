@@ -43,45 +43,56 @@ if (isset($_POST["submit"])) {
       <div class="form-group">
         <label for="age">Age :</label>
         <select name="age" id="age" class="form-control">
-          <option selected>Choose...</option>
+          <option value="">Choose...</option>
           <?php
           $levels = query("SELECT * FROM tb_stages");
-          foreach ($levels as $level) : ?>
-            <option><?= $level["student_age"]; ?></option>
-          <?php endforeach; ?>
+          foreach ($levels as $level) {
+            $selected = $level["student_age"] == $students["student_age"] ? "selected" : null;
+
+            echo '<option value="' . $level["student_age"] . '" ' . $selected . '>' . $level["student_age"] . '</option>';
+          } ?>
         </select>
       </div>
 
       <div class="form-group">
         <label for="gender">Gender :</label>
         <select name="gender" id="gender" class="form-control">
-          <option selected>Choose...</option>
-          <option>Lelaki</option>
-          <option>Perempuan</option>
+          <option value="">Choose...</option>
+          <?php
+          $gender = query("SELECT * FROM tb_gender");
+          foreach ($gender as $gen) {
+            $selected = $gen["gender"] == $students["student_gender"] ? "selected" : null;
+
+            echo '<option value="' . $gen["gender"] . '" ' . $selected . '>' . $gen["gender"] . '</option>';
+          } ?>
         </select>
       </div>
 
       <div class="form-group">
         <label for="class">Class :</label>
         <select name="class" id="class" class="form-control">
-          <option selected>Choose...</option>
+          <option value="">Choose...</option>
           <?php
           $classes = query("SELECT * FROM tb_class");
-          foreach ($classes as $class) : ?>
-            <option value="<?= $class["id"]; ?>"><?= $class["class_name"]; ?></option>
-          <?php endforeach; ?>
+          foreach ($classes as $class) {
+            $selected = $class["id"] == $students["class_id"] ? "selected" : null;
+
+            echo  '<option value="' . $class["id"] . '" ' . $selected . '>' . $class["class_name"] . '</option>';
+          } ?>
         </select>
       </div>
 
       <div class="form-group">
         <label for="teacher">Teacher :</label>
         <select name="teacher" id="teacher" class="form-control">
-          <option selected>Choose...</option>
+          <option value="">Choose...</option>
           <?php
           $teachers = query("SELECT * FROM tb_user");
-          foreach ($teachers as $teacher) : ?>
-            <option value="<?= $teacher["id"]; ?>"><?= "Cikgu" . " " . $teacher["first_name"] . " " . $teacher["last_name"]; ?></option>
-          <?php endforeach; ?>
+          foreach ($teachers as $teacher) {
+            $selected = $teacher["id"] == $students["teacher_id"] ? "selected" : null;
+
+            echo '<option value="' . $teacher["id"] . '" ' . $selected . '>' . 'Cikgu' . ' ' . $teacher["first_name"] . ' ' . $teacher["last_name"] . '</option>';
+          } ?>
         </select>
       </div>
 
