@@ -394,7 +394,7 @@ function register($data)
   $create = "
    CREATE TABLE IF NOT EXISTS tb_gender(
      `id` INT AUTO_INCREMENT,
-     `gender` VARCHAR(200)
+     `gender` VARCHAR(100)
      PRIMARY KEY (`id`)
   )";
   mysqli_query($con, $create);
