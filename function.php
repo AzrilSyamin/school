@@ -394,10 +394,15 @@ function register($data)
   $create = "
    CREATE TABLE IF NOT EXISTS tb_gender(
      `id` INT AUTO_INCREMENT,
-     `gender` VARCHAR(100)
+     `gender` VARCHAR(100),
      PRIMARY KEY (`id`)
   )";
   mysqli_query($con, $create);
+  $insertTbGender = "
+  INSERT INTO `tb_gender` (`Id`, `gender`) VALUES
+  (1, 'Lelaki'),
+  (2, 'Perempuan')";
+  mysqli_query($con, $insertTbGender);
   //end create table tb_gender
 
   //create table tb_role
