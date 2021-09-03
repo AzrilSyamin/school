@@ -70,15 +70,13 @@ if (isset($_POST["submit"])) {
         <label for="gender">Gender</label>
         <select name="gender" id="gender" class="form-control">
           <option value="">Choose...</option>
-          <option <?php if ($user["gender"] == 'Lelaki') {
-                    echo "selected";
-                  } ?>>Lelaki</option>
-          <option <?php if ($user["gender"] == 'Perempuan') {
-                    echo "selected";
-                  } ?>>Perempuan</option>
-          <option <?php if ($user["gender"] == 'Lain-Lain') {
-                    echo "selected";
-                  } ?>>Lain-Lain</option>
+          <?php
+          $gender = query("SELECT * FROM tb_gender");
+          foreach ($gender as $gen) {
+            $selected = $gen["gender"] == $user["gender"] ? "selected" : null;
+
+            echo '<option value="' . $gen["gender"] . '" ' . $selected . '>' . $gen["gender"] . '</option>';
+          } ?>
         </select>
       </div>
 
