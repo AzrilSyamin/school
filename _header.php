@@ -220,36 +220,36 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <p>Dashboard</p>
                             </a>
                         </li>
-                        
+
                         <li class="nav-item">
                             <a href="../teachers/teacher.php" class="nav-link">
                                 <i class="fas fa-fw fa-user-tie"></i>
                                 <p>Teachers</p>
                             </a>
                         </li>
-                        
+
                         <li class="nav-item">
                             <a href="../subjects/subject.php" class="nav-link">
                                 <i class="fas fa-fw fa-journal-whills"></i>
                                 <p>Subjects</p>
                             </a>
                         </li>
-                        
+
                         <li class="nav-item">
                             <a href="../students/student.php" class="nav-link">
                                 <i class="fas fa-fw fa-users"></i>
                                 <p>Students</p>
                             </a>
                         </li>
-                        
-                        
+
+
                         <li class="nav-item">
-                            <a href="../class/class.php" class="nav-link">
+                            <a href="../classes/class.php" class="nav-link">
                                 <i class="fas fa-fw fa-person-booth"></i>
                                 <p>Classes</p>
                             </a>
                         </li>
-                        
+
                         <li class="nav-item">
                             <a href="../auth/logout.php" class="nav-link">
                                 <i class="fas fa-fw fa-sign-out-alt"></i>
