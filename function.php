@@ -359,6 +359,40 @@ function edit_students($data)
 //end function edit_students
 
 
+//function add_class
+function add_class($data)
+{
+  $con = con();
+  $class = htmlspecialchars($data["class"]);
+
+  
+  $query = "INSERT INTO tb_class VALUE
+  (null,'$class' )";
+
+  mysqli_query($con, $query) or die(mysqli_error($con));
+  return mysqli_affected_rows($con);
+}
+//end function add_class
+
+
+//function edit_class
+function edit_class($data)
+{
+  $con = con();
+  $id = $data["id"];
+  $class = htmlspecialchars($data["class"]);
+
+  
+  $query = "UPDATE tb_class SET
+  class_name = '$class'
+  WHERE id = $id ";
+
+  mysqli_query($con, $query) or die(mysqli_error($con));
+  return mysqli_affected_rows($con);
+}
+//end function edit_class
+
+
 //function register
 function register($data)
 {
@@ -452,7 +486,7 @@ function register($data)
   //create table tb_class and INSERT
   $createTbKelas = "
    CREATE TABLE IF NOT EXISTS tb_class(
-     `id` INT,
+     `id` INT AUTO_INCREMENT,
      `class_name` VARCHAR(200),
      PRIMARY KEY (`id`)
   )";
