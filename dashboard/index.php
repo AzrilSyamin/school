@@ -108,15 +108,13 @@ $student = query("SELECT * FROM tb_student");
             <td><?= $student["student_age"]; ?></td>
             <td><?= $student["class_name"]; ?></td>
             <td><?= $student["stages_age"]; ?></td>
-            <td><?= $student["first_name"]; ?></td>
+            <td><?= $student["first_name"] . " " . $student["last_name"]; ?></td>
             <td>
               <?php $pelajaran = query("SELECT * FROM tb_subjects 
                                         JOIN tb_user
                                         ON tb_subjects.teacher_id = tb_user.id WHERE teacher_id = '$student[teacher_id]'");
               foreach ($pelajaran as $p) : ?>
-                <ul>
-                  <li><?= $p["subjects_name"]; ?></li>
-                </ul>
+                <li class="list-unstyled"><?= $p["subjects_name"]; ?></li>
               <?php endforeach; ?>
             </td>
           </tr>
