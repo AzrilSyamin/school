@@ -365,7 +365,7 @@ function add_class($data)
   $con = con();
   $class = htmlspecialchars($data["class"]);
 
-  
+
   $query = "INSERT INTO tb_class VALUE
   (null,'$class' )";
 
@@ -382,7 +382,7 @@ function edit_class($data)
   $id = $data["id"];
   $class = htmlspecialchars($data["class"]);
 
-  
+
   $query = "UPDATE tb_class SET
   class_name = '$class'
   WHERE id = $id ";
@@ -391,6 +391,19 @@ function edit_class($data)
   return mysqli_affected_rows($con);
 }
 //end function edit_class
+
+
+//function search_student
+function search_student($keyword)
+{
+  $query = "SELECT * FROM tb_student WHERE
+          student_name LIKE '%$keyword%' OR
+          student_age LIKE '%$keyword%' OR
+          student_gender LIKE '%$keyword%'
+          ";
+  return query($query);
+}
+//end function search_student
 
 
 //function register

@@ -1,10 +1,29 @@
 <?php include_once "../_header.php"; ?>
 <?php
 
-$students = query("SELECT * FROM tb_student
-                 ");
+$students = query("SELECT * FROM tb_student");
+
+if (isset($_POST["search"])) {
+    if (!$students = search_student($_POST["searchbox"])) {
+        $noData = true;
+    }
+}
 ?>
 
+<div class="row">
+    <div class="col-12">
+        <div class="form-group">
+            <form action="" method="post" class="row">
+                <div class="col-8 col-md-10">
+                    <input type="text" class="form-control" name="searchbox" autocomplete="off">
+                </div>
+                <div class="col-1 col-md-2">
+                    <button type="submit" class="btn text-white" style="background-color: midnightblue;" name="search">Search</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 <!-- Page Heading -->
 <div class="row">
     <div class="col-12">
@@ -52,6 +71,9 @@ $students = query("SELECT * FROM tb_student
                         <?php endforeach; ?>
                     </tbody>
                 </table>
+                <?php if (isset($noData)) : ?>
+                    <p class="text-center">No Result !</p>
+                <?php endif; ?>
             </div>
             <!-- Akhir Table  -->
         </div>
