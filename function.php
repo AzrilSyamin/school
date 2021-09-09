@@ -259,13 +259,9 @@ function add_subjects($data)
 {
   $con = con();
   $subjects = htmlspecialchars($data["subjects"]);
-  $teacher = htmlspecialchars($data["teacher"]);
-
-  if ($data["teacher"] == "Choose...") {
-    return false;
-  }
+  
   $query = "INSERT INTO tb_subjects VALUE
-  (NULL, '$subjects','$teacher')";
+  (NULL, '$subjects')";
 
   mysqli_query($con, $query) or die(mysqli_error($con));
   return mysqli_affected_rows($con);
@@ -279,14 +275,9 @@ function edit_subjects($data)
   $con = con();
   $id = $data["id"];
   $subjects = htmlspecialchars($data["subjects"]);
-  $teacher = htmlspecialchars($data["teacher"]);
-
-  if ($data["teacher"] == "Choose...") {
-    return false;
-  }
+  
   $query = "UPDATE tb_subjects SET
-  subjects_name = '$subjects',
-  teacher_id = '$teacher'
+  subjects_name = '$subjects'
   WHERE id = $id ";
 
   mysqli_query($con, $query) or die(mysqli_error($con));
@@ -519,7 +510,6 @@ function register($data)
  CREATE TABLE IF NOT EXISTS tb_subjects(
    `id` INT AUTO_INCREMENT,
    `subjects_name` VARCHAR(200),
-   `teacher_id` INT,
    PRIMARY KEY (`id`))";
   mysqli_query($con, $create);
   // akhir create table pelajaran

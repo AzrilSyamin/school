@@ -12,7 +12,18 @@ if (isset($_POST["submit"])) {
       </script>
       ";
   } else {
-    $error = true;
+    echo "
+    <div class=\"row\">
+      <div class=\"col-12 col-md-6\">
+        <div class=\"alert alert-danger alert-dismissible fade show pb-0\" role=\"alert\">
+          <p>Failed to Edit Subjects</p>
+          <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
+            <span aria-hidden=\"true\">&times;</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    ";
   }
 }
 ?>
@@ -23,14 +34,6 @@ if (isset($_POST["submit"])) {
   <div class="col-12 col-md-6 p-4 shadow">
     <h4>Edit Subjects</h4>
     <a href="subject.php" class="btn btn-primary"><i class="fas fa-backward"></i> Back</a>
-    <?php if (isset($error)) : ?>
-      <div class="alert alert-danger alert-dismissible fade show pb-0" role="alert">
-        <p>Failed to edit Subjects</p>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-    <?php endif; ?>
     <form action="" method="POST">
       <div class="form-group">
         <input type="hidden" class="form-control" name="id" id="id " value="<?= $subjects["id"]; ?>" required>
@@ -39,21 +42,6 @@ if (isset($_POST["submit"])) {
       <div class="form-group">
         <label for="subjects">Subjects Name :</label>
         <input type="text" class="form-control" name="subjects" id="subjects " value="<?= $subjects["subjects_name"]; ?>" autofocus required>
-      </div>
-
-      <div class="form-group">
-        <label for="teacher">Teacher Name :</label>
-
-        <select name="teacher" id="teacher" class="form-control">
-          <option selected>Choose...</option>
-          <?php
-          $teachers = query("SELECT * FROM tb_user");
-          foreach ($teachers as $teacher) {
-            $selected = $teacher["id"] == $subjects["teacher_id"] ? "selected" : null;
-
-            echo  '<option value="' . $teacher["id"] . '" ' . $selected . '>' . "Teacher" . ' ' . $teacher["first_name"] . ' ' . $teacher["last_name"] . '</option>';
-          } ?>
-        </select>
       </div>
 
       <button type="submit" class="btn btn-success m-2" style="float:right;" name="submit"><i class="fas fa-save"></i> Save Changes</button>
