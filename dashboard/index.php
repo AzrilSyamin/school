@@ -14,13 +14,14 @@ $students = query("SELECT * FROM tb_student
 $teacher = query("SELECT * FROM tb_user");
 $subjects = query("SELECT * FROM tb_subjects");
 $student = query("SELECT * FROM tb_student");
+$class = query("SELECT * FROM tb_class");
 ?>
 
 
 <!-- Start Card  -->
 <div class="row mb-4">
-  <div class="col-12 col-md-4">
-    <div class="card  text-white shadow bg-dark mb-3">
+  <div class="col-12 col-sm-6 col-md-3">
+    <div class="card  text-white shadow bg-gradient-primary mb-3">
       <div class="card-body">
         <div class="row">
           <div class="col-8">
@@ -29,15 +30,15 @@ $student = query("SELECT * FROM tb_student");
           <div class="col-4">
             <h2><b><?= count($teacher); ?></b></h2>
           </div>
-          <div class="col-12">
+          <div class="col-8 pt-2">
             <p><a href="../teachers/teacher.php" class="text-white"> View Details</a></p>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="col-12 col-md-4">
-    <div class="card  text-white shadow bg-danger mb-3">
+  <div class="col-12 col-sm-6 col-md-3">
+    <div class="card  text-white shadow bg-gradient-success mb-3">
       <div class="card-body">
         <div class="row">
           <div class="col-8">
@@ -46,15 +47,15 @@ $student = query("SELECT * FROM tb_student");
           <div class="col-4">
             <h2><b><?= count($subjects); ?></b></h2>
           </div>
-          <div class="col-12">
+          <div class="col-8 pt-2">
             <p><a href="../subjects/subject.php" class="text-white"> View Details</a></p>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="col-12 col-md-4">
-    <div class="card  text-white shadow bg-success mb-3">
+  <div class="col-12 col-sm-6 col-md-3">
+    <div class="card  text-white shadow bg-gradient-danger mb-3">
       <div class="card-body">
         <div class="row">
           <div class="col-8">
@@ -63,8 +64,25 @@ $student = query("SELECT * FROM tb_student");
           <div class="col-4">
             <h2><b><?= count($student); ?></b></h2>
           </div>
-          <div class="col-12">
+          <div class="col-8 pt-2">
             <p><a href="../students/student.php" class="text-white"> View Details</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-sm-6 col-md-3">
+    <div class="card  text-white shadow bg-gradient-info mb-3">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-8">
+            <h5 class="card-text">TOTAL CLASSES</h5>
+          </div>
+          <div class="col-4">
+            <h2><b><?= count($class); ?></b></h2>
+          </div>
+          <div class="col-8 pt-2">
+            <p><a href="../classes/class.php" class="text-white"> View Details</a></p>
           </div>
         </div>
       </div>
