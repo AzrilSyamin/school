@@ -61,8 +61,8 @@ if (isset($_POST["submit"])) {
       </div>
 
       <div class="form-group">
-        <label for="age">Age *</label>
-        <input type="number" class="form-control" name="age" id="age" value="<?= $data["age"]; ?>" required>
+        <label for="age">Age</label>
+        <input type="number" class="form-control" name="age" id="age" value="<?= $data["age"]; ?>">
       </div>
 
       <div class="form-group">
@@ -82,6 +82,16 @@ if (isset($_POST["submit"])) {
       <div class="form-group">
         <label for="email">Email</label>
         <input type="email" class="form-control" name="email" id="email" value="<?= $data["email"]; ?>" readonly>
+      </div>
+      
+      <div class="form-group">
+        <label for="phone_number">Phone Number</label>
+        <input type="number" class="form-control" name="phone_number" id="phone_number" value="<?= $data["phone_number"]; ?>">
+      </div>
+      
+      <div class="form-group">
+        <label for="address">Address</label>
+        <input type="text" class="form-control" name="address" id="address" value="<?= $data["address"]; ?>">
       </div>
 
       <div class="form-group">

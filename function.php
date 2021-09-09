@@ -44,6 +44,8 @@ function add_teachers($data)
   $age = htmlspecialchars($data["age"]);
   $gender = htmlspecialchars($data["gender"]);
   $email = htmlspecialchars($data["email"]);
+  $phone = htmlspecialchars($data["phone_number"]);
+  $address = htmlspecialchars($data["address"]);
   $password = htmlspecialchars($data["password1"]);
   $password2 = htmlspecialchars($data["password2"]);
   $picture = 'default.jpg';
@@ -89,7 +91,7 @@ function add_teachers($data)
   $password = password_hash($password, PASSWORD_DEFAULT);
 
   $query = "INSERT INTO tb_user VALUE
-  (NULL, '$first_name','$last_name', '$age', '$gender', '$email',  '$password', '$picture', '$role_id', '$is_active')";
+  (NULL, '$first_name','$last_name', '$age', '$gender', '$email', '$phone', '$address',  '$password', '$picture', '$role_id', '$is_active')";
 
   mysqli_query($con, $query) or die(mysqli_error($con));
   return mysqli_affected_rows($con);
@@ -105,6 +107,8 @@ function edit_teachers($data)
   $first_name = htmlspecialchars($data["first_name"]);
   $last_name = htmlspecialchars($data["last_name"]);
   $email = htmlspecialchars($data["email"]);
+  $phone = htmlspecialchars($data["phone_number"]);
+  $address = htmlspecialchars($data["address"]);
   $age = htmlspecialchars($data["age"]);
   $gender = htmlspecialchars($data["gender"]);
   $password = htmlspecialchars($data["password1"]);
@@ -160,6 +164,8 @@ function edit_teachers($data)
   age = '$age',
   gender = '$gender',
   email = '$email',
+  phone_number = '$phone',
+  address = '$address',
   password = '$password', 
   picture = '$name_picture',
   role_id = '$role_id', 
@@ -180,6 +186,8 @@ function edit_user($data)
   $first_name = htmlspecialchars($data["first_name"]);
   $last_name = htmlspecialchars($data["last_name"]);
   $email = htmlspecialchars($data["email"]);
+  $phone = htmlspecialchars($data["phone_number"]);
+  $address = htmlspecialchars($data["address"]);
   $age = htmlspecialchars($data["age"]);
   $gender = htmlspecialchars($data["gender"]);
   $password = htmlspecialchars($data["password1"]);
@@ -241,7 +249,9 @@ function edit_user($data)
   last_name = '$last_name', 
   age = '$age',
   gender = '$gender',
-  email = '$email', 
+  email = '$email',
+  phone_number = '$phone',
+  address = '$address',
   password = '$password',
   picture = '$name_picture', 
   role_id = '$role_id',
@@ -416,9 +426,11 @@ function register($data)
      `id` INT AUTO_INCREMENT,
      `first_name` VARCHAR(200),
      `last_name` VARCHAR(200),
-     `age` INT,
+     `age` VARCHAR(3),
      `gender` VARCHAR(200),
      `email` VARCHAR(200),
+     `phone_number` VARCHAR(12),
+     `address` VARCHAR(300),
      `password` VARCHAR(200),
      `picture` VARCHAR(200),
      `role_id` INT,

@@ -32,14 +32,16 @@ ON tb_user.role_id = tb_role.role_id
                             <th scope="col">#</th>
                             <th scope="col">Profile</th>
                             <th scope="col">Name</th>
+                            <?php if (isset($_SESSION["admin"])) : ?>
                             <th scope="col">Age</th>
                             <th scope="col">Gender</th>
                             <th scope="col">Email</th>
+                            <th scope="col">Phone Number</th>
+                            <th scope="col">Address</th>
                             <th scope="col">Status</th>
                             <th scope="col">Role</th>
-                            <?php if (isset($_SESSION["admin"])) { ?>
                                 <th scope="col">Action</th>
-                            <?php } ?>
+                            <?php endif; ?>
                         </tr>
                     </thead>
                     <tbody>
@@ -54,12 +56,14 @@ ON tb_user.role_id = tb_role.role_id
                                 <th scope="row"><?= $i++; ?></th>
                                 <td><img src="../img/<?= $user["picture"]; ?>" alt="user-profile" width="35px"></td>
                                 <td><?= $user["first_name"] . " " . $user["last_name"] ?></td>
+                                <?php if (isset($_SESSION["admin"])) : ?>
                                 <td><?= $user["age"]; ?></td>
                                 <td><?= $user["gender"]; ?></td>
                                 <td><?= $user["email"]; ?></td>
+                                <td><?= $user["phone_number"]; ?></td>
+                                <td><?= $user["address"]; ?></td>
                                 <td><?= $status; ?></td>
                                 <td><?= $user["role_name"]; ?></td>
-                                <?php if (isset($_SESSION["admin"])) { ?>
                                     <td class="<?php if ($user["id"] == $login) {
                                                     echo "d-none";
                                                 } ?>">
@@ -67,7 +71,7 @@ ON tb_user.role_id = tb_role.role_id
 
                                         <a class="badge badge-danger" href="del.php?id=<?= $user["id"]; ?>" onclick="return confirm('Are You Sure Want To Delete?');"><i class="far fa-trash-alt"></i></a>
                                     </td>
-                                <?php } ?>
+                                <?php endif; ?>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>

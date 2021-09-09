@@ -62,8 +62,8 @@ if (isset($_POST["submit"])) {
       </div>
 
       <div class="form-group">
-        <label for="age">Age *</label>
-        <input type="number" class="form-control" name="age" id="age" value="<?= $user["age"]; ?>" required>
+        <label for="age">Age</label>
+        <input type="number" class="form-control" name="age" id="age" value="<?= $user["age"]; ?>">
       </div>
 
       <div class="form-group">
@@ -84,6 +84,17 @@ if (isset($_POST["submit"])) {
         <label for="email">Email *</label>
         <input type="email" class="form-control" name="email" id="email" value="<?= $user["email"]; ?>" required>
       </div>
+
+      <div class="form-group">
+        <label for="phone_number">Phone Number</label>
+        <input type="number" class="form-control" name="phone_number" id="phone_number" value="<?= $user["phone_number"]; ?>">
+      </div>
+      
+      <div class="form-group">
+        <label for="address">Address</label>
+        <input type="text" class="form-control" name="address" id="address" value="<?= $user["address"]; ?>">
+      </div>
+      
 
       <div class="form-group">
         <label for="password1">Password</label>
