@@ -269,7 +269,7 @@ function add_subjects($data)
 {
   $con = con();
   $subjects = htmlspecialchars($data["subjects"]);
-  
+
   $query = "INSERT INTO tb_subjects VALUE
   (NULL, '$subjects')";
 
@@ -285,7 +285,7 @@ function edit_subjects($data)
   $con = con();
   $id = $data["id"];
   $subjects = htmlspecialchars($data["subjects"]);
-  
+
   $query = "UPDATE tb_subjects SET
   subjects_name = '$subjects'
   WHERE id = $id ";
@@ -414,6 +414,8 @@ function register($data)
   $first_name = htmlspecialchars($data["first_name"]);
   $last_name = htmlspecialchars($data["last_name"]);
   $email = htmlspecialchars($data["email"]);
+  @$phone = htmlspecialchars($data["phone_number"]);
+  @$address = htmlspecialchars($data["address"]);
   $password = htmlspecialchars($data["password"]);
   $password2 = htmlspecialchars($data["password2"]);
   $picture = "default.jpg";
@@ -570,7 +572,7 @@ function register($data)
 
   $password = password_hash($password, PASSWORD_DEFAULT);
   $query = "INSERT INTO tb_user VALUE 
-  (null, '$first_name','$last_name', null, null, '$email', '$password','$picture', '$role_id', '$is_active')";
+  (null, '$first_name','$last_name', null, null, '$email', '$phone', '$address', '$password','$picture', '$role_id', '$is_active')";
 
   mysqli_query($con, $query) or die(mysqli_error($con));
   return mysqli_affected_rows($con);

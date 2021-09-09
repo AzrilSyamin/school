@@ -49,7 +49,7 @@ if (isset($_POST["submit"])) {
                 <label for="name">Last Name</label>
                 <input type="text" class="form-control" name="last_name" id="name">
             </div>
-            
+
             <div class="form-group">
                 <label for="age">Age</label>
                 <input type="number" class="form-control" name="age" id="age">
@@ -59,8 +59,13 @@ if (isset($_POST["submit"])) {
                 <label for="gender">Gender</label>
                 <select name="gender" id="gender" class="form-control">
                     <option value="">Choose...</option>
-                    <option>Lelaki</option>
-                    <option>Perempuan</option>
+                    <?php
+                    $gender = query("SELECT * FROM tb_gender");
+                    foreach ($gender as $gen) {
+                        $selected = $gen["gender"] == $data["gender"] ? "selected" : null;
+
+                        echo '<option value="' . $gen["gender"] . '" ' . $selected . '>' . $gen["gender"] . '</option>';
+                    } ?>
                 </select>
             </div>
 
@@ -73,7 +78,7 @@ if (isset($_POST["submit"])) {
                 <label for="phone_number">Phone Number</label>
                 <input type="number" class="form-control" name="phone_number" id="phone_number">
             </div>
-            
+
             <div class="form-group">
                 <label for="address">Address</label>
                 <input type="text" class="form-control" name="address" id="address">

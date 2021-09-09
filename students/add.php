@@ -49,8 +49,13 @@ if (isset($_POST["submit"])) {
                 <label for="gender">Gender :</label>
                 <select name="gender" id="gender" class="form-control">
                     <option selected>Choose...</option>
-                    <option>Lelaki</option>
-                    <option>Perempuan</option>
+                    <?php
+                    $gender = query("SELECT * FROM tb_gender");
+                    foreach ($gender as $gen) {
+                        $selected = $gen["gender"] == $data["gender"] ? "selected" : null;
+
+                        echo '<option value="' . $gen["gender"] . '" ' . $selected . '>' . $gen["gender"] . '</option>';
+                    } ?>
                 </select>
             </div>
 
@@ -62,18 +67,6 @@ if (isset($_POST["submit"])) {
                     $classes = query("SELECT * FROM tb_class");
                     foreach ($classes as $class) : ?>
                         <option value="<?= $class["id"]; ?>"><?= $class["class_name"]; ?></option>
-                    <?php endforeach; ?>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="teacher">Teacher :</label>
-                <select name="teacher" id="teacher" class="form-control">
-                    <option selected>Choose...</option>
-                    <?php
-                    $teachers = query("SELECT * FROM tb_user");
-                    foreach ($teachers as $teacher) : ?>
-                        <option value="<?= $teacher["id"]; ?>"><?= "Cikgu" . " " . $teacher["first_name"] . " " . $teacher["last_name"]; ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>
