@@ -304,20 +304,9 @@ function add_students($data)
   $age = htmlspecialchars($data["age"]);
   $gender = htmlspecialchars($data["gender"]);
   $class_id = htmlspecialchars($data["class"]);
-  $teacher_id = htmlspecialchars($data["teacher"]);
-
-  if ($data["age"] == "Choose...") {
-    return false;
-  } elseif ($data["gender"] == "Choose...") {
-    return false;
-  } elseif ($data["class"] == "Choose...") {
-    return false;
-  } elseif ($data["teacher"] == "Choose...") {
-    return false;
-  }
 
   $query = "INSERT INTO tb_student VALUE
-  (NULL, '$name','$age', '$gender', '$class_id', '$teacher_id')";
+  (NULL, '$name','$age', '$gender', '$class_id')";
 
   mysqli_query($con, $query) or die(mysqli_error($con));
   return mysqli_affected_rows($con);
@@ -334,24 +323,12 @@ function edit_students($data)
   $age = htmlspecialchars($data["age"]);
   $gender = htmlspecialchars($data["gender"]);
   $class_id = htmlspecialchars($data["class"]);
-  $teacher_id = htmlspecialchars($data["teacher"]);
-
-  if ($data["age"] == "Choose...") {
-    return false;
-  } elseif ($data["gender"] == "Choose...") {
-    return false;
-  } elseif ($data["class"] == "Choose...") {
-    return false;
-  } elseif ($data["teacher"] == "Choose...") {
-    return false;
-  }
 
   $query = "UPDATE tb_student SET
   student_name = '$name',
   student_age = '$age', 
   student_gender = '$gender', 
-  class_id = '$class_id', 
-  teacher_id = '$teacher_id'
+  class_id = '$class_id'
   WHERE id = $id ";
 
   mysqli_query($con, $query) or die(mysqli_error($con));
@@ -537,7 +514,6 @@ function register($data)
     `student_age` VARCHAR(200),
     `student_gender` VARCHAR(200),
     `class_id` INT,
-    `teacher_id` INT,
     PRIMARY KEY (`id`))";
   mysqli_query($con, $create);
   // end create tb_student 

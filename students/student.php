@@ -1,7 +1,9 @@
 <?php include_once "../_header.php"; ?>
 <?php
 
-$students = query("SELECT * FROM tb_student");
+$students = query("SELECT * FROM tb_class 
+JOIN tb_student 
+ON tb_student.class_id = tb_class.id");
 
 if (isset($_POST["search"])) {
     if (!$students = search_student($_POST["searchbox"])) {
@@ -49,6 +51,7 @@ if (isset($_POST["search"])) {
                             <th scope="col">Name</th>
                             <th scope="col">Gender</th>
                             <th scope="col">Age</th>
+                            <th scope="col">Class</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
@@ -60,6 +63,8 @@ if (isset($_POST["search"])) {
                                 <td><?= $student["student_name"]; ?></td>
                                 <td><?= $student["student_gender"]; ?></td>
                                 <td><?= $student["student_age"]; ?></td>
+                                <td><?= $student["class_name"]; ?>
+                                </td>
                                 <td>
 
                                     <a class="badge badge-warning" href="edit.php?id=<?= $student["id"]; ?>"><i class="fas fa-edit"></i></i></a>

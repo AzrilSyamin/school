@@ -11,7 +11,18 @@ if (isset($_POST["submit"])) {
       </script>
       ";
   } else {
-    $error = true;
+    echo "
+    <div class=\"row\">
+      <div class=\"col-12 col-md-6\">
+        <div class=\"alert alert-danger alert-dismissible fade show pb-0\" role=\"alert\">
+          <p>Failed to Edit Student</p>
+          <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
+            <span aria-hidden=\"true\">&times;</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    ";
   }
 }
 ?>
@@ -22,26 +33,18 @@ if (isset($_POST["submit"])) {
   <div class="col-12 col-md-6 p-4 shadow">
     <h4>Edit Students</h4>
     <a href="student.php" class="btn btn-primary"><i class="fas fa-backward"></i> Back</a>
-    <?php if (isset($error)) : ?>
-      <div class="alert alert-danger alert-dismissible fade show pb-0" role="alert">
-        <p>Failed to edit Student</p>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-    <?php endif; ?>
     <form action="" method="POST">
       <div class="form-group">
         <input type="hidden" class="form-control" name="id" id="id " value="<?= $students["id"]; ?>" autofocus required>
       </div>
 
       <div class="form-group">
-        <label for="name">Nama :</label>
+        <label for="name">Nama</label>
         <input type="text" class="form-control" name="name" id="name " value="<?= $students["student_name"]; ?>" autofocus required>
       </div>
 
       <div class="form-group">
-        <label for="age">Age :</label>
+        <label for="age">Age</label>
         <select name="age" id="age" class="form-control">
           <option value="">Choose...</option>
           <?php
@@ -55,7 +58,7 @@ if (isset($_POST["submit"])) {
       </div>
 
       <div class="form-group">
-        <label for="gender">Gender :</label>
+        <label for="gender">Gender</label>
         <select name="gender" id="gender" class="form-control">
           <option value="">Choose...</option>
           <?php
@@ -69,8 +72,8 @@ if (isset($_POST["submit"])) {
       </div>
 
       <div class="form-group">
-        <label for="class">Class :</label>
-        <select name="class" id="class" class="form-control">
+        <label for="class">Class *</label>
+        <select name="class" id="class" class="form-control" required>
           <option value="">Choose...</option>
           <?php
           $classes = query("SELECT * FROM tb_class");
@@ -78,20 +81,6 @@ if (isset($_POST["submit"])) {
             $selected = $class["id"] == $students["class_id"] ? "selected" : null;
 
             echo  '<option value="' . $class["id"] . '" ' . $selected . '>' . $class["class_name"] . '</option>';
-          } ?>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label for="teacher">Teacher :</label>
-        <select name="teacher" id="teacher" class="form-control">
-          <option value="">Choose...</option>
-          <?php
-          $teachers = query("SELECT * FROM tb_user");
-          foreach ($teachers as $teacher) {
-            $selected = $teacher["id"] == $students["teacher_id"] ? "selected" : null;
-
-            echo '<option value="' . $teacher["id"] . '" ' . $selected . '>' . 'Cikgu' . ' ' . $teacher["first_name"] . ' ' . $teacher["last_name"] . '</option>';
           } ?>
         </select>
       </div>
