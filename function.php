@@ -507,6 +507,17 @@ function register($data)
   // akhir create tb_class_teacher
 
 
+  // create tb_class_subjects  
+  $create = "
+    CREATE TABLE IF NOT EXISTS tb_class_subjects(
+      `id` INT AUTO_INCREMENT,
+      `class_id` INT,
+      `subjects_id` INT,
+      PRIMARY KEY (`id`))";
+  mysqli_query($con, $create);
+  // akhir create tb_class_subjects
+
+
   // create tb_subjects   
   $create = "
  CREATE TABLE IF NOT EXISTS tb_subjects(
