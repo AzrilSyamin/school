@@ -6,7 +6,7 @@ if (isset($_SESSION["admin"])) {
   $login = $_SESSION["moderator"];
 }
 
-$query = mysqli_query(con(), "SELECT * FROM tb_user 
+$query = mysqli_query($con, "SELECT * FROM tb_user 
                               JOIN tb_role 
                               ON tb_user.role_id = tb_role.role_id 
                               WHERE tb_user.id = '$login'");
@@ -83,12 +83,12 @@ if (isset($_POST["submit"])) {
         <label for="email">Email</label>
         <input type="email" class="form-control" name="email" id="email" value="<?= $data["email"]; ?>" readonly>
       </div>
-      
+
       <div class="form-group">
         <label for="phone_number">Phone Number</label>
         <input type="number" class="form-control" name="phone_number" id="phone_number" value="<?= $data["phone_number"]; ?>">
       </div>
-      
+
       <div class="form-group">
         <label for="address">Address</label>
         <input type="text" class="form-control" name="address" id="address" value="<?= $data["address"]; ?>">

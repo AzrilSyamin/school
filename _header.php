@@ -12,7 +12,7 @@ if (!isset($login)) {
   </script>";
 }
 
-$query = mysqli_query(con(), "SELECT * FROM tb_user WHERE id = '$login'");
+$query = mysqli_query($con, "SELECT * FROM tb_user WHERE id = '$login'");
 $users = mysqli_fetch_assoc($query);
 
 
