@@ -6,14 +6,14 @@ $user = "root";
 $pass = "";
 $db = "db_sekolah";
 
-$con = mysqli_connect("$host", "$user", "$pass", "$db");
+$con = mysqli_connect($host, $user, $pass, $db);
 
 
 
 //function query
 function query($query)
 {
-  global $con;;
+  global $con;
   $result = mysqli_query($con, $query) or die(mysqli_error($con));
 
   $rows = [];
@@ -41,7 +41,7 @@ function base_url($url = null)
 //function add_teachers
 function add_teachers($data)
 {
-  global $con;;
+  global $con;
   $first_name = htmlspecialchars($data["first_name"]);
   $last_name = htmlspecialchars($data["last_name"]);
   $age = htmlspecialchars($data["age"]);
@@ -105,7 +105,7 @@ function add_teachers($data)
 //function edit_teachers
 function edit_teachers($data)
 {
-  global $con;;
+  global $con;
   $id = $data["id"];
   $first_name = htmlspecialchars($data["first_name"]);
   $last_name = htmlspecialchars($data["last_name"]);
@@ -184,7 +184,7 @@ function edit_teachers($data)
 //function edit_user
 function edit_user($data)
 {
-  global $con;;
+  global $con;
   $id = $data["id"];
   $first_name = htmlspecialchars($data["first_name"]);
   $last_name = htmlspecialchars($data["last_name"]);
@@ -270,7 +270,7 @@ function edit_user($data)
 //function add_subjects
 function add_subjects($data)
 {
-  global $con;;
+  global $con;
   $subjects = htmlspecialchars($data["subjects"]);
 
   $query = "INSERT INTO tb_subjects VALUE
@@ -285,7 +285,7 @@ function add_subjects($data)
 //function edit_subjects
 function edit_subjects($data)
 {
-  global $con;;
+  global $con;
   $id = $data["id"];
   $subjects = htmlspecialchars($data["subjects"]);
 
@@ -302,7 +302,7 @@ function edit_subjects($data)
 //function add_students
 function add_students($data)
 {
-  global $con;;
+  global $con;
   $name = htmlspecialchars($data["name"]);
   $age = htmlspecialchars($data["age"]);
   $gender = htmlspecialchars($data["gender"]);
@@ -320,7 +320,7 @@ function add_students($data)
 //function edit_students
 function edit_students($data)
 {
-  global $con;;
+  global $con;
   $id = $data["id"];
   $name = htmlspecialchars($data["name"]);
   $age = htmlspecialchars($data["age"]);
@@ -343,7 +343,7 @@ function edit_students($data)
 //function add_class
 function add_class($data)
 {
-  global $con;;
+  global $con;
   $class = htmlspecialchars($data["class"]);
 
 
@@ -359,7 +359,7 @@ function add_class($data)
 //function edit_class
 function edit_class($data)
 {
-  global $con;;
+  global $con;
   $id = $data["id"];
   $class = htmlspecialchars($data["class"]);
 
@@ -390,7 +390,7 @@ function search_student($keyword)
 //function register
 function register($data)
 {
-  global $con;;
+  global $con;
   $first_name = htmlspecialchars($data["first_name"]);
   $last_name = htmlspecialchars($data["last_name"]);
   $email = htmlspecialchars($data["email"]);
@@ -584,7 +584,7 @@ function register($data)
 //function login
 function login($data)
 {
-  global $con;;
+  global $con;
   $email = htmlspecialchars($data["email"]);
   $password = htmlspecialchars($data["password"]);
 
