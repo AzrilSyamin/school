@@ -2,9 +2,9 @@
 session_start();
 
 $host = "localhost";
-$user = "root";
-$pass = "";
-$db = "db_sekolah";
+$user = "scho_school";
+$pass = "scho_school";
+$db = "scho_school";
 
 $con = mysqli_connect($host, $user, $pass, $db);
 
