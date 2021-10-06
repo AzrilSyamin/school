@@ -1,9 +1,9 @@
 <?php require "../_header.php";
 
 $students = query("SELECT * FROM tb_student
-JOIN tb_class
+LEFT JOIN tb_class
 ON tb_student.class_id = tb_class.id
-JOIN tb_stages
+LEFT JOIN tb_stages
 ON tb_student.student_age = tb_stages.student_age
                  ");
 //print_r($students);
