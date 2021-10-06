@@ -14,6 +14,13 @@ $totalStudent = query("SELECT * FROM tb_student");
 $class = query("SELECT * FROM tb_class");
 ?>
 
+<!-- welcome user  -->
+<div class="row">
+  <div class="col-6">
+    <h3>Welcome Back '<span class="text-primary"><b><?= $users["first_name"] . " " . $users["last_name"] ?></b></span>'</h3>
+  </div>
+</div>
+<!-- end welcome user  -->
 
 <!-- Start Card  -->
 <div class="row mb-4">
