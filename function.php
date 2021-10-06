@@ -373,7 +373,9 @@ function edit_class($data)
 //function search_student
 function search_student($keyword)
 {
-  $query = "SELECT * FROM tb_student WHERE
+  $query = "SELECT * FROM tb_class 
+  RIGHT JOIN tb_student 
+  ON tb_student.class_id = tb_class.id WHERE
           student_name LIKE '%$keyword%' OR
           student_age LIKE '%$keyword%' OR
           student_gender LIKE '%$keyword%'

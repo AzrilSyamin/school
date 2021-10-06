@@ -2,7 +2,7 @@
 <?php
 
 $students = query("SELECT * FROM tb_class 
-JOIN tb_student 
+RIGHT JOIN tb_student 
 ON tb_student.class_id = tb_class.id");
 
 if (isset($_POST["search"])) {
@@ -12,20 +12,21 @@ if (isset($_POST["search"])) {
 }
 ?>
 
+<!-- search form  -->
 <div class="row">
     <div class="col-12">
-        <div class="form-group">
-            <form action="" method="post" class="row">
-                <div class="col-8 col-md-10">
-                    <input type="text" class="form-control" name="searchbox" autocomplete="off">
+        <form action="" method="post">
+            <div class="input-group mb-3 shadow">
+                <input type="text" class="form-control" name="searchbox" autocomplete="off">
+                <div class="input-group-append">
+                    <button class="btn btn-warning border-dark" type="submit" name="search">Search</button>
                 </div>
-                <div class="col-1 col-md-2">
-                    <button type="submit" class="btn text-white" style="background-color: midnightblue;" name="search">Search</button>
-                </div>
-            </form>
-        </div>
+            </div>
+        </form>
     </div>
 </div>
+<!-- end search form  -->
+
 <!-- Page Heading -->
 <div class="row">
     <div class="col-12">

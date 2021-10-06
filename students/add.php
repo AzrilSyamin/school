@@ -39,7 +39,7 @@ if (isset($_POST["submit"])) {
             <div class="form-group">
                 <label for="age">Age</label>
                 <select name="age" id="age" class="form-control">
-                    <option selected>Choose...</option>
+                    <option selected value="">Choose...</option>
                     <?php
                     $levels = query("SELECT * FROM tb_stages");
                     foreach ($levels as $level) : ?>
@@ -51,7 +51,7 @@ if (isset($_POST["submit"])) {
             <div class="form-group">
                 <label for="gender">Gender</label>
                 <select name="gender" id="gender" class="form-control">
-                    <option selected>Choose...</option>
+                    <option selected value="">Choose...</option>
                     <?php
                     $gender = query("SELECT * FROM tb_gender");
                     foreach ($gender as $gen) {
