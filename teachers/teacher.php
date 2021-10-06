@@ -18,7 +18,7 @@ ON tb_user.role_id = tb_role.role_id
                     </div>
                     <div class="col-12 col-md-6">
                         <?php if (isset($_SESSION["admin"])) { ?>
-                            <a href="add.php" class="btn btn-success" style="float:right;"><i class="fas fa-fw fa-plus-circle"></i> Add New Teachers</a>
+                            <a href="add.php" class="btn btn-success float-sm-right"><i class="fas fa-fw fa-plus-circle"></i> Add New Teachers</a>
                         <?php } ?>
                     </div>
                 </div>

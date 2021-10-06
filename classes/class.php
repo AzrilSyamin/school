@@ -15,7 +15,7 @@ $classes = query("SELECT * FROM tb_class");
                         <h4>List Of Class</h4>
                     </div>
                     <div class="col-12 col-sm-6">
-                        <a href="add.php" class="btn btn-success" style="float:right;"><i class="fas fa-fw fa-plus-circle"></i> Add New Class</a>
+                        <a href="add.php" class="btn btn-success float-md-right"><i class="fas fa-fw fa-plus-circle"></i> Add New Class</a>
                     </div>
                 </div>
             </div>
@@ -35,7 +35,7 @@ $classes = query("SELECT * FROM tb_class");
                             <tr>
                                 <th scope="row"><?= $i++; ?></th>
                                 <td><?= $class["class_name"]; ?></td>
-                                
+
                                 <td>
                                     <a class="badge badge-warning" href="edit.php?id=<?= $class["id"]; ?>"><i class="fas fa-edit"></i></a>
                                     <?php if (isset($_SESSION["admin"])) { ?>

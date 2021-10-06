@@ -26,10 +26,12 @@ if (isset($_POST["submit"])) {
 
 <!-- Page Heading -->
 <div class="row">
+    <div class="col-12 mb-3">
+        <a href="student.php" class="btn btn-primary mb-3"><i class="fas fa-backward"></i> Back</a>
+    </div>
     <!-- Awal Form  -->
     <div class="col-12 col-md-6 p-4 shadow">
         <h4>Add New Students</h4>
-        <a href="student.php" class="btn btn-primary mb-3"><i class="fas fa-backward"></i> Back</a>
         <form action="" method="POST">
             <div class="form-group">
                 <label for="name">Nama</label>

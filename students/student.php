@@ -38,7 +38,7 @@ if (isset($_POST["search"])) {
                         <h4>List Of Students</h4>
                     </div>
                     <div class="col-12 col-sm-6">
-                        <a href="add.php" class="btn btn-success" style="float: right;"><i class="fas fa-fw fa-plus-circle"></i> Add New Students</a>
+                        <a href="add.php" class="btn btn-success float-md-right"><i class="fas fa-fw fa-plus-circle"></i> Add New Students</a>
                     </div>
                 </div>
             </div>

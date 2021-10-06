@@ -30,10 +30,12 @@ if (isset($_POST["submit"])) {
 
 <!-- Page Heading -->
 <div class="row">
+  <div class="col-12 mb-3">
+    <a href="subject.php" class="btn btn-primary"><i class="fas fa-backward"></i> Back</a>
+  </div>
   <!-- Awal Form  -->
   <div class="col-12 col-md-6 p-4 shadow">
     <h4>Edit Subjects</h4>
-    <a href="subject.php" class="btn btn-primary"><i class="fas fa-backward"></i> Back</a>
     <form action="" method="POST">
       <div class="form-group">
         <input type="hidden" class="form-control" name="id" id="id " value="<?= $subjects["id"]; ?>" required>

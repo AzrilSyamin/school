@@ -31,10 +31,12 @@ if (isset($_POST["submit"])) {
 
 <!-- Page Heading -->
 <div class="row">
+  <div class="col-12 mb-3">
+    <a href="class.php" class="btn btn-primary"><i class="fas fa-backward"></i> Back</a>
+  </div>
   <!-- Awal Form  -->
   <div class="col-12 col-md-6 p-4 shadow">
     <h4>Edit Class</h4>
-    <a href="class.php" class="btn btn-primary"><i class="fas fa-backward"></i> Back</a>
     <form action="" method="POST">
       <div class="form-group">
         <input type="hidden" class="form-control" name="id" id="id " value="<?= $class["id"]; ?>" required>
@@ -44,7 +46,7 @@ if (isset($_POST["submit"])) {
         <label for="class">Class Name :</label>
         <input type="text" class="form-control" name="class" id="class " value="<?= $class["class_name"]; ?>" autofocus required>
       </div>
-      
+
 
       <button type="submit" class="btn btn-success m-2" style="float:right;" name="submit"><i class="fas fa-save"></i> Save Changes</button>
       <button type="reset" class="btn btn-warning m-2" style="float: right;"><i class="fas fa-redo-alt"></i> Reset</button>

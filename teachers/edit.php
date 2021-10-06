@@ -36,10 +36,12 @@ if (isset($_POST["submit"])) {
 ?>
 <!-- Page Heading -->
 <div class="row">
+  <div class="col-12 mb-3">
+    <a href="teacher.php" class="btn btn-primary"><i class="fas fa-backward"></i> Back</a>
+  </div>
   <!-- Awal Form  -->
   <div class="col-12 col-md-6 p-4 shadow">
     <h4>Edit Teachers</h4>
-    <a href="teacher.php" class="btn btn-primary"><i class="fas fa-backward"></i> Back</a>
     <form action="" method="POST" enctype="multipart/form-data">
 
       <div class="form-group mt-2">
@@ -89,12 +91,12 @@ if (isset($_POST["submit"])) {
         <label for="phone_number">Phone Number</label>
         <input type="number" class="form-control" name="phone_number" id="phone_number" value="<?= $user["phone_number"]; ?>">
       </div>
-      
+
       <div class="form-group">
         <label for="address">Address</label>
         <input type="text" class="form-control" name="address" id="address" value="<?= $user["address"]; ?>">
       </div>
-      
+
 
       <div class="form-group">
         <label for="password1">Password</label>
