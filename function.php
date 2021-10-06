@@ -1,12 +1,8 @@
 <?php
 session_start();
+require "config.php";
 
-$host = "localhost";
-$user = "root";
-$pass = "";
-$db = "db_sekolah";
-
-$con = mysqli_connect($host, $user, $pass, $db);
+$con = mysqli_connect($host, $user, $pass, $db) or die(mysqli_error($con));
 
 
 
