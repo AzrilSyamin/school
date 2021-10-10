@@ -16,7 +16,7 @@ $class = query("SELECT * FROM tb_class");
 
 <!-- welcome user  -->
 <div class="row">
-  <div class="col-6">
+  <div class="col-12 text-center">
     <h3>Welcome Back '<span class="text-primary"><b><?= $users["first_name"] . " " . $users["last_name"] ?></b></span>'</h3>
   </div>
 </div>
