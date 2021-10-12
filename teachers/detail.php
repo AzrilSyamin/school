@@ -27,12 +27,12 @@ $detail = mysqli_fetch_assoc($details);
       </div>
       <ul class="list-group list-group-flush">
         <li class="list-group-item"><img src="../img/<?= $detail["picture"]; ?>" alt="" width="40px"></li>
-        <li class="list-group-item"><?= $detail["first_name"] . " " . $detail["last_name"] ?></li>
-        <li class="list-group-item"><?= $detail["age"]; ?></li>
-        <li class="list-group-item"><?= $detail["gender"]; ?></li>
-        <li class="list-group-item"><?= $detail["email"]; ?></li>
-        <li class="list-group-item"><?= $detail["phone_number"]; ?></li>
-        <li class="list-group-item"><?= $detail["address"]; ?></li>
+        <li class="list-group-item"><b>Name: </b> <?= $detail["first_name"] . " " . $detail["last_name"] ?></li>
+        <li class="list-group-item"><b>Age: </b><?= $detail["age"]; ?></li>
+        <li class="list-group-item"><b>Gender: </b><?= $detail["gender"]; ?></li>
+        <li class="list-group-item"><b>Email: </b><?= $detail["email"]; ?></li>
+        <li class="list-group-item"><b>Phone Number: </b><?= $detail["phone_number"]; ?></li>
+        <li class="list-group-item"><b>Address: </b><?= $detail["address"]; ?></li>
       </ul>
     </div>
   </div>

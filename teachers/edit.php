@@ -111,34 +111,28 @@ if (isset($_POST["submit"])) {
       <div class="form-group">
         <label for="is_active">Status *</label><br>
         <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="is_active" id="is_active" value="1" <?php if ($user["is_active"] == 1) {
-                                                                                                    echo "checked";
-                                                                                                  } ?>>
+          <input class="form-check-input" type="radio" name="is_active" id="is_active" value="1" <?= $user["is_active"] == 1 ? "checked" : null ?>>
           <label class="form-check-label" for="Radio1">Active</label>
         </div>
         <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="is_active" id="is_active" value="0" <?php if ($user["is_active"] == 0) {
-                                                                                                    echo "checked";
-                                                                                                  } ?>>
+          <input class="form-check-input" type="radio" name="is_active" id="is_active" value="0" <?= $user["is_active"] == 0 ? "checked" : null ?> >
           <label class="form-check-label" for="Radio0">Non Active</label>
         </div>
       </div>
 
       <div class="form-group">
-        <label for="role_id">Role *</label><br>
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="role_id" id="role_id" value="1" <?php if ($user["role_id"] == 1) {
-                                                                                                echo "checked";
-                                                                                              } ?>>
-          <label class="form-check-label" for="Radio1">Admin</label>
-        </div>
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="role_id" id="role_id" value="2" <?php if ($user["role_id"] == 2) {
-                                                                                                echo "checked";
-                                                                                              } ?>>
-          <label class="form-check-label" for="Radio2">Moderator</label>
-        </div>
-      </div>
+    <label for="role_id">Role *</label>
+    <select class="form-control" id="Role" name="role_id">
+      <option value="">Choose..</option>
+      <?php 
+      $roleses = query("SELECT * FROM tb_role");
+      foreach ($roleses as $role):
+        $selected = $role["role_id"] == $user["role_id"] ? "selected" : null;
+      ?>
+      <option value="<?= $role["role_id"]?>" <?= $selected ?>><?= $role["role_name"] ?></option>
+      <?php endforeach; ?>
+    </select>
+  </div>
 
       <div class=" form-group">
         <label for="picture">Profile Picture</label>

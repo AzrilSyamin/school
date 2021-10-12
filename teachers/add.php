@@ -43,13 +43,13 @@ if (isset($_POST["submit"])) {
         <form action="" method="POST">
 
             <div class="form-group">
-                <label for="name">First Name *</label>
-                <input type="text" class="form-control" name="first_name" id="name" autofocus required>
+                <label for="first_name">First Name *</label>
+                <input type="text" class="form-control" name="first_name" id="first_name" autofocus required>
             </div>
 
             <div class="form-group">
-                <label for="name">Last Name</label>
-                <input type="text" class="form-control" name="last_name" id="name">
+                <label for="last_name">Last Name</label>
+                <input type="text" class="form-control" name="last_name" id="last_name">
             </div>
 
             <div class="form-group">
@@ -95,15 +95,18 @@ if (isset($_POST["submit"])) {
                 <label for="password2">Comfirm Password *</label>
                 <input type="password" class="form-control" name="password2" id="password2">
             </div>
-
-            <div class="form-group">
-                <label for="status">Status *</label>
-                <select name="status" id="status" class="form-control" required>
-                    <option value="">Choose...</option>
-                    <option value="1">Active</option>
-                    <option value="0">Non Active</option>
-                </select>
-            </div>
+            
+      <div class="form-group">
+        <label for="status">Status *</label><br>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="status" id="status" value="1" >
+          <label class="form-check-label" for="Radio1">Active</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="status" id="status" value="0" checked>
+          <label class="form-check-label" for="Radio0">Non Active</label>
+        </div>
+      </div>
 
             <div class=" form-group">
                 <label for="picture">Profile Picture</label>
