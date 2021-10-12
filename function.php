@@ -341,10 +341,11 @@ function add_class($data)
 {
   global $con;
   $class = htmlspecialchars($data["class"]);
+  $teacher = htmlspecialchars(implode(",", ($data["teacher_id"])));
 
 
   $query = "INSERT INTO tb_class VALUE
-  (null,'$class' )";
+  (null,'$class','$teacher' )";
 
   mysqli_query($con, $query) or die(mysqli_error($con));
   return mysqli_affected_rows($con);
@@ -358,10 +359,12 @@ function edit_class($data)
   global $con;
   $id = $data["id"];
   $class = htmlspecialchars($data["class"]);
+  $teacher = htmlspecialchars(implode(",", ($data["teacher_id"])));
 
 
   $query = "UPDATE tb_class SET
-  class_name = '$class'
+  class_name = '$class',
+  teacher_id = '$teacher'
   WHERE id = $id ";
 
   mysqli_query($con, $query) or die(mysqli_error($con));
@@ -484,6 +487,7 @@ function register($data)
    CREATE TABLE IF NOT EXISTS tb_class(
      `id` INT AUTO_INCREMENT,
      `class_name` VARCHAR(200),
+     `teacher_id` VARCHAR(300),
      PRIMARY KEY (`id`)
   )";
   mysqli_query($con, $createTbKelas);

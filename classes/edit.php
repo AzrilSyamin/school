@@ -4,6 +4,9 @@
 $id = $_GET["id"];
 $class = query("SELECT * FROM tb_class WHERE id = $id")[0];
 
+$tea = query("SELECT * FROM tb_user");
+$data = explode(",", $class["teacher_id"]);
+
 
 if (isset($_POST["submit"])) {
   if (edit_class($_POST) > 0) {
@@ -43,10 +46,24 @@ if (isset($_POST["submit"])) {
       </div>
 
       <div class="form-group">
-        <label for="class">Class Name :</label>
+        <label for="class">Class Name </label>
         <input type="text" class="form-control" name="class" id="class " value="<?= $class["class_name"]; ?>" autofocus required>
       </div>
 
+<div>
+  <label>Teachers</label>
+              <?php 
+              $teachers = query("SELECT * FROM tb_user");
+              foreach($teachers as $teacher):
+              ?>
+           <div class="form-check">
+  <label class="form-check-label">
+    <input name="teacher_id[]" class="form-check-input" type="checkbox" value="<?= $teacher["id"]?>" <?php in_array($teacher["id"], $data) ? print "checked" : null ?>>
+    <?= $teacher["first_name"]." ".$teacher["last_name"]?>
+  </label>
+</div>
+<?php endforeach;?>
+</div>
 
       <button type="submit" class="btn btn-success m-2" style="float:right;" name="submit"><i class="fas fa-save"></i> Save Changes</button>
       <button type="reset" class="btn btn-warning m-2" style="float: right;"><i class="fas fa-redo-alt"></i> Reset</button>

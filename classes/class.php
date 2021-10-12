@@ -2,6 +2,7 @@
 <?php
 
 $classes = query("SELECT * FROM tb_class");
+
 ?>
 
 <!-- Page Heading -->
@@ -27,6 +28,7 @@ $classes = query("SELECT * FROM tb_class");
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Class Name</th>
+                            <th scope="col">Teacher Name</th>
                             <th scope="col">Action</th>
                     </thead>
                     <tbody>
@@ -35,6 +37,17 @@ $classes = query("SELECT * FROM tb_class");
                             <tr>
                                 <th scope="row"><?= $i++; ?></th>
                                 <td><?= $class["class_name"]; ?></td>
+                                <td>
+                                  <?php
+                                  $data = explode(",", $class["teacher_id"]);
+                                  $teachers = query("SELECT * FROM tb_user");
+                                  foreach($teachers as $teacher):
+                                  ?>
+                                  <li class="list-unstyled"> <?php
+                      in_array($teacher["id"], $data) ? print "#"." ". $teacher["first_name"]." ".$teacher["last_name"]: null ?>
+                                </li>
+                                <?php endforeach;?>
+                                </td>
 
                                 <td>
                                     <a class="badge badge-warning" href="edit.php?id=<?= $class["id"]; ?>"><i class="fas fa-edit"></i></a>
