@@ -132,13 +132,11 @@ $class = query("SELECT * FROM tb_class");
             <td><?= $student["stages_age"]; ?></td>
             <td>
               <?php
-              $teachers = query("SELECT * FROM tb_user
-              JOIN tb_class_teacher
-              ON tb_user.id = tb_class_teacher.teacher_id
-              WHERE class_id = '$student[class_id]'");
+              $data = explode(",", $student["teacher_id"]);
+              $teachers = query("SELECT * FROM tb_user");
               foreach ($teachers as $teacher) :
               ?>
-                <li class="list-unstyled"><?= $teacher["first_name"] . " " . $teacher["last_name"]; ?></li>
+                <li class="list-unstyled"><?php in_array($teacher["id"], $data) ? print "#" . " " . $teacher["first_name"] . " " . $teacher["last_name"] : null ?></li>
               <?php endforeach; ?>
             </td>
             <td>
