@@ -1,7 +1,9 @@
 <?php include_once "../_header.php"; ?>
 <?php
 
-$subjects = query("SELECT * FROM tb_subjects");
+$subjects = query("SELECT * FROM tb_user
+RIGHT JOIN tb_subjects
+ ON tb_user.id = tb_subjects.teacher_id");
 ?>
 
 <!-- Page Heading -->
@@ -27,6 +29,7 @@ $subjects = query("SELECT * FROM tb_subjects");
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Subjects Name</th>
+                            <th scope="col">Teacher Name</th>
                             <th scope="col">Action</th>
                     </thead>
                     <tbody>
@@ -35,6 +38,7 @@ $subjects = query("SELECT * FROM tb_subjects");
                             <tr>
                                 <th scope="row"><?= $i++; ?></th>
                                 <td><?= $subject["subjects_name"]; ?></td>
+                                <td><?= $subject["first_name"] . " " . $subject["last_name"] ?></td>
                                 <td>
                                     <a class="badge badge-warning" href="edit.php?id=<?= $subject["id"]; ?>"><i class="fas fa-edit"></i></a>
                                     <?php if (isset($_SESSION["admin"])) { ?>

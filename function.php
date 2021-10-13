@@ -268,9 +268,10 @@ function add_subjects($data)
 {
   global $con;
   $subjects = htmlspecialchars($data["subjects"]);
+  $teacher = htmlspecialchars($data["teacher"]);
 
   $query = "INSERT INTO tb_subjects VALUE
-  (NULL, '$subjects')";
+  (NULL, '$subjects', '$teacher')";
 
   mysqli_query($con, $query) or die(mysqli_error($con));
   return mysqli_affected_rows($con);
@@ -284,9 +285,11 @@ function edit_subjects($data)
   global $con;
   $id = $data["id"];
   $subjects = htmlspecialchars($data["subjects"]);
+  $teacher = htmlspecialchars($data["teacher"]);
 
   $query = "UPDATE tb_subjects SET
-  subjects_name = '$subjects'
+  subjects_name = '$subjects',
+  teacher_id = '$teacher'
   WHERE id = $id ";
 
   mysqli_query($con, $query) or die(mysqli_error($con));

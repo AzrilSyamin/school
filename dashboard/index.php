@@ -141,13 +141,11 @@ $class = query("SELECT * FROM tb_class");
             </td>
             <td>
               <?php
-              $subjectsList = query("SELECT * FROM tb_subjects
-            JOIN tb_class_subjects
-            ON tb_subjects.id = tb_class_subjects.subjects_id
-            WHERE class_id = '$student[class_id]'");
+              $data = explode(",", $student["teacher_id"]);
+              $subjectsList = query("SELECT * FROM tb_subjects");
               foreach ($subjectsList as $subjects) :
               ?>
-                <li class="list-unstyled"><?= $subjects["subjects_name"]; ?></li>
+                <li class="list-unstyled"><?php in_array($subjects["teacher_id"], $data) ? print "#" . " " . $subjects["subjects_name"] : null ?></li>
               <?php endforeach; ?>
             </td>
           </tr>

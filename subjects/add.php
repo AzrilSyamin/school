@@ -38,6 +38,19 @@ if (isset($_POST["submit"])) {
         <input type="text" class="form-control" name="subjects" id="subjects " autofocus required>
       </div>
 
+      <div class="form-group">
+        <label for="teacher">Teacher</label>
+        <select class="form-control" id="teacher" name="teacher">
+          <option value="">Choose...</option>
+          <?php
+          $teachers = query("SELECT * FROM tb_user");
+          foreach ($teachers as $teacher) :
+          ?>
+            <option value="<?= $teacher["id"]; ?>"><?= $teacher["first_name"] . " " . $teacher["last_name"] ?></option>
+          <?php endforeach; ?>
+        </select>
+      </div>
+
       <button type="submit" class="btn btn-success m-2" style="float: right;" name="submit"><i class="fas fa-fw fa-plus-circle"></i> Add New Subject</button>
       <button type="reset" class="btn btn-warning m-2" style="float: right;"><i class="fas fa-redo-alt"></i> Reset</button>
     </form>
