@@ -43,6 +43,7 @@ function add_teachers($data)
   $age = htmlspecialchars($data["age"]);
   $gender = htmlspecialchars($data["gender"]);
   $email = htmlspecialchars($data["email"]);
+  $username = null;
   $phone = htmlspecialchars($data["phone_number"]);
   $address = htmlspecialchars($data["address"]);
   $password = htmlspecialchars($data["password1"]);
@@ -90,7 +91,7 @@ function add_teachers($data)
   $password = password_hash($password, PASSWORD_DEFAULT);
 
   $query = "INSERT INTO tb_user VALUE
-  (NULL, '$first_name','$last_name', '$age', '$gender', '$email', '$phone', '$address',  '$password', '$picture', '$role_id', '$is_active')";
+  (NULL, '$first_name','$last_name', '$age', '$gender', '$email','$username', '$phone', '$address',  '$password', '$picture', '$role_id', '$is_active')";
 
   mysqli_query($con, $query) or die(mysqli_error($con));
   return mysqli_affected_rows($con);
@@ -106,6 +107,7 @@ function edit_teachers($data)
   $first_name = htmlspecialchars($data["first_name"]);
   $last_name = htmlspecialchars($data["last_name"]);
   $email = htmlspecialchars($data["email"]);
+  $username = htmlspecialchars($data["username"]);
   $phone = htmlspecialchars($data["phone_number"]);
   $address = htmlspecialchars($data["address"]);
   $age = htmlspecialchars($data["age"]);
@@ -129,6 +131,45 @@ function edit_teachers($data)
     $name_picture = $data_pic["picture"];
   } else {
     move_uploaded_file($sumber, $folder . $name_picture);
+  }
+
+  if ($username !== $data["oldusername"]) {
+    $fetchUsername = mysqli_query($con, "SELECT * FROM tb_user WHERE username = '$username'");
+    // $fetchEmail = mysqli_query($con, "SELECT * FROM tb_user WHERE email = '$email'");
+
+    if (mysqli_fetch_assoc($fetchUsername)) {
+      echo "
+      <div class=\"row\">
+        <div class=\"col-12 col-md-6\">
+          <div class=\"alert alert-danger alert-dismissible fade show pb-0\" role=\"alert\">
+            <p>Username Is Already Exist !</p>
+            <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
+              <span aria-hidden=\"true\">&times;</span>
+            </button>
+          </div>
+        </div>
+      </div>";
+      return false;
+    }
+  }
+
+  if ($email !== $data["oldemail"]) {
+    $fetchEmail = mysqli_query($con, "SELECT * FROM tb_user WHERE email = '$email'");
+
+    if (mysqli_fetch_assoc($fetchEmail)) {
+      echo  "
+      <div class=\"row\">
+        <div class=\"col-12 col-md-6\">
+          <div class=\"alert alert-danger alert-dismissible fade show pb-0\" role=\"alert\">
+            <p>Email Is Already Exist !</p>
+            <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
+              <span aria-hidden=\"true\">&times;</span>
+            </button>
+          </div>
+        </div>
+      </div>";
+      return false;
+    }
   }
 
   //password
@@ -163,6 +204,7 @@ function edit_teachers($data)
   age = '$age',
   gender = '$gender',
   email = '$email',
+  username = '$username',
   phone_number = '$phone',
   address = '$address',
   password = '$password', 
@@ -398,6 +440,7 @@ function register($data)
   $first_name = htmlspecialchars($data["first_name"]);
   $last_name = htmlspecialchars($data["last_name"]);
   $email = htmlspecialchars($data["email"]);
+  $username = htmlspecialchars($data["username"]);
   @$phone = htmlspecialchars($data["phone_number"]);
   @$address = htmlspecialchars($data["address"]);
   $password = htmlspecialchars($data["password"]);
@@ -415,6 +458,7 @@ function register($data)
      `age` VARCHAR(3),
      `gender` VARCHAR(200),
      `email` VARCHAR(200),
+     `username` VARCHAR(200),
      `phone_number` VARCHAR(12),
      `address` VARCHAR(300),
      `password` VARCHAR(200),
@@ -531,6 +575,7 @@ function register($data)
  CREATE TABLE IF NOT EXISTS tb_subjects(
    `id` INT AUTO_INCREMENT,
    `subjects_name` VARCHAR(200),
+   `teacher_id` VARCHAR(300),
    PRIMARY KEY (`id`))";
   mysqli_query($con, $create);
   // akhir create tb_subjects
@@ -548,13 +593,26 @@ function register($data)
   mysqli_query($con, $create);
   // end create tb_student 
 
-  $result = mysqli_query($con, "SELECT * FROM tb_user WHERE email = '$email'");
+  $fetchUsername = mysqli_query($con, "SELECT * FROM tb_user WHERE username = '$username'");
+  $fetchEmail = mysqli_query($con, "SELECT * FROM tb_user WHERE email = '$email'");
 
-  if (mysqli_fetch_assoc($result)) {
+  if (mysqli_fetch_assoc($fetchUsername)) {
 
     echo  "<div class=\"register-box\">
     <div class=\"alert alert-danger alert-dismissible fade show pb-0\" role=\"alert\">
-        <p>Email Is Already Registered !</p>
+        <p>Username Is Already Exist !</p>
+        <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
+          <span aria-hidden=\"true\">&times;</span>
+        </button>
+      </div>
+      </div>";
+    return false;
+  }
+
+  if (mysqli_fetch_assoc($fetchEmail)) {
+    echo  "<div class=\"register-box\">
+    <div class=\"alert alert-danger alert-dismissible fade show pb-0\" role=\"alert\">
+        <p>Email Is Already Exist !</p>
         <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
           <span aria-hidden=\"true\">&times;</span>
         </button>
@@ -578,7 +636,7 @@ function register($data)
 
   $password = password_hash($password, PASSWORD_DEFAULT);
   $query = "INSERT INTO tb_user VALUE 
-  (null, '$first_name','$last_name', null, null, '$email', '$phone', '$address', '$password','$picture', '$role_id', '$is_active')";
+  (null, '$first_name','$last_name', null, null, '$email','$username', '$phone', '$address', '$password','$picture', '$role_id', '$is_active')";
 
   mysqli_query($con, $query) or die(mysqli_error($con));
   return mysqli_affected_rows($con);
@@ -593,7 +651,7 @@ function login($data)
   $email = htmlspecialchars($data["email"]);
   $password = htmlspecialchars($data["password"]);
 
-  $result = mysqli_query($con,  "SELECT * FROM tb_user WHERE email = '$email'");
+  $result = mysqli_query($con,  "SELECT * FROM tb_user WHERE email = '$email' || phone_number = '$email' || username = '$email'");
 
   if (mysqli_num_rows($result) === 1) {
 

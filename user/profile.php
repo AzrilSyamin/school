@@ -85,6 +85,11 @@ if (isset($_POST["submit"])) {
       </div>
 
       <div class="form-group">
+        <label for="username">Username</label>
+        <input type="username" class="form-control" name="username" id="username" value="<?= $data["username"]; ?>" readonly>
+      </div>
+
+      <div class="form-group">
         <label for="phone_number">Phone Number</label>
         <input type="number" class="form-control" name="phone_number" id="phone_number" value="<?= $data["phone_number"]; ?>">
       </div>
