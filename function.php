@@ -676,18 +676,7 @@ function login($data)
 
       $cek = mysqli_num_rows($result);
       if ($cek > 0) {
-        //if ($row["role_id"] == 1)
-        if ($role_id["role_name"] == "admin") {
-          $_SESSION["admin"] = $row["id"];
-          echo "<script>
-          window.location.href='/'
-          </script>";
-        } else if ($role_id["role_name"] == "moderator") {
-          $_SESSION["moderator"] = $row["id"];
-          echo "<script>
-          window.location.href='/'
-          </script>";
-        }
+        myRole($role_id["role_name"], $row["id"]);
       }
     } else {
       echo "
@@ -715,3 +704,28 @@ function login($data)
   }
 }
 //end function login
+
+//role management
+function myRole($role, $rowId)
+{
+  if ($role == "admin") {
+    $_SESSION["admin"] = $rowId;
+    $role = $_SESSION["admin"];
+    echo "<script>
+          window.location.href='/'
+          </script>";
+  } elseif ($role == "moderator") {
+    $_SESSION["moderator"] = $rowId;
+    $role = $_SESSION["moderator"];
+    echo "<script>
+          window.location.href='/moderator/'
+          </script>";
+  } elseif ($role == "member") {
+    $_SESSION["member"] = $rowId;
+    $role = $_SESSION["member"];
+    echo "<script>
+          window.location.href='/member/'
+          </script>";
+  }
+}
+// end role management
