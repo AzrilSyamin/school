@@ -21,19 +21,6 @@ function query($query)
 //end function login
 
 
-//function base_url
-function base_url($url = null)
-{
-  $base_url = '';
-  if ($url != null) {
-    return $base_url . "/" . $url;
-  } else {
-    return $base_url;
-  }
-}
-//end function base_url
-
-
 //function add_teachers
 function add_teachers($data)
 {
@@ -709,23 +696,55 @@ function login($data)
 function myRole($role, $rowId)
 {
   if ($role == "admin") {
-    $_SESSION["admin"] = $rowId;
-    $role = $_SESSION["admin"];
+    $_SESSION["admin"] = [
+      'name' => $role,
+      'roleid' => $rowId
+    ];
+    $myRole = $_SESSION["admin"];
     echo "<script>
           window.location.href='/'
           </script>";
+    return $myRole;
   } elseif ($role == "moderator") {
-    $_SESSION["moderator"] = $rowId;
-    $role = $_SESSION["moderator"];
+    $_SESSION["moderator"] = [
+      'name' => $role,
+      'roleid' => $rowId
+    ];
+    $myRole = $_SESSION["moderator"];
     echo "<script>
           window.location.href='/moderator/'
           </script>";
+    return $myRole;
   } elseif ($role == "member") {
-    $_SESSION["member"] = $rowId;
-    $role = $_SESSION["member"];
+    $_SESSION["member"] = [
+      'name' => $role,
+      'roleid' => $rowId
+    ];
+    $myRole = $_SESSION["member"];
     echo "<script>
           window.location.href='/member/'
           </script>";
+    return $myRole;
   }
 }
 // end role management
+
+function role()
+{
+  if (isset($_SESSION["admin"])) {
+    $login = $_SESSION["admin"];
+  } elseif (isset($_SESSION["moderator"])) {
+    $login = $_SESSION["moderator"];
+  } elseif (isset($_SESSION["member"])) {
+    $login = $_SESSION["member"];
+  }
+  return $login;
+}
+
+function roleProtect($role)
+{
+  if (role()["name"] == $role) {
+    $role = $_SESSION[$role]["name"];
+    return $role;
+  }
+}

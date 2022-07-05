@@ -1,16 +1,13 @@
 <?php require_once("function.php");
 
-if (isset($_SESSION["admin"])) {
-    $login = $_SESSION["admin"];
-} elseif (isset($_SESSION["moderator"])) {
-    $login = $_SESSION["moderator"];
+if (roleProtect("admin")) {
+    $login = role()["roleid"];
+} else {
+    echo "<script>
+      window.location='" . myUrl("auth/logout.php") . "'
+      </script>";
 }
 
-if (!isset($login)) {
-    echo "<script>
-  window.location='../auth/login.php'
-  </script>";
-}
 
 $query = mysqli_query($con, "SELECT * FROM tb_user WHERE id = '$login'");
 $users = mysqli_fetch_assoc($query);
