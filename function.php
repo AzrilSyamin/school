@@ -729,22 +729,8 @@ function myRole($role, $rowId)
 }
 // end role management
 
-function role()
-{
-  if (isset($_SESSION["admin"])) {
-    $login = $_SESSION["admin"];
-  } elseif (isset($_SESSION["moderator"])) {
-    $login = $_SESSION["moderator"];
-  } elseif (isset($_SESSION["member"])) {
-    $login = $_SESSION["member"];
-  }
-  return $login;
-}
 
-function roleProtect($role)
+function notFound($back = "")
 {
-  if (role()["name"] == $role) {
-    $role = $_SESSION[$role]["name"];
-    return $role;
-  }
+  echo '<p style="background-color:' . $back . ';">Not Content Available...</p>';
 }

@@ -1,16 +1,48 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php require_once "teacher-template/member-header.php"; ?>
+  <?php
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Member</title>
-</head>
-
-<body>
-  <h1>Welcome To Member Area</h1>
-
-</body>
-
-</html>
+  $page = @$_GET['page'];
+  $action = @$_GET['action'];
+  if ($page == "myprofile") {
+    require_once "user/profile.php";
+  } elseif ($page == "teachers") {
+    // teacher 
+    require_once "teachers/teacher.php";
+  } elseif ($page == "subjects") {
+    // subjects 
+    if ($action == "") {
+      require_once "subjects/subject.php";
+    } elseif ($action == "add") {
+      require_once "subjects/add.php";
+    } elseif ($action == "edit") {
+      require_once "subjects/edit.php";
+    } else {
+      notFound();
+    }
+  } elseif ($page == "students") {
+    // students 
+    if ($action == "") {
+      require_once "students/student.php";
+    } elseif ($action == "add") {
+      require_once "students/add.php";
+    } elseif ($action == "edit") {
+      require_once "students/edit.php";
+    } else {
+      notFound();
+    }
+  } elseif ($page == "classes") {
+    // classes 
+    if ($action == "") {
+      require_once "classes/class.php";
+    } elseif ($action == "add") {
+      require_once "classes/add.php";
+    } elseif ($action == "edit") {
+      require_once "classes/edit.php";
+    } else {
+      notFound();
+    }
+  } else {
+    notFound();
+  }
+  ?>
+<?php require_once "teacher-template/member-footer.php"; ?>

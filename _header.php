@@ -1,12 +1,24 @@
 <?php require_once("function.php");
 
-if (roleProtect("admin")) {
-    $login = role()["roleid"];
+if (isset($_SESSION["admin"])) {
+    $login = $_SESSION["admin"]["roleid"];
 } else {
-    echo "<script>
-      window.location='" . myUrl("auth/logout.php") . "'
-      </script>";
+    if (isset($_SESSION["moderator"])) {
+        echo "<script>
+          window.location.href='" . myUrl("moderator/") . "'
+          </script>";
+    } elseif (isset($_SESSION["member"])) {
+        echo "<script>
+          window.location.href='" . myUrl("member/") . "'
+          </script>";
+    } else {
+        echo "<script>
+          window.location.href='" . myUrl("auth/logout.php") . "'
+          </script>";
+    }
 }
+
+
 
 
 $query = mysqli_query($con, "SELECT * FROM tb_user WHERE id = '$login'");

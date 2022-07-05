@@ -1,3 +1,23 @@
+<?php
+require_once "../function.php";
+if (isset($_SESSION["moderator"])) {
+  $login = $_SESSION["moderator"]["roleid"];
+} else {
+  if (isset($_SESSION["admin"])) {
+    echo "<script>
+      window.location.href='" . myUrl("dashboard/") . "'
+      </script>";
+  } elseif (isset($_SESSION["member"])) {
+    echo "<script>
+      window.location.href='" . myUrl("member/") . "'
+      </script>";
+  } else {
+    echo "<script>
+      window.location.href='" . myUrl("auth/logout.php") . "'
+      </script>";
+  }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
