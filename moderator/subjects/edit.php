@@ -1,0 +1,66 @@
+<?php
+
+$id = $_GET["id"];
+$subjects = query("SELECT * FROM tb_subjects WHERE id = $id")[0];
+
+
+if (isset($_POST["submit"])) {
+  if (edit_subjects($_POST) > 0) {
+    echo "<script>
+      document.location.href='../subjects/subject.php';
+      </script>
+      ";
+  } else {
+    echo "
+    <div class=\"row\">
+      <div class=\"col-12 col-md-6\">
+        <div class=\"alert alert-danger alert-dismissible fade show pb-0\" role=\"alert\">
+          <p>Failed to Edit Subjects</p>
+          <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
+            <span aria-hidden=\"true\">&times;</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    ";
+  }
+}
+?>
+
+<!-- Page Heading -->
+<div class="row">
+  <div class="col-12 mb-3">
+    <a href="?page=subjects" class="btn btn-primary"><i class="fas fa-backward"></i> Back</a>
+  </div>
+  <!-- Awal Form  -->
+  <div class="col-12 col-md-6 p-4 shadow">
+    <h4>Edit Subjects</h4>
+    <form action="" method="POST">
+      <div class="form-group">
+        <input type="hidden" class="form-control" name="id" id="id " value="<?= $subjects["id"]; ?>" required>
+      </div>
+
+      <div class="form-group">
+        <label for="subjects">Subjects Name</label>
+        <input type="text" class="form-control" name="subjects" id="subjects " value="<?= $subjects["subjects_name"]; ?>" autofocus required>
+      </div>
+
+      <div class="form-group">
+        <label for="teacher">Teacher</label>
+        <select class="form-control" id="teacher" name="teacher">
+          <option value="">Choose...</option>
+          <?php
+          $teachers = query("SELECT * FROM tb_user");
+          foreach ($teachers as $teacher) :
+          ?>
+            <option value="<?= $teacher["id"]; ?>" <?php $subjects["teacher_id"] == $teacher["id"] ? print "selected" : null ?>><?= $teacher["first_name"] . " " . $teacher["last_name"] ?></option>
+          <?php endforeach; ?>
+        </select>
+      </div>
+
+      <button type="submit" class="btn btn-success m-2" style="float:right;" name="submit"><i class="fas fa-save"></i> Save Changes</button>
+      <button type="reset" class="btn btn-warning m-2" style="float: right;"><i class="fas fa-redo-alt"></i> Reset</button>
+    </form>
+  </div>
+  <!-- Akhir Form  -->
+</div>
