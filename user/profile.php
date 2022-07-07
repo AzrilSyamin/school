@@ -1,11 +1,5 @@
 <?php include_once("../_header.php");
 
-if (isset($_SESSION["admin"])) {
-  $login = $_SESSION["admin"];
-} elseif (isset($_SESSION["moderator"])) {
-  $login = $_SESSION["moderator"];
-}
-
 $query = mysqli_query($con, "SELECT * FROM tb_user 
                               JOIN tb_role 
                               ON tb_user.role_id = tb_role.role_id 
