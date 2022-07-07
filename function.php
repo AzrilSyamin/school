@@ -231,9 +231,11 @@ function edit_user($data)
 
 
   if (isset($_SESSION["admin"])) {
-    $login = $_SESSION["admin"];
+    $login = $_SESSION["admin"]["roleid"];
   } elseif (isset($_SESSION["moderator"])) {
-    $login = $_SESSION["moderator"];
+    $login = $_SESSION["moderator"]["roleid"];
+  } elseif (isset($_SESSION["member"])) {
+    $login = $_SESSION["member"]["roleid"];
   }
 
   $sql = mysqli_query($con, "SELECT * FROM tb_user WHERE id = '$login'");
