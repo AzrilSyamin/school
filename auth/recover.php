@@ -6,7 +6,7 @@ require "_headerauth.php";
   <div class="login-box">
     <div class="card card-outline card-primary">
       <div class="card-header text-center">
-        <a href="/" class="h1"><b>School</b> Data</a>
+        <a href="<?= myUrl() ?>" class="h1"><b>School</b> Data</a>
       </div>
       <div class="card-body">
         <p class="login-box-msg">You are only one step a way from your new password, recover your password now.</p>
@@ -36,7 +36,7 @@ require "_headerauth.php";
         </form>
 
         <p class="mt-3 mb-1">
-          <a href="login.php">Login</a>
+          <a href="<?= myUrl("auth/login.php") ?> ">Login</a>
         </p>
       </div>
       <!-- /.login-card-body -->

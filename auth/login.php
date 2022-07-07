@@ -12,7 +12,7 @@ if (isset($_POST["submit"])) {
     <!-- /.login-logo -->
     <div class="card card-outline card-primary">
       <div class="card-header text-center">
-        <a href="/" class="h1"><b>School</b> Data</a>
+        <a href="<?= myUrl() ?>" class="h1"><b>School</b> Data</a>
       </div>
       <div class="card-body">
         <p class="login-box-msg">Sign in to start your session</p>
@@ -62,10 +62,10 @@ if (isset($_POST["submit"])) {
         <!-- /.social-auth-links -->
 
         <p class="mb-1">
-          <a href="forget.php">I forgot my password</a>
+          <a href="<?= myUrl("auth/forget.php") ?>">I forgot my password</a>
         </p>
         <p class="mb-0">
-          <a href="reg.php" class="text-center">Register a new member</a>
+          <a href="<?= myUrl("auth/reg.php") ?>" class="text-center">Register a new member</a>
         </p>
       </div>
       <!-- /.card-body -->

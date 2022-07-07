@@ -5,7 +5,7 @@ if (isset($_POST["submit"])) {
   if (register($_POST) > 0) {
     echo "<script>
     alert('Register Success !');
-    window.location='/';
+    window.location='" . myUrl() . "';
     </script>";
   } else {
     $error = true;
@@ -25,7 +25,7 @@ if (isset($_POST["submit"])) {
     <?php endif; ?>
     <div class="card card-outline card-primary">
       <div class="card-header text-center">
-        <a href="/" class="h1"><b>School</b> Data</a>
+        <a href="<?= myUrl() ?>" class="h1"><b>School</b> Data</a>
       </div>
       <div class="card-body">
         <p class="login-box-msg">Register a new member</p>
@@ -110,7 +110,7 @@ if (isset($_POST["submit"])) {
           </a>
         </div> -->
 
-        <a href="login.php" class="text-center">I already have a member</a>
+        <a href="<?= myUrl("auth/login.php") ?> " class="text-center">I already have a member</a>
       </div>
       <!-- /.form-box -->
     </div><!-- /.card -->
