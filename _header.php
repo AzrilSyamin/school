@@ -42,11 +42,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="../_asset/plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="<?= myUrl("_asset/plugins/fontawesome-free/css/all.min.css") ?>">
     <!-- Theme style -->
-    <link rel="stylesheet" href="../_asset/dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="<?= myUrl("_asset/dist/css/adminlte.min.css") ?>">
 
-    <link rel="stylesheet" href="../_asset/dist/css/style.css">
+    <link rel="stylesheet" href="<?= myUrl("_asset/dist/css/style.css") ?>">
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -60,7 +60,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="/" class="nav-link">Home</a>
+                    <a href="<?= myUrl() ?>" class="nav-link">Home</a>
                 </li>
                 </li>
             </ul>
@@ -170,8 +170,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color: midnightblue;">
             <!-- Brand Logo -->
-            <a href="/" class="brand-link">
-                <img src="../_asset/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+            <a href="<?= myUrl() ?>" class="brand-link">
+                <img src="<?= myUrl("_asset/dist/img/AdminLTELogo.png") ?>" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
                 <span class="brand-text font-weight-light">School Data</span>
             </a>
 
@@ -180,10 +180,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="../img/<?= $users["picture"]; ?>" alt="User Image">
+                        <img src="<?= myUrl("img/") . $users["picture"]; ?>" alt="User Image">
                     </div>
                     <div class="info">
-                        <a href="../user/profile.php" class="d-block"><?= $users["first_name"]; ?> <?= $users["last_name"]; ?></a>
+                        <a href="<?= myUrl("user/profile.php") ?>" class="d-block"><?= $users["first_name"]; ?> <?= $users["last_name"]; ?></a>
                     </div>
                 </div>
 
@@ -194,28 +194,28 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
                         <li class="nav-item">
-                            <a href="/" class="nav-link">
+                            <a href="<?= myUrl() ?>" class="nav-link">
                                 <i class="fas fa-fw fa-tachometer-alt"></i>
                                 <p>Dashboard</p>
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a href="../teachers/teacher.php" class="nav-link">
+                            <a href=" <?= myUrl("teachers/teacher.php") ?>" class="nav-link">
                                 <i class="fas fa-fw fa-user-tie"></i>
                                 <p>Teachers</p>
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a href="../subjects/subject.php" class="nav-link">
+                            <a href="<?= myUrl("subjects/subject.php") ?>" class="nav-link">
                                 <i class="fas fa-fw fa-journal-whills"></i>
                                 <p>Subjects</p>
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a href="../students/student.php" class="nav-link">
+                            <a href="<?= myUrl("students/student.php") ?>" class="nav-link">
                                 <i class="fas fa-fw fa-users"></i>
                                 <p>Students</p>
                             </a>
@@ -223,14 +223,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
                         <li class="nav-item">
-                            <a href="../classes/class.php" class="nav-link">
+                            <a href="<?= myUrl("classes/class.php") ?>" class="nav-link">
                                 <i class="fas fa-fw fa-person-booth"></i>
                                 <p>Classes</p>
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a href="../auth/logout.php" class="nav-link">
+                            <a href="<?= myUrl("auth/logout.php") ?>" class="nav-link">
                                 <i class="fas fa-fw fa-sign-out-alt"></i>
                                 <p>Log Out</p>
                             </a>
