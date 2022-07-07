@@ -58,10 +58,10 @@ $data = mysqli_fetch_assoc($query);
           </div>
           <div class="col-sm-6 col-12 mt-md-3">
             <div class="row justify-content-center">
-              <a href="?page=myprofile" class="col-5 m-1 py-4 text-center border rounded-sm shadow btn">
+              <a href="<?= myUrl("moderator/index.php?page=") ?>myprofile" class="col-5 m-1 py-4 text-center border rounded-sm shadow btn">
                 <div class="row">
                   <div class="col-12">
-                    <img src="../../img/default.jpg" class="rounded" alt="teacher-icon">
+                    <img src="<?= myUrl("img/default.jpg") ?> " class="rounded" alt="teacher-icon">
                   </div>
                   <div class="col-12 mt-2">
                     <p>My Profile</p>
