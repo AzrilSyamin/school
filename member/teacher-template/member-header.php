@@ -54,11 +54,11 @@ if (isset($_SESSION["member"])) {
           </div>
           <div class="col-md-4 col-sm-12">
             <div class="list-group">
-              <a href="?page=myprofile" class="list-group-item list-group-item-action">My Profile</a>
-              <a href="?page=teachers" class="list-group-item list-group-item-action">Teachers</a>
-              <a href="?page=subjects" class="list-group-item list-group-item-action">Subjects</a>
-              <a href="?page=students" class="list-group-item list-group-item-action">Students</a>
-              <a href="?page=classes" class="list-group-item list-group-item-action">Classes</a>
+              <a href="<?= myUrl("member/index.php?page=") ?> myprofile" class="list-group-item list-group-item-action">My Profile</a>
+              <a href="<?= myUrl("member/index.php?page=") ?>teachers" class="list-group-item list-group-item-action">Teachers</a>
+              <a href="<?= myUrl("member/index.php?page=") ?>subjects" class="list-group-item list-group-item-action">Subjects</a>
+              <a href="<?= myUrl("member/index.php?page=") ?>students" class="list-group-item list-group-item-action">Students</a>
+              <a href="<?= myUrl("member/index.php?page=") ?>classes" class="list-group-item list-group-item-action">Classes</a>
               <a href="<?= myUrl("auth/logout.php") ?>" class="list-group-item list-group-item-action">Log Out</a>
             </div>
           </div>
