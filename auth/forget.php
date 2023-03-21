@@ -1,5 +1,5 @@
 <?php
-require "_headerauth.php";
+require_once "_headerauth.php";
 ?>
 
 <body class="hold-transition login-page">
@@ -34,4 +34,4 @@ require "_headerauth.php";
     </div>
   </div>
   <!-- /.login-box -->
-  <?php require "_footerauth.php"; ?>
+  <?php require_once "_footerauth.php"; ?>

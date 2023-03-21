@@ -1,4 +1,4 @@
-<?php require_once("function.php");
+<?php require_once "function.php";
 
 if (isset($_SESSION["admin"])) {
     $login = $_SESSION["admin"]["roleid"];

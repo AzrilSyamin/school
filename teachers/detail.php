@@ -1,5 +1,5 @@
 <?php
-require "../_header.php";
+require_once "../_header.php";
 
 if (!isset($_SESSION["admin"])) {
   echo "
@@ -39,4 +39,4 @@ $detail = mysqli_fetch_assoc($details);
 </div>
 
 
-<?php require "../_footer.php"; ?>
+<?php require_once "../_footer.php"; ?>

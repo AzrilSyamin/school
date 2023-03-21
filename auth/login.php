@@ -1,5 +1,5 @@
 <?php
-require "_headerauth.php";
+require_once "_headerauth.php";
 
 if (isset($_POST["submit"])) {
   !login($_POST);
@@ -73,4 +73,4 @@ if (isset($_POST["submit"])) {
     <!-- /.card -->
   </div>
   <!-- /.login-box -->
-  <?php require "_footerauth.php"; ?>
+  <?php require_once "_footerauth.php"; ?>

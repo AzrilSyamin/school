@@ -1,4 +1,4 @@
-<?php require "../_header.php";
+<?php require_once "../_header.php";
 
 $students = query("SELECT * FROM tb_student
 LEFT JOIN tb_class
@@ -156,4 +156,4 @@ $class = query("SELECT * FROM tb_class");
 </div>
 <!-- End DataTales Students -->
 
-<?php require "../_footer.php" ?>
+<?php require_once "../_footer.php" ?>
