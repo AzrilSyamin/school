@@ -15,7 +15,7 @@ function create_config()
   $code = "
     \$host = \"$host\";
     \$user = \"$user\";
-    \$password = \"$pass\";
+    \$pass = \"$pass\";
     \$db_name = \"$db_name\";
   ";
   fwrite($fh, $code);

@@ -1,5 +1,8 @@
 <?php
-echo "<h1>Ini file setup</h1>";
+$link = __DIR__ . "/config.php";
+if (file_exists($link)) {
+  header("location:index.html");
+}
 
 if (isset($_POST["setup"])) {
   require_once "create.php";
@@ -18,6 +21,7 @@ if (isset($_POST["setup"])) {
     $con = mysqli_connect($host, $user, $pass, $db_name) or die(mysqli_error($con));
     create_tabel();
     insert_table_data();
+    header("location:index.html");
   }
 }
 ?>
