@@ -4,7 +4,7 @@
 $host = "localhost";
 $user = "";
 $pass = "";
-$db = "";
+$db_name = "";
 
 //function base_url
 function myUrl($url = null)
