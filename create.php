@@ -179,3 +179,69 @@ function insert_table_data()
   (4, 'Class D')";
   mysqli_query($con, $insertTbKelas);
 }
+
+//function register
+function setup_step_two($data)
+{
+  global $con;
+  $first_name = htmlspecialchars($data["first_name"]);
+  $last_name = htmlspecialchars($data["last_name"]);
+  $email = htmlspecialchars($data["email"]);
+  $username = htmlspecialchars($data["username"]);
+  @$phone = htmlspecialchars($data["phone_number"]);
+  @$address = htmlspecialchars($data["address"]);
+  $password = htmlspecialchars($data["password"]);
+  $password2 = htmlspecialchars($data["password2"]);
+  $picture = "default.jpg";
+  $role_id = 1;
+  $is_active = 1;
+
+  $fetchUsername = mysqli_query($con, "SELECT * FROM tb_user WHERE username = '$username'");
+  $fetchEmail = mysqli_query($con, "SELECT * FROM tb_user WHERE email = '$email'");
+
+  if (mysqli_fetch_assoc($fetchUsername)) {
+
+    echo  "<div class=\"register-box\">
+    <div class=\"alert alert-danger alert-dismissible fade show pb-0\" role=\"alert\">
+        <p>Username Is Already Exist !</p>
+        <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
+          <span aria-hidden=\"true\">&times;</span>
+        </button>
+      </div>
+      </div>";
+    return false;
+  }
+
+  if (mysqli_fetch_assoc($fetchEmail)) {
+    echo  "<div class=\"register-box\">
+    <div class=\"alert alert-danger alert-dismissible fade show pb-0\" role=\"alert\">
+        <p>Email Is Already Exist !</p>
+        <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
+          <span aria-hidden=\"true\">&times;</span>
+        </button>
+      </div>
+      </div>";
+    return false;
+  }
+
+
+  if ($password !== $password2) {
+    echo  "<div class=\"register-box\">
+    <div class=\"alert alert-danger alert-dismissible fade show pb-0\" role=\"alert\">
+        <p>Passwords Do Not Match !</p>
+        <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
+          <span aria-hidden=\"true\">&times;</span>
+        </button>
+      </div>
+      </div>";
+    return false;
+  }
+
+  $password = password_hash($password, PASSWORD_DEFAULT);
+  $query = "INSERT INTO tb_user VALUE 
+  (null, '$first_name','$last_name', null, null, '$email','$username', '$phone', '$address', '$password','$picture', '$role_id', '$is_active')";
+
+  mysqli_query($con, $query) or die(mysqli_error($con));
+  return mysqli_affected_rows($con);
+}
+//end function register

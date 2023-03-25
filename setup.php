@@ -1,63 +1,54 @@
-<?php
-$link = __DIR__ . "/config.php";
-if (file_exists($link)) {
-  header("location:index.html");
-}
+<html lang="en">
 
-if (isset($_POST["setup"])) {
-  require_once "create.php";
-  create_config();
-  require_once "config.php";
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>School Data</title>
 
-  $con = mysqli_connect($host, $user, $pass);
-  if (!$con) {
-    echo "<p style=\"color:red;text-align:center\">Failed To Connect</p>" . mysqli_connect_error();
-  }
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="_asset/plugins/fontawesome-free/css/all.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="_asset/dist/css/adminlte.min.css">
 
-  $create_db = "CREATE DATABASE IF NOT EXISTS $db_name";
-  if (!mysqli_query($con, $create_db) === true) {
-    echo "<p style=\"color:red;text-align:center\">Failed To Create Database :</p>" . mysqli_error($con);
-  } else {
-    $con = mysqli_connect($host, $user, $pass, $db_name) or die(mysqli_error($con));
-    create_tabel();
-    insert_table_data();
-    header("location:index.html");
-  }
-}
-?>
+  <link rel="stylesheet" href="_asset/dist/css/style.css">
+  <style>
+    .white {
+      background-color: #FFFFFF;
+      margin-top: 80px;
+    }
 
-<form action="" method="post">
+    body {
+      background-color: #F0F0F1;
+    }
+  </style>
+</head>
 
-  <div>
-    <label>
-      Hostname
-      <input type="text" name="hostname">
-    </label>
+<body>
+  <div class="container">
+    <!-- create database  -->
+    <div class="row justify-content-center">
+      <div class="col-md-8 white p-3 shadow">
+
+        <?php
+        if ($_GET["step"] == null || $_GET["step"] == 1) {
+          require_once "create-data.php";
+        } elseif ($_GET["step"] == 2) {
+          require_once "create-user.php";
+        }
+        ?>
+
+      </div>
+    </div>
+
   </div>
-  <div>
-    <label>
-      Database Name
-      <input type="text" name="db_name">
-    </label>
-  </div>
-  <div>
-    <label>
-      Username
-      <input type="text" name="username">
-    </label>
-  </div>
-  <div>
-    <label>
-      Password
-      <input type="password" name="password">
-    </label>
-  </div>
-  <div>
-    <label>
-      Website URL
-      <input type="url" name="webUrl">
-    </label>
-  </div>
+  <!-- jQuery -->
+  <script src="_asset/plugins/jquery/jquery.min.js"></script>
+  <!-- Bootstrap 4 -->
+  <script src="_asset/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- AdminLTE App -->
+  <script src="_asset/dist/js/adminlte.min.js"></script>
+</body>
 
-  <button type="submit" name="setup">Next</button>
-</form>
+</html>
