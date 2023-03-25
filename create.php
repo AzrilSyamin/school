@@ -13,24 +13,28 @@ function create_config()
   fwrite($fh, $open);
 
   $code = "
-    \$host = \"$host\";
-    \$user = \"$user\";
-    \$pass = \"$pass\";
-    \$db_name = \"$db_name\";
+// rename this file to config.php
+// insert detail database connection
+\$host = \"$host\";
+\$user = \"$user\";
+\$pass = \"$pass\";
+\$db_name = \"$db_name\";
   ";
   fwrite($fh, $code);
 
   $code = "
-    function myUrl(\$url = null)
-      {
-        // \$base_url = 'http://localhost.test';
-        \$base_url = '$webUrl';
-        if (\$url != null) {
-          return \$base_url . \"/\" . \$url;
-        } else {
-          return \$base_url;
-        }
-  }";
+//function base_url
+function myUrl(\$url = null)
+{
+  // \$base_url = 'http://localhost.test';
+  \$base_url = '$webUrl';
+  if (\$url != null) {
+    return \$base_url . \"/\" . \$url;
+  } else {
+    return \$base_url;
+  }
+}
+//end function base_url";
   fwrite($fh, $code);
 
   fclose($fh);
