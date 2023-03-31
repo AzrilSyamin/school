@@ -32,7 +32,7 @@
       <div class="col-md-8 white p-3 shadow">
 
         <?php
-        if ($_GET["step"] == null || $_GET["step"] == 1) {
+        if (!isset($_GET["step"]) || $_GET["step"] == null || $_GET["step"] == 1) {
           require_once "create-data.php";
         } elseif ($_GET["step"] == 2) {
           require_once "create-user.php";

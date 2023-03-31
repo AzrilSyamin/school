@@ -21,19 +21,19 @@ if (mysqli_num_rows($check_users) > 0) {
 
   <div class="form-group col-md-6">
     <label for="firstname">First Name</label>
-    <input type="text" class="form-control" id="first_name" name="first_name" placeholder="First Name" required>
+    <input type="text" class="form-control" id="first_name" name="first_name" placeholder="First Name" value="<?= $_POST ? $_POST["first_name"] : null; ?>" required>
   </div>
   <div class="form-group col-md-6">
     <label for="lastname">Last Name</label>
-    <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Last Name" required>
+    <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Last Name" value="<?= $_POST ? $_POST["last_name"] : null; ?>" required>
   </div>
   <div class="form-group col-md-6">
     <label for="username">Username</label>
-    <input type="text" class="form-control" id="username" name="username" placeholder="Username" required>
+    <input type="text" class="form-control" id="username" name="username" placeholder="Username" value="<?= $_POST ? $_POST["username"] : null; ?>" required>
   </div>
   <div class="form-group col-md-6">
     <label for="email">Email address</label>
-    <input type="email" class="form-control" id="email" name="email" placeholder="example@gmail.com" required>
+    <input type="email" class="form-control" id="email" name="email" placeholder="example@gmail.com" value="<?= $_POST ? $_POST["email"] : null; ?>" required>
   </div>
   <div class="form-group col-md-6">
     <label for="password">Password</label>
