@@ -1,0 +1,78 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+    --dark-mode: selector;
+    --color-primary: #228260;
+    --color-primary-dark: #32BA83;
+}
+
+:root {
+    --primary: #228260;
+    --primary-dark: #32BA83;
+}
+
+::selection {
+    background: color-mix(in srgb, var(--primary) 30%, transparent);
+}
+
+@layer utilities {
+    .bg-blue-500,
+    .bg-blue-600,
+    .bg-blue-700,
+    .hover\:bg-blue-500:hover,
+    .hover\:bg-blue-600:hover,
+    .hover\:bg-blue-700:hover,
+    .active\:bg-blue-800:active {
+        background-color: var(--primary);
+    }
+
+    .dark .dark\:bg-blue-500,
+    .dark .dark\:bg-blue-600,
+    .dark .dark\:hover\:bg-blue-500:hover,
+    .dark .dark\:hover\:bg-blue-600:hover,
+    .dark .dark\:hover\:bg-blue-700:hover {
+        background-color: var(--primary-dark);
+    }
+
+    .text-blue-400,
+    .text-blue-500,
+    .text-blue-600,
+    .hover\:text-blue-400:hover,
+    .hover\:text-blue-500:hover,
+    .hover\:text-blue-600:hover {
+        color: var(--primary);
+    }
+
+    .dark .dark\:text-blue-400,
+    .dark .dark\:text-blue-500,
+    .dark .dark\:text-blue-600,
+    .dark .dark\:hover\:text-blue-400:hover,
+    .dark .dark\:hover\:text-blue-500:hover,
+    .dark .dark\:hover\:text-blue-600:hover {
+        color: var(--primary-dark);
+    }
+
+    .border-blue-100,
+    .border-blue-200,
+    .border-blue-500,
+    .border-blue-600,
+    .hover\:border-blue-500:hover {
+        border-color: color-mix(in srgb, var(--primary) 35%, white);
+    }
+
+    .dark .dark\:border-blue-500,
+    .dark .dark\:border-blue-800,
+    .dark .dark\:hover\:border-blue-800:hover {
+        border-color: color-mix(in srgb, var(--primary-dark) 45%, transparent);
+    }
+
+    .focus\:border-blue-500:focus {
+        border-color: var(--primary);
+    }
+
+    .dark .dark\:focus\:border-blue-500:focus {
+        border-color: var(--primary-dark);
+    }
+}
