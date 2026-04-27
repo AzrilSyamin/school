@@ -1,15 +1,18 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link, useForm } from '@inertiajs/react';
 import InputError from '@/Components/InputError';
-import { formatStudentId } from '@/utils/formatters';
+import { formatNric, formatStudentId, hasInvalidNricCharacters } from '@/utils/formatters';
+import { useState } from 'react';
 
 const inputClass = "w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800/60 dark:bg-slate-800/60 py-2.5 px-4 text-sm text-slate-900 dark:text-white placeholder-slate-500 outline-none transition-all duration-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20";
 const labelClass = "block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5";
 
 export default function Edit({ student, classrooms }) {
+    const [nricError, setNricError] = useState('');
     const { data, setData, put, processing, errors } = useForm({
         name: student.name,
         student_id: student.student_id || '',
+        nric: student.nric || '',
         email: student.email || '',
         age: student.age ?? '',
         gender: student.gender ?? '',
@@ -19,6 +22,15 @@ export default function Edit({ student, classrooms }) {
     const submit = (e) => {
         e.preventDefault();
         put(route('students.update', student.id));
+    };
+
+    const handleNricChange = (value) => {
+        setNricError(
+            hasInvalidNricCharacters(value)
+                ? 'NRIC hanya boleh mengandungi nombor dan dash (-).'
+                : ''
+        );
+        setData('nric', formatNric(value));
     };
 
     return (
@@ -80,6 +92,20 @@ export default function Edit({ student, classrooms }) {
                                 className={inputClass}
                             />
                             <InputError message={errors.email} className="mt-1.5 text-xs text-red-400" />
+                        </div>
+
+                        <div>
+                            <label htmlFor="nric" className={labelClass}>NRIC / Nombor IC (Pilihan)</label>
+                            <input
+                                id="nric"
+                                type="text"
+                                value={data.nric}
+                                onChange={(e) => handleNricChange(e.target.value)}
+                                className={inputClass}
+                                placeholder="Contoh: 010101-01-0101"
+                                inputMode="numeric"
+                            />
+                            <InputError message={nricError || errors.nric} className="mt-1.5 text-xs text-red-400" />
                         </div>
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">

@@ -37,6 +37,7 @@ Route::middleware('auth')->group(function () {
         Route::resource('courses', CourseController::class)->except(['show']);
         Route::resource('classrooms', ClassroomController::class);
         Route::resource('subjects', SubjectController::class);
+        Route::get('students/export/{format}', [StudentController::class, 'export'])->name('students.export');
         Route::resource('students', StudentController::class);
     });
 
@@ -57,6 +58,7 @@ Route::middleware('auth')->group(function () {
         Route::post('attendances', [AttendanceController::class, 'store'])->name('attendances.store');
         Route::get('attendances/show', [AttendanceController::class, 'show'])->name('attendances.show');
         Route::get('attendances/edit', [AttendanceController::class, 'edit'])->name('attendances.edit');
+        Route::get('attendances/export/{format}', [AttendanceController::class, 'export'])->name('attendances.export');
     });
 });
 

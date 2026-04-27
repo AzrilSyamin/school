@@ -28,6 +28,7 @@ class StudentTest extends TestCase
         $response = $this->actingAs($admin)->post('/students', [
             'name' => 'John Doe',
             'student_id' => 'S123',
+            'nric' => '010101-01-0101',
             'email' => 'john@example.com',
             'gender' => 'Lelaki',
             'age' => 20,
@@ -35,7 +36,10 @@ class StudentTest extends TestCase
         ]);
 
         $response->assertRedirect('/students');
-        $this->assertDatabaseHas('students', ['name' => 'John Doe']);
+        $this->assertDatabaseHas('students', [
+            'name' => 'John Doe',
+            'nric' => '010101-01-0101',
+        ]);
     }
 
     public function test_student_id_is_normalized_when_created(): void
@@ -76,6 +80,64 @@ class StudentTest extends TestCase
             'id' => $student->id,
             'student_id' => 'NEW456CD',
         ]);
+    }
+
+    public function test_nric_is_normalized_when_created(): void
+    {
+        $admin = User::factory()->create(['role_id' => 1]);
+        $course = Course::create(['name' => 'IT', 'code' => 'BIT']);
+        $classroom = Classroom::create(['name' => 'Class A', 'course_id' => $course->id]);
+
+        $response = $this->actingAs($admin)->post('/students', [
+            'name' => 'NRIC Student',
+            'student_id' => 'S999',
+            'nric' => '010101 01 0101',
+            'classroom_id' => $classroom->id,
+        ]);
+
+        $response->assertRedirect('/students');
+        $this->assertDatabaseHas('students', [
+            'name' => 'NRIC Student',
+            'nric' => '010101010101',
+        ]);
+    }
+
+    public function test_nric_rejects_characters_other_than_numbers_and_dash(): void
+    {
+        $admin = User::factory()->create(['role_id' => 1]);
+        $course = Course::create(['name' => 'IT', 'code' => 'BIT']);
+        $classroom = Classroom::create(['name' => 'Class A', 'course_id' => $course->id]);
+
+        $response = $this->actingAs($admin)->from('/students/create')->post('/students', [
+            'name' => 'Invalid NRIC Student',
+            'student_id' => 'S998',
+            'nric' => '010101-A1-0101',
+            'classroom_id' => $classroom->id,
+        ]);
+
+        $response->assertRedirect('/students/create');
+        $response->assertSessionHasErrors('nric');
+        $this->assertDatabaseMissing('students', [
+            'student_id' => 'S998',
+        ]);
+    }
+
+    public function test_admin_can_export_students_csv_and_pdf(): void
+    {
+        $admin = User::factory()->create(['role_id' => 1]);
+        Student::factory()->create([
+            'name' => 'Export Student',
+            'student_id' => 'EXP001',
+            'nric' => '020202-02-0202',
+        ]);
+
+        $csvResponse = $this->actingAs($admin)->get('/students/export/csv');
+        $csvResponse->assertOk();
+        $csvResponse->assertDownload();
+
+        $pdfResponse = $this->actingAs($admin)->get('/students/export/pdf');
+        $pdfResponse->assertOk();
+        $pdfResponse->assertDownload();
     }
 
     public function test_course_manager_can_create_student_in_their_course(): void

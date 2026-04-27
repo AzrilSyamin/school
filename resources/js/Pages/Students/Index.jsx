@@ -20,7 +20,12 @@ export default function Index({ students, filters, classrooms, courses }) {
     const [classroomId, setClassroomId] = useState(filters.classroom_id || '');
     const [courseId, setCourseId] = useState(filters.course_id || '');
     const showActions = students.data.some((student) => student.can?.update || student.can?.delete);
-    const columnCount = showActions ? 5 : 4;
+    const columnCount = showActions ? 6 : 5;
+    const exportParams = {
+        search: filters.search,
+        classroom_id: classroomId,
+        course_id: courseId,
+    };
 
     const handleFilter = () => {
         router.get(route('students.index'), {
@@ -51,17 +56,31 @@ export default function Index({ students, filters, classrooms, courses }) {
                         <h1 className="text-2xl font-bold text-slate-900 dark:text-white">Pengurusan Pelajar</h1>
                         <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">Lihat dan urus semua rekod pelajar berdaftar.</p>
                     </div>
-                    {canCreate && (
-                        <Link
-                            href={route('students.create')}
-                            className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-sm font-semibold text-white transition-colors shadow-lg shadow-blue-500/20"
+                    <div className="flex flex-wrap items-center gap-2">
+                        <a
+                            href={route('students.export', { format: 'pdf', ...exportParams })}
+                            className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-sm font-semibold text-slate-700 dark:text-slate-300 hover:border-red-300 hover:text-red-500 dark:hover:border-red-500/40 dark:hover:text-red-400 transition-colors"
                         >
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                            </svg>
-                            Tambah Pelajar
-                        </Link>
-                    )}
+                            PDF
+                        </a>
+                        <a
+                            href={route('students.export', { format: 'csv', ...exportParams })}
+                            className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-sm font-semibold text-slate-700 dark:text-slate-300 hover:border-green-300 hover:text-green-600 dark:hover:border-green-500/40 dark:hover:text-green-400 transition-colors"
+                        >
+                            CSV
+                        </a>
+                        {canCreate && (
+                            <Link
+                                href={route('students.create')}
+                                className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-sm font-semibold text-white transition-colors shadow-lg shadow-blue-500/20"
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                                </svg>
+                                Tambah Pelajar
+                            </Link>
+                        )}
+                    </div>
                 </div>
 
                 {flash.success && (
@@ -118,11 +137,12 @@ export default function Index({ students, filters, classrooms, courses }) {
                     </div>
                 </div>
 
-                <DataTable minWidth="min-w-[900px]" footer={<Pagination meta={students} />}>
+                <DataTable minWidth="min-w-[1100px]" footer={<Pagination meta={students} />}>
                     <TableHead>
                         <HeaderRow>
                             <HeaderCell>Nama Pelajar</HeaderCell>
                             <HeaderCell>Student ID</HeaderCell>
+                            <HeaderCell>NRIC / No. IC</HeaderCell>
                             <HeaderCell>Maklumat</HeaderCell>
                             <HeaderCell>Kelas & Kursus</HeaderCell>
                                     {showActions && (
@@ -148,8 +168,12 @@ export default function Index({ students, filters, classrooms, courses }) {
                                                 </span>
                                     </TableCell>
                                     <TableCell>
+                                                <span className="font-mono text-xs font-bold px-3 py-1.5 rounded-lg bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-700">
+                                                    {student.nric || '-'}
+                                                </span>
+                                    </TableCell>
+                                    <TableCell>
                                                 <div className="flex flex-col gap-1.5">
-                                                    <span className="text-slate-700 dark:text-slate-300 font-bold">{student.age || '-'} Tahun</span>
                                                     <span className={`inline-flex w-fit px-2 py-0.5 rounded-lg text-[9px] font-black uppercase tracking-wider ${
                                                         student.gender === 'Lelaki' ? 'bg-blue-100 text-blue-700 dark:bg-blue-500/10 dark:text-blue-400' : 'bg-pink-100 text-pink-700 dark:bg-pink-500/10 dark:text-pink-400'
                                                     }`}>

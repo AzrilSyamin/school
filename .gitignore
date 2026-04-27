@@ -12,6 +12,7 @@
 /.vscode
 /.codex
 /.zed
+/.kilo
 /auth.json
 /node_modules
 /public/build
@@ -23,3 +24,4 @@
 Homestead.json
 Homestead.yaml
 Thumbs.db
+*PLAN*.md

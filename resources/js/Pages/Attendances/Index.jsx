@@ -214,24 +214,34 @@ export default function Index({ sessions, classrooms = [], subjects = [], course
                                                      
                                                      {/* Export buttons */}
                                                      <div className="flex gap-1 ml-2 pl-2 border-l border-slate-200 dark:border-slate-200 dark:border-slate-800">
-                                                        <button 
+                                                        <a
+                                                            href={route('attendances.export', {
+                                                                format: 'pdf',
+                                                                subject_id: session.subject_id,
+                                                                classroom_id: session.classroom_id,
+                                                                date: session.date,
+                                                            })}
                                                             className="p-1.5 rounded-md text-slate-500 hover:text-red-400 hover:bg-red-500/10 transition-colors"
                                                             title="Download PDF"
-                                                            onClick={() => alert('Fungsi muat turun PDF akan datang')}
                                                         >
                                                             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                                                                 <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
                                                             </svg>
-                                                        </button>
-                                                        <button 
+                                                        </a>
+                                                        <a
+                                                            href={route('attendances.export', {
+                                                                format: 'csv',
+                                                                subject_id: session.subject_id,
+                                                                classroom_id: session.classroom_id,
+                                                                date: session.date,
+                                                            })}
                                                             className="p-1.5 rounded-md text-slate-500 hover:text-green-400 hover:bg-green-500/10 transition-colors"
                                                             title="Download CSV/Excel"
-                                                            onClick={() => alert('Fungsi muat turun CSV akan datang')}
                                                         >
                                                             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                                                                 <path strokeLinecap="round" strokeLinejoin="round" d="M3.375 19.5h17.25m-17.25 0a1.125 1.125 0 0 1-1.125-1.125V3.375m1.125 16.25h17.25m-17.25 0a1.125 1.125 0 0 0 1.125 1.125m16.125-1.125v-11.25a3.375 3.375 0 0 0-3.375-3.375H8.25m12 12.375H3.75" />
                                                             </svg>
-                                                        </button>
+                                                        </a>
                                                      </div>
                                                 </div>
                                             </TableCell>

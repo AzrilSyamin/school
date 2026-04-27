@@ -7,6 +7,7 @@ use App\Models\Classroom;
 use App\Models\Course;
 use App\Models\Student;
 use App\Models\Subject;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -144,6 +145,8 @@ class AttendanceController extends Controller
         if ($attendances->isEmpty()) {
             return redirect()->route('attendances.index')->with('error', 'Sesi kehadiran tidak dijumpai.');
         }
+
+        $this->authorize('view', $attendances->first());
 
         return Inertia::render('Attendances/Show', [
             'attendances' => $attendances,
@@ -304,5 +307,73 @@ class AttendanceController extends Controller
         }
 
         return redirect()->route('attendances.index')->with('success', 'Kehadiran berjaya direkodkan.');
+    }
+
+    public function export(Request $request, string $format)
+    {
+        $format = strtolower($format);
+        abort_unless(in_array($format, ['csv', 'pdf'], true), 404);
+
+        $request->validate([
+            'subject_id' => 'required|exists:subjects,id',
+            'classroom_id' => 'required|exists:classrooms,id',
+            'date' => 'required|date',
+        ]);
+
+        $attendances = Attendance::with(['student', 'subject', 'classroom.course', 'recorder'])
+            ->where('subject_id', $request->subject_id)
+            ->where('classroom_id', $request->classroom_id)
+            ->whereDate('date', $request->date)
+            ->orderBy(Student::select('name')->whereColumn('students.id', 'attendances.student_id'))
+            ->get();
+
+        if ($attendances->isEmpty()) {
+            return redirect()->route('attendances.index')->with('error', 'Sesi kehadiran tidak dijumpai.');
+        }
+
+        $this->authorize('view', $attendances->first());
+
+        $session = [
+            'subject' => $attendances->first()->subject,
+            'classroom' => $attendances->first()->classroom,
+            'date' => $request->date,
+            'recorder' => $attendances->first()->recorder,
+        ];
+
+        $filename = 'kehadiran-' .
+            str($session['classroom']?->name ?? 'kelas')->slug() . '-' .
+            str($session['subject']?->code ?? $session['subject']?->name ?? 'subjek')->slug() . '-' .
+            $request->date;
+
+        if ($format === 'csv') {
+            return response()->streamDownload(function () use ($attendances, $session) {
+                $handle = fopen('php://output', 'w');
+                fwrite($handle, "\xEF\xBB\xBF");
+                fputcsv($handle, ['Mata Pelajaran', $session['subject']?->name]);
+                fputcsv($handle, ['Kelas', $session['classroom']?->name]);
+                fputcsv($handle, ['Tarikh', $session['date']]);
+                fputcsv($handle, []);
+                fputcsv($handle, ['Nama Pelajar', 'Student ID', 'Status', 'Nota']);
+
+                foreach ($attendances as $attendance) {
+                    fputcsv($handle, [
+                        $attendance->student?->name,
+                        $attendance->student?->student_id,
+                        $attendance->status,
+                        $attendance->remarks,
+                    ]);
+                }
+
+                fclose($handle);
+            }, $filename . '.csv', [
+                'Content-Type' => 'text/csv; charset=UTF-8',
+            ]);
+        }
+
+        return Pdf::loadView('exports.attendance-session', [
+            'attendances' => $attendances,
+            'session' => $session,
+            'generatedAt' => now(),
+        ])->setPaper('a4', 'portrait')->download($filename . '.pdf');
     }
 }

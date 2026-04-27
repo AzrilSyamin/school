@@ -3,6 +3,11 @@ import { Head, Link, usePage } from '@inertiajs/react';
 
 export default function Show({ attendances, session, can }) {
     const { flash } = usePage().props;
+    const exportParams = {
+        subject_id: session.subject?.id,
+        classroom_id: session.classroom?.id,
+        date: session.date,
+    };
 
     return (
         <AuthenticatedLayout title="Detail Kehadiran">
@@ -41,18 +46,24 @@ export default function Show({ attendances, session, can }) {
                                 Kemaskini Kehadiran
                             </Link>
                         )}
-                        <button className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 hover:bg-slate-700 text-sm font-semibold text-slate-900 dark:text-white transition-colors border border-slate-200 dark:border-slate-700">
+                        <a
+                            href={route('attendances.export', { format: 'pdf', ...exportParams })}
+                            className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-sm font-semibold text-slate-900 dark:text-white transition-colors border border-slate-200 dark:border-slate-700"
+                        >
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                             </svg>
                             PDF
-                        </button>
-                        <button className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 hover:bg-slate-700 text-sm font-semibold text-slate-900 dark:text-white transition-colors border border-slate-200 dark:border-slate-700">
+                        </a>
+                        <a
+                            href={route('attendances.export', { format: 'csv', ...exportParams })}
+                            className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-sm font-semibold text-slate-900 dark:text-white transition-colors border border-slate-200 dark:border-slate-700"
+                        >
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                             </svg>
                             CSV
-                        </button>
+                        </a>
                     </div>
                 </div>
 
@@ -86,6 +97,7 @@ export default function Show({ attendances, session, can }) {
                             <thead className="bg-slate-50 dark:bg-slate-800/50">
                                 <tr>
                                     <th className="px-6 py-4 font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider text-xs">Pelajar</th>
+                                    <th className="px-6 py-4 font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider text-xs">Student ID</th>
                                     <th className="px-6 py-4 font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider text-xs text-center">Status</th>
                                     <th className="px-6 py-4 font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider text-xs">Nota / Remarks</th>
                                 </tr>
@@ -95,7 +107,11 @@ export default function Show({ attendances, session, can }) {
                                     <tr key={attendance.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/50 dark:hover:bg-slate-800/30 transition-colors">
                                         <td className="px-6 py-4">
                                             <div className="font-medium text-slate-900 dark:text-white">{attendance.student?.name}</div>
-                                            <div className="text-[10px] text-slate-500 uppercase font-bold tracking-tight">{attendance.student?.student_id || 'ID Pelajar'}</div>
+                                        </td>
+                                        <td className="px-6 py-4">
+                                            <span className="font-mono text-xs font-bold px-3 py-1.5 rounded-lg bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-700">
+                                                {attendance.student?.student_id || '-'}
+                                            </span>
                                         </td>
                                         <td className="px-6 py-4 text-center">
                                             <span className={`inline-flex px-3 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wider ${

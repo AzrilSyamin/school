@@ -172,4 +172,32 @@ class AttendanceTest extends TestCase
             ->where('filters.course_id', (string) $otherCourse->id)
         );
     }
+
+    public function test_attendance_session_can_be_exported_as_csv_and_pdf(): void
+    {
+        $admin = User::factory()->create(['role_id' => 1]);
+
+        Attendance::create([
+            'student_id' => $this->student->id,
+            'subject_id' => $this->subject->id,
+            'classroom_id' => $this->classroom->id,
+            'date' => now()->toDateString(),
+            'status' => 'Hadir',
+            'recorded_by' => $this->classrep->id,
+        ]);
+
+        $params = http_build_query([
+            'subject_id' => $this->subject->id,
+            'classroom_id' => $this->classroom->id,
+            'date' => now()->toDateString(),
+        ]);
+
+        $csvResponse = $this->actingAs($admin)->get('/attendances/export/csv?' . $params);
+        $csvResponse->assertOk();
+        $csvResponse->assertDownload();
+
+        $pdfResponse = $this->actingAs($admin)->get('/attendances/export/pdf?' . $params);
+        $pdfResponse->assertOk();
+        $pdfResponse->assertDownload();
+    }
 }

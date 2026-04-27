@@ -21,6 +21,7 @@ class StudentFactory extends Factory
         return [
             'name' => fake()->name(),
             'student_id' => 'S' . fake()->unique()->numberBetween(10000, 99999),
+            'nric' => fake()->unique()->numerify('######-##-####'),
             'email' => fake()->unique()->safeEmail(),
             'age' => fake()->numberBetween(18, 30),
             'gender' => fake()->randomElement(['Lelaki', 'Perempuan']),
